@@ -59,6 +59,31 @@ class UserModel
     }
 
     public function createUser(User $user){
+        if(!$this->isInDatabase($user)){
+            try {
+                DatabaseModel::getModel()->getBD()->beginTransaction();
+                $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "User" (uuid, role, active) VALUES (:uuid, :role, :active, :pass_hash)');
+                $req->bindValue(":uuid", $user->getUUID());
+                $req->bindValue(":role", $user->getRole());
+                $req->bindValue(":active", $user->isActive());
+                $req->bindValue(":pass_hash", $user->getPassHash());
+                $req->execute();
+
+                $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "PersonalData" (id_user, last_name, first_name, mail, phone) VALUES (:uuid, :last_name, :first_name, :mail, :phone)');
+                $req->bindValue(":uuid", $user->getUUID());
+                $req->bindValue(":last_name", $user->getLastName());
+                $req->bindValue(":first_name", $user->getFirstName());
+                $req->bindValue(":mail", $user->getEmail());
+                $req->bindValue(":phone", $user->getPhone());
+
+                DatabaseModel::getModel()->getBD()->commit();
+
+            } catch (PDOException $e) {
+                // rollback the changes
+                DatabaseModel::getModel()->getBD()->rollback();
+                throw $e;
+            }
+        }
 
 
     }
