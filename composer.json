@@ -1,0 +1,7 @@
+{
+  "require": {
+    "phpunit/phpunit": "^9",
+    "ext-pdo_pgsql": "^8",
+    "symfony/polyfill-uuid": "^v1.27"
+  }
+}
