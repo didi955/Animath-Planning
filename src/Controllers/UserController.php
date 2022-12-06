@@ -16,6 +16,10 @@ class UserController extends Controller
     }
 
     public function action_sign_in(){
+        // CHECK IF MAIL EXISTS
+        // GET PASS HASH
+        // IF PASS HASH === GIVEN PASS HASH
+        // VALID
         if(isset($_POST['email']) && preg_match("/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/", $_POST['email']) && isset($_POST['pass'])){
 
 
@@ -23,7 +27,7 @@ class UserController extends Controller
     }
 
     public function action_sign_up(){
-        if(isset($_POST['email']) && preg_match("/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/", $_POST['email']) && isset($_POST['pass']) && isset($_POST['last_name']) && isset($_POST['first_name']) && isset($_POST['pass_confirm']) && $_POST['pass'] === $_POST['pass_confirm']){
+        if(isset($_GET['email'])){
             $user = new User();
             $user->setUUID(uuid_create(UUID_TYPE_RANDOM));
             $user->setEmail($_POST['email']);
