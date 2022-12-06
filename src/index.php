@@ -4,11 +4,12 @@ session_start();
 
 require_once "Utils/constant.php";
 require_once "Utils/functions.php";
-//require_once "Models/Model.php";
+require_once "Models/UserModel.php";
+require_once "Models/DatabaseModel.php";
 require_once "Controllers/Controller.php";
 
 //Liste des contrôleurs
-$controllers = ["Home"];
+$controllers = ["Home", "User"];
 //Nom du contrôleur par défaut
 $controller_default = "Home";
 

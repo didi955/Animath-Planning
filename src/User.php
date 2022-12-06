@@ -34,16 +34,10 @@ class User
 
     private $created_at;
 
-    public function __construct($uuid, $lastName, $firstName, $mail, $phone, $role, $active, $created_at)
+    private $pass_hash;
+
+    public function __construct()
     {
-        $this->uuid = $uuid;
-        $this->lastName = $lastName;
-        $this->firstName = $firstName;
-        $this->mail = $mail;
-        $this->phone = $phone;
-        $this->role = $role;
-        $this->active = $active;
-        $this->created_at = $created_at;
     }
 
     /**
@@ -81,7 +75,7 @@ class User
     /**
      * @return mixed
      */
-    public function getMail()
+    public function getEMail()
     {
         return $this->mail;
     }
@@ -97,7 +91,7 @@ class User
     /**
      * @return mixed
      */
-    public function isActive()
+    public function isActive() : bool
     {
         return $this->active;
     }
@@ -109,6 +103,95 @@ class User
     {
         return $this->created_at;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPassHash()
+    {
+        return $this->pass_hash;
+    }
+
+    /**
+     * @param mixed $uuid
+     */
+    public function setUUID($uuid): void
+    {
+        $this->uuid = $uuid;
+    }
+
+    /**
+     * @param mixed $lastName
+     */
+    public function setLastName(string $lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @param mixed $firstName
+     */
+    public function setFirstName(string $firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @param mixed $phone
+     */
+    public function setPhone($phone): void
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * @param mixed $mail
+     */
+    public function setEmail(string $mail): void
+    {
+        $this->mail = $mail;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole(Role $role): void
+    {
+        $this->role = $role;
+    }
+
+    /**
+     * @param mixed $active
+     */
+    public function setActive(bool $active): void
+    {
+        $this->active = $active;
+    }
+
+    /**
+     * @param mixed $created_at
+     */
+    public function setCreatedAt($created_at): void
+    {
+        $this->created_at = $created_at;
+    }
+
+    /**
+     * @param mixed $pass_hash
+     */
+    public function setPassHash($pass_hash): void
+    {
+        $this->pass_hash = $pass_hash;
+    }
+
+    public function save(): void
+    {
+        UserModel::getModel()->createUser($this);
+    }
+
+
+
+
 
 
 
