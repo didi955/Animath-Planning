@@ -49,7 +49,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="container" method="post" action="?controller=User&action=sign_up">
+                <form class="container" method="get" action="?controller=User&action=sign_up">
                     <span class="row m-3">
                         <label class="col form-label" for="email">Mail :</label><input class="col form-control" type="email" id="email" required>
                     </span>
@@ -65,9 +65,14 @@
                     <span class="row m-3">
                         <label class="col form-label" for="pass_confirm">Confirmation mot de passe : </label><input class="col form-control" type="password" id="pass_confirm" required>
                     </span>
+                    <span class="row m-3">
+                        <input type="checkbox" name="cgu_accept_ins" id="cgu"/><label for="cgu">J'accepte les <a href="#">Conditions Générales d'Utilisation</a></label>
+                    </span>
                     <?php
+                    /*
                     $key = parse_ini_file("hcaptcha.ini")['key'];
                     echo '<div class="h-captcha" data-sitekey="'. $key .'"></div>';
+                    */
                     ?>
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-primary"/>
