@@ -43,7 +43,7 @@ class User
     /**
      * @return mixed
      */
-    public function getUUID()
+    public function getUUID() : string
     {
         return $this->uuid;
     }
@@ -51,7 +51,7 @@ class User
     /**
      * @return mixed
      */
-    public function getLastName()
+    public function getLastName() : string
     {
         return $this->lastName;
     }
@@ -59,7 +59,7 @@ class User
     /**
      * @return mixed
      */
-    public function getFirstName()
+    public function getFirstName() : string
     {
         return $this->firstName;
     }
@@ -75,7 +75,7 @@ class User
     /**
      * @return mixed
      */
-    public function getEMail()
+    public function getEmail() : string
     {
         return $this->mail;
     }
@@ -83,7 +83,7 @@ class User
     /**
      * @return mixed
      */
-    public function getRole()
+    public function getRole() : Role
     {
         return $this->role;
     }
@@ -107,7 +107,7 @@ class User
     /**
      * @return mixed
      */
-    public function getPassHash()
+    public function getPassHash() : string
     {
         return $this->pass_hash;
     }

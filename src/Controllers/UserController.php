@@ -1,42 +1,52 @@
 <?php
 
+use Ramsey\Uuid\Nonstandard\Uuid;
+require 'User.php';
+require 'Utils/Role.php';
+
 class UserController extends Controller
 {
+
     /**
      * @inheritDoc
      */
     public function action_default()
     {
-        $this->action_myAccount();
+        $this->action_my_account();
     }
 
-    public function action_myAccount()
+    public function action_my_account()
     {
         $this->render('myAccount');
     }
 
     public function action_sign_in(){
-        // CHECK IF MAIL EXISTS
-        // GET PASS HASH
-        // IF PASS HASH === GIVEN PASS HASH
-        // VALID
-        if(isset($_POST['email']) && preg_match("/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/", $_POST['email']) && isset($_POST['pass'])){
-
-
+        if(isset($_POST['email']) && preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/", $_POST['email']) && isset($_POST['pass'])){
+            $user = UserModel::getModel()->getUserByEmail($_POST['email']);
+            if($user != null) {
+                if ($user->getPassHash() === encrypt_pass($_POST['pass'])) {
+                    $_SESSION['uuid'] = $user->getUUID();
+                    $this->render('home');
+                }
+                else {
+                    echo "Wrong password";
+                }
+            }
         }
     }
 
     public function action_sign_up(){
-        if(isset($_GET['email'])){
+        if(isset($_POST['email']) && preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/", $_POST['email'])
+            && isset($_POST['pass']) && isset($_POST['pass_confirm']) && $_POST['pass'] === $_POST['pass_confirm'] &&
+            isset($_POST['last_name']) && isset($_POST['first_name']) && isset($_POST['cgu_accept']) && $_POST['cgu_accept'] === 'on'){
             $user = new User();
-            $user->setUUID(uuid_create(UUID_TYPE_RANDOM));
+            $user->setUUID(Uuid::uuid4()->toString());
             $user->setEmail($_POST['email']);
             $user->setActive(false);
-            $user->setPassHash($_POST['pass']);
+            $user->setPassHash(encrypt_pass($_POST['pass']));
             $user->setLastName($_POST['last_name']);
             $user->setFirstName($_POST['first_name']);
             $user->setRole(Role::PROFESSOR);
-            $user->setCreatedAt(time());
             $user->save();
             $this->render("home");
         }

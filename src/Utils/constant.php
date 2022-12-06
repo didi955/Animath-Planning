@@ -2,9 +2,5 @@
 
 define("TITLE", "Animath");
 
-
-// Role
-define("SUPERVISOR_ID", 1);
-define("EXHIBITOR", 2);
-define("PROFESSOR_ID", 3);
+define("CGU_TITLE", "Conditions Générales d'Utilisation");
 

@@ -24,9 +24,15 @@ class DatabaseModel
         $user = $credentials['user'];
         $pass = $credentials['pass'];
         $dsn = "pgsql:host=$host;port=5432;dbname=$dbname;";
-        $this->bd = new PDO($dsn, $user, $pass);
-        $this->bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->bd->query("SET names 'utf8'");
+        try {
+            $this->bd = new PDO($dsn, $user, $pass);
+            $this->bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->bd->query("SET names 'utf8'");
+        }
+        catch (PDOException $e) {
+            echo "Erreur de connexion à la base de données : " . $e->getMessage();
+            die();
+        }
     }
 
     /**
