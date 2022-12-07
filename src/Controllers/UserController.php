@@ -24,14 +24,21 @@ class UserController extends Controller
         if(isset($_POST['email']) && preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/", $_POST['email']) && isset($_POST['pass'])){
             $user = UserModel::getModel()->getUserByEmail($_POST['email']);
             if($user != null) {
-                if ($user->getPassHash() === encrypt_pass($_POST['pass'])) {
+                if(password_verify($_POST['pass'], $user->getPassHash())){
                     $_SESSION['uuid'] = $user->getUUID();
                     $this->render('home');
                 }
                 else {
-                    echo "Wrong password";
+                    echo "Wrong password:";
                 }
             }
+        }
+    }
+
+    public function action_sign_out() : void{
+        if(isset($_SESSION['uuid'])){
+            session_unset();
+            $this->render("home");
         }
     }
 
