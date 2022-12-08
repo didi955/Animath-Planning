@@ -4,7 +4,7 @@
 
     <div class="container text-center">
     <?php if (isset($message) && isset($title) && isset($code)): ?>
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger position-relative" role="alert">
             <h4 class="alert-heading"><?= $title ?></h4>
             <h5><?= $code ?></h5>
             <p><?= $message ?></p>

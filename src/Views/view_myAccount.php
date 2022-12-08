@@ -3,8 +3,9 @@ include 'view_topbar.php';
 ?>
 
 <?php
-    if(isset($_SESSION['uuid']) || isset($_COOKIE['uuid'])){
-        $user = UserModel::getModel()->getUser($_SESSION['uuid'] ?? $_COOKIE['uuid']);
+    if(isset($_SESSION['user']) || isset($_COOKIE['uuid'])){
+        $user = unserialize($_SESSION['user']);
+        $user = UserModel::getModel()->getUser($user->getUUID());
         if($user != null): ?>
             <div class="container text-center">
                 <div class="row">
