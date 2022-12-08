@@ -35,6 +35,9 @@ class UserModel
     }
 
     public function getUser(string $uuid){
+        if(!$this->isInDatabase($uuid)){
+            return null;
+        }
         $req = DatabaseModel::getModel()->getBD()->prepare('SELECT uuid, pass_hash, role, active, created_at, last_name, first_name, mail, phone FROM "User" inner join "PersonalData" on uuid = "PersonalData".id_user WHERE uuid= :uuid');
         $req->bindValue(":uuid", $uuid);
         $req->execute();
