@@ -26,18 +26,26 @@ class UserController extends Controller
             if($user != null) {
                 if(password_verify($_POST['pass'], $user->getPassHash())){
                     $_SESSION['uuid'] = $user->getUUID();
+                    setcookie('uuid', $user->getUUID(), time() + 3600 * 24 * 30, '/', '', true, true);
                     $this->render('home');
                 }
                 else {
-                    echo "Wrong password:";
+                    $this->action_error('Mot de passe incorrect', 444);
                 }
+            }
+            else {
+                $this->action_error('Adresse mail inconnue', 444);
             }
         }
     }
 
     public function action_sign_out() : void{
         if(isset($_SESSION['uuid'])){
-            session_unset();
+            if(isset($_COOKIE['uuid'])){
+                unset($_COOKIE['uuid']);
+                setcookie('uuid', null, -1, '/');
+            }
+            session_destroy();
             $this->render("home");
         }
     }
@@ -56,6 +64,9 @@ class UserController extends Controller
             $user->setRole(Role::PROFESSOR);
             $user->save();
             $this->render("home");
+            $_SESSION['uuid'] = $user->getUUID();
+            setcookie('uuid', $user->getUUID(), time() + 3600 * 24 * 30, '/', '', true, true);
+
         }
         else {
             $this->action_error("Erreur lors de la création du compte", 444);

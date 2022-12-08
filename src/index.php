@@ -9,6 +9,7 @@ require_once "Utils/functions.php";
 require_once "Models/UserModel.php";
 require_once "Models/DatabaseModel.php";
 require_once "Controllers/Controller.php";
+require "Layouts/header.php";
 
 //Liste des contrôleurs
 $controllers = ["Home", "User"];

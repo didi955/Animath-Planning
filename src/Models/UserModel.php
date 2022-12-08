@@ -42,7 +42,7 @@ class UserModel
         $user = new User();
         $user->setPassHash($rs['pass_hash']);
         $user->setUUID($rs['uuid']);
-        $user->setRole($rs['role']);
+        $user->setRole(Role::valueOf($rs['role']));
         $user->setActive($rs['active']);
         $user->setCreatedAt($rs['created_at']);
         $user->setLastName($rs['last_name']);
@@ -114,7 +114,6 @@ class UserModel
                 throw $e;
             }
         }
-
 
     }
 

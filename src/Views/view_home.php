@@ -1,6 +1,5 @@
 <?php
-require "Layouts/header.php";
-require "view_topbar.php";
+include "view_topbar.php";
 ?>
 
 <img class= "w-100 h-100" src="public/images/logo.jpg" alt="logo">
@@ -27,7 +26,7 @@ require "view_topbar.php";
 </div>
 
 <?php
-require "view_footer.php";
+include "view_footer.php";
 ?>
 
 

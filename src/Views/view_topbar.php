@@ -1,4 +1,3 @@
-
 <div class="row align-items-center fixed-top position-absolute mt-2" style="width: 15%;left:85%;height: 10%" >
     <span class="col w-50 form-check-reverse form-switch text-center">
             <label for="darkMode"></label><input class="mx-1 form-check-input " type="checkbox" id="darkMode" role="switch">
@@ -9,9 +8,12 @@
     <div class="collapse" id="collapseMenu">
         <div class="card card-body">
             <?php if(isset($_SESSION['uuid'])): ?>
-                <a class="btn btn-primary" href="index.php?controller=User&action=my_account">Mon compte</a>
-                <a class="btn btn-primary" href="index.php?controller=User&action=sign_out">Se déconnecter</a>
-            <?php else: ?>
+                <a class="btn btn-primary m-1" href="?controller=User&action=my_account">Mon compte</a>
+                <a class="btn btn-primary m-1" href="?controller=User&action=sign_out">Se déconnecter</a>
+            <?php elseif(isset($_COOKIE['uuid'])): ?>
+                <a class="btn btn-primary m-1" href="?controller=User&action=my_account">Mon compte</a>
+                <a class="btn btn-primary m-1" href="?controller=User&action=sign_out">Se déconnecter</a>
+            <?php else : ?>
                 <p class="text-center">Vous n'êtes pas connecté !</p>
                 <span class="row">
                 <button class="col border-right btn btn-light border m-1" data-bs-toggle="modal" href="#connexionModal">Connexion</button>
@@ -54,30 +56,41 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="container" method="post" action="?controller=User&action=sign_up">
+                <form class="container needs-validation" method="post" action="?controller=User&action=sign_up" novalidate>
                     <div class="mb-3">
                         <label class="form-label" for="email">Mail :</label>
                         <input class="form-control" type="email" id="email" name="email" required>
+                        <div class="invalid-feedback">Veuillez entrer une adresse mail valide.</div>
+                        <div class="valid-feedback">Adresse mail valide.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="first_name">Prénom :</label>
                         <input class="form-control" type="text" id="first_name" name="first_name" required>
+                        <div class="invalid-feedback">Veuillez entrer un prénom valide.</div>
+                        <div class="valid-feedback">Prénom valide.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="last_name">Nom :</label>
                         <input class="form-control" type="text" id="last_name" name="last_name" required>
+                        <div class="invalid-feedback">Veuillez entrer un nom valide.</div>
+                        <div class="valid-feedback">Nom valide.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="pass">Mot de passe : </label>
                         <input class="form-control" type="password" id="pass" name="pass" required>
+                        <div class="invalid-feedback">Veuillez entrer un mot de passe valide.</div>
+                        <div class="valid-feedback">Mot de passe valide.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="pass_confirm">Confirmation mot de passe : </label>
                         <input class="form-control" type="password" id="pass_confirm" name="pass_confirm" required>
+                        <div class="invalid-feedback">Veuillez entrer un mot de passe valide.</div>
+                        <div class="valid-feedback">Mot de passe valide.</div>
                     </div>
                     <div class="mb-3">
                         <input type="checkbox" name="cgu_accept" id="cgu" class="form-check-input"/>
                         <label for="cgu">J'accepte les <a data-bs-toggle="modal" href="#cguModalTopbar"><?=e(CGU_TITLE)?></a></label>
+                        <div class="invalid-feedback">Veuillez accepter les CGU, pour continuer</div>
                     </div>
                     <?php
                     /*
@@ -86,7 +99,7 @@
                     */
                     ?>
                     <div class="modal-footer">
-                        <input type="submit" class="btn btn-primary"/>
+                        <input type="submit" id="submit_signup" class="btn btn-primary"/>
                     </div>
                 </form>
             </div>
@@ -114,3 +127,4 @@
         </div>
     </div>
 </div>
+

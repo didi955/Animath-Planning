@@ -54,7 +54,7 @@ abstract class Controller
     protected function action_error(string $message = '', $code = 500): void
     {
         $data = [
-            'title' => "Error",
+            'title' => "Erreur",
             'code' => $code,
             'message' => $message
         ];
