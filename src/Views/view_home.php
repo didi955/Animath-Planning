@@ -2,7 +2,9 @@
 include "view_topbar.php";
 ?>
 
-<div class="w-100" style="height: 93%"></div>
+<div class="w-100" style="height: 93%">
+    <img class="img-fluid" src="public/images/Animath.jpg" alt="background">
+</div>
 
 
 <div class="card bg-light" style="height: 7%">

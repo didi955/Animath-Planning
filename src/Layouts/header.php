@@ -8,7 +8,6 @@
 <style>
     body{
         overflow-x: hidden;
-        background-image: url("public/images/Animath.jpg");
         width: auto;
         height: auto;
         background-attachment: fixed;
