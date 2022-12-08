@@ -25,7 +25,7 @@ class UserController extends Controller
             $user = UserModel::getModel()->getUserByEmail($_POST['email']);
             if($user != null) {
                 if(password_verify($_POST['pass'], $user->getPassHash())){
-                    $_SESSION['uuid'] = $user->getUUID();
+                    $_SESSION['user'] = serialize($user);
                     setcookie('uuid', $user->getUUID(), time() + 3600 * 24 * 30, '/', '', true, true);
                     $this->render('home');
                 }
@@ -40,7 +40,7 @@ class UserController extends Controller
     }
 
     public function action_sign_out() : void{
-        if(isset($_SESSION['uuid'])){
+        if(isset($_SESSION['user'])){
             if(isset($_COOKIE['uuid'])){
                 unset($_COOKIE['uuid']);
                 setcookie('uuid', null, -1, '/');
@@ -64,9 +64,8 @@ class UserController extends Controller
             $user->setRole(Role::PROFESSOR);
             $user->save();
             $this->render("home");
-            $_SESSION['uuid'] = $user->getUUID();
+            $_SESSION['user'] = serialize($user);
             setcookie('uuid', $user->getUUID(), time() + 3600 * 24 * 30, '/', '', true, true);
-
         }
         else {
             $this->action_error("Erreur lors de la création du compte", 444);

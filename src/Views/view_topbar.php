@@ -7,12 +7,10 @@
     </span>
     <div class="collapse" id="collapseMenu">
         <div class="card card-body">
-            <?php if(isset($_SESSION['uuid'])): ?>
-                <a class="btn btn-primary m-1" href="?controller=User&action=my_account">Mon compte</a>
-                <a class="btn btn-primary m-1" href="?controller=User&action=sign_out">Se déconnecter</a>
-            <?php elseif(isset($_COOKIE['uuid'])): ?>
-                <a class="btn btn-primary m-1" href="?controller=User&action=my_account">Mon compte</a>
-                <a class="btn btn-primary m-1" href="?controller=User&action=sign_out">Se déconnecter</a>
+            <?php if(isset($_SESSION['user']) || isset($_COOKIE['uuid'])): ?>
+                <a class="btn btn-primary btn-lg" href="?controller=User&action=my_account">Mon compte</a>
+
+                <a class="btn btn-outline-danger btn-sm mb-1 ms-3 me-3 mt-3" href="?controller=User&action=sign_out">Se déconnecter</a>
             <?php else : ?>
                 <p class="text-center">Vous n'êtes pas connecté !</p>
                 <span class="row">
