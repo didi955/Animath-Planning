@@ -26,8 +26,8 @@ include "view_topbar.php";
 </div>
 
 <div class="accordion shadow" id="accordionExample">
-    <div class="bg-light accordion-item accordion-collapse collapse pt-4" id="collapseOne" data-bs-parent="#accordionExample">
-        <form class="container" action="?controller=User&action=sign_in" method="post">
+    <div class="bg-light bg-gradient accordion-item accordion-collapse collapse pt-4" id="collapseOne" data-bs-parent="#accordionExample">
+        <form class="container" action="?controller=User&action=sign_in" method="post" style="width: 35%">
             <div class="mb-3">
                 <label class="col form-label" for="login">Identifiant/Mail :</label><input class="col form-control" type="email" id="email" name="email" required>
             </div>
@@ -40,8 +40,8 @@ include "view_topbar.php";
         </form>
     </div>
 
-    <div class="bg-light accordion-item accordion-collapse collapse pt-4" id="collapseTwo" data-bs-parent="#accordionExample">
-        <form class="container needs-validation" method="post" action="?controller=User&action=sign_up" novalidate>
+    <div class="bg-light bg-gradient accordion-item accordion-collapse collapse pt-4" id="collapseTwo" data-bs-parent="#accordionExample">
+        <form class="container needs-validation" method="post" action="?controller=User&action=sign_up" style="width: 35%" novalidate>
             <div class="mb-3">
                 <label class="form-label" for="email">Mail :</label>
                 <input class="form-control" type="email" id="email" name="email" required>
