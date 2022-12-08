@@ -13,6 +13,10 @@ class HomeController extends Controller
         $this->action_home();
     }
 
+
+    /**
+     * Action pour afficher la page d'accueil
+     */
     public function action_home()
     {
         if(!isset($_SESSION['user'])){

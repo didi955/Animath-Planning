@@ -47,6 +47,7 @@ class DatabaseModel
     }
 
     /**
+     * Méthode permettant de récupérer l'instance PDO
      * @return PDO
      */
     public function getBD(): PDO

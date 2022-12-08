@@ -15,6 +15,9 @@ class UserController extends Controller
         $this->action_my_account();
     }
 
+    /**
+     * Action pour afficher la page de mon compte
+     */
     public function action_my_account()
     {
         if(!isset($_SESSION['user'])){
@@ -50,6 +53,9 @@ class UserController extends Controller
         $this->render('myAccount', ['user' => $user]);
     }
 
+    /**
+     * Action pour se connecter
+     */
     public function action_sign_in(){
         if(isset($_POST['email'])){
             $mail = strtolower($_POST['email']);
@@ -76,6 +82,9 @@ class UserController extends Controller
         $this->action_error('Adresse mail non spécifiée', 444);
     }
 
+    /**
+     * Action pour se déconnecter
+     */
     public function action_sign_out() : void{
         $_SESSION= array();
         if(isset($_COOKIE['user'])){
@@ -86,6 +95,9 @@ class UserController extends Controller
         $this->render("home");
     }
 
+    /**
+     * Action pour s'inscrire
+     */
     public function action_sign_up(){
         if(isset($_POST['email'])){
             $mail = strtolower($_POST['email']);
@@ -97,7 +109,7 @@ class UserController extends Controller
                 $user->setUUID(Uuid::uuid4()->toString());
                 $user->setEmail($_POST['email']);
                 $user->setActive(false);
-                $user->setPassHash(encrypt_pass($_POST['pass']));
+                $user->setPassHash(hash_pass($_POST['pass']));
                 $user->setLastName($_POST['last_name']);
                 $user->setFirstName($_POST['first_name']);
                 $user->setRole(Role::PROFESSOR);

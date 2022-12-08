@@ -28,12 +28,24 @@ class User
      */
     private $mail;
 
+    /**
+     * Attribut caractérisant le role de l'utilisateur
+     */
     private $role;
 
+    /**
+     * Attribut caractérisant le statut de l'utilisateur
+     */
     private $active;
 
+    /**
+     * Attribut caractérisant la date de création de l'utilisateur
+     */
     private $created_at;
 
+    /**
+     * Attribut caractérisant le mot de passe hashé de l'utilisateur
+     */
     private $pass_hash;
 
     public function __construct()
@@ -41,7 +53,8 @@ class User
     }
 
     /**
-     * @return mixed
+     * Méthode permettant de récupérer l'UUID de l'utilisateur
+     * @return string UUID de l'utilisateur
      */
     public function getUUID() : string
     {
@@ -49,7 +62,8 @@ class User
     }
 
     /**
-     * @return mixed
+     * Méthode permettant de récupérer le nom de l'utilisateur
+     * @return string Nom de l'utilisateur
      */
     public function getLastName() : string
     {
@@ -57,7 +71,8 @@ class User
     }
 
     /**
-     * @return mixed
+     * Méthode permettant de récupérer le prénom de l'utilisateur
+     * @return string Prénom de l'utilisateur
      */
     public function getFirstName() : string
     {
@@ -65,7 +80,8 @@ class User
     }
 
     /**
-     * @return mixed
+     * Méthode permettant de récupérer le numéro de téléphone de l'utilisateur
+     * @return string Numéro de téléphone de l'utilisateur
      */
     public function getPhone()
     {
@@ -73,7 +89,8 @@ class User
     }
 
     /**
-     * @return mixed
+     * Méthode permettant de récupérer l'adresse mail de l'utilisateur
+     * @return string Adresse mail de l'utilisateur
      */
     public function getEmail() : string
     {
@@ -81,7 +98,8 @@ class User
     }
 
     /**
-     * @return mixed
+     * Méthode permettant de récupérer le role de l'utilisateur
+     * @return Role Role de l'utilisateur
      */
     public function getRole() : Role
     {
@@ -89,7 +107,8 @@ class User
     }
 
     /**
-     * @return mixed
+     * Méthode permettant de récupérer le statut de l'utilisateur
+     * @return bool Statut de l'utilisateur
      */
     public function isActive() : bool
     {
@@ -97,7 +116,8 @@ class User
     }
 
     /**
-     * @return mixed
+     * Méthode permettant de récupérer la date de création de l'utilisateur
+     * @return  int Timestamp correspodant à la date de création de l'utilisateur
      */
     public function getCreatedAt()
     {
@@ -105,7 +125,8 @@ class User
     }
 
     /**
-     * @return mixed
+     * Méthode permettant de récupérer le mot de passe hashé de l'utilisateur
+     * @return string Mot de passe hashé de l'utilisateur
      */
     public function getPassHash() : string
     {
@@ -113,7 +134,8 @@ class User
     }
 
     /**
-     * @param mixed $uuid
+     * Méthode permettant de définir l'UUID de l'utilisateur
+     * @param string $uuid Nouvel UUID de l'utilisateur
      */
     public function setUUID($uuid): void
     {
@@ -121,7 +143,8 @@ class User
     }
 
     /**
-     * @param mixed $lastName
+     * Méthode permettant de définir le nom de l'utilisateur
+     * @param string $lastName Nouveau nom de l'utilisateur
      */
     public function setLastName(string $lastName): void
     {
@@ -129,7 +152,8 @@ class User
     }
 
     /**
-     * @param mixed $firstName
+     * Méthode permettant de définir le prénom de l'utilisateur
+     * @param string $firstName Nouveau prénom de l'utilisateur
      */
     public function setFirstName(string $firstName): void
     {
@@ -137,7 +161,8 @@ class User
     }
 
     /**
-     * @param mixed $phone
+     * Méthode permettant de définir le numéro de téléphone de l'utilisateur
+     * @param string $phone Nouveau numéro de téléphone de l'utilisateur
      */
     public function setPhone($phone): void
     {
@@ -145,7 +170,8 @@ class User
     }
 
     /**
-     * @param mixed $mail
+     * Méthode permettant de définir l'adresse mail de l'utilisateur
+     * @param string $mail Nouvelle adresse mail de l'utilisateur
      */
     public function setEmail(string $mail): void
     {
@@ -153,7 +179,8 @@ class User
     }
 
     /**
-     * @param mixed $role
+     * Méthode permettant de définir le role de l'utilisateur
+     * @param Role $role Nouveau role de l'utilisateur
      */
     public function setRole(Role $role): void
     {
@@ -161,7 +188,8 @@ class User
     }
 
     /**
-     * @param mixed $active
+     * Méthode permettant de définir le statut de l'utilisateur
+     * @param bool $active Nouveau statut de l'utilisateur
      */
     public function setActive(bool $active): void
     {
@@ -169,7 +197,8 @@ class User
     }
 
     /**
-     * @param mixed $created_at
+     * Méthode permettant de définir la date de création de l'utilisateur
+     * @param int $created_at Nouvelle date de création de l'utilisateur
      */
     public function setCreatedAt($created_at): void
     {
@@ -177,16 +206,27 @@ class User
     }
 
     /**
-     * @param mixed $pass_hash
+     * Méthode permettant de définir le mot de passe hashé de l'utilisateur
+     * @param string $pass_hash Nouveau mot de passe hashé de l'utilisateur
      */
     public function setPassHash($pass_hash): void
     {
         $this->pass_hash = $pass_hash;
     }
 
+    /**
+     * Méthode permettant d'enregistrer l'utilisateur dans la base de données
+     */
     public function save(): void
     {
-        UserModel::getModel()->createUser($this);
+        if(UserModel::getModel()->isInDatabase($this->uuid))
+        {
+            UserModel::getModel()->updateUser($this);
+        }
+        else
+        {
+            UserModel::getModel()->createUser($this);
+        }
     }
 
 
