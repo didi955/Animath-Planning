@@ -1,4 +1,5 @@
-<div class="row align-items-center fixed-top position-absolute mt-2" style="width: 15%;left:85%;height: 10%" >
+<div class="fixed-top">
+  <div class="row align-items-center fixed-top position-absolute mt-2" style="width: 15%;left:85%;height: 10%" >
     <span class="col w-50 form-check-reverse form-switch text-center">
             <label for="darkMode"></label><input class="mx-1 form-check-input " type="checkbox" id="darkMode" role="switch">
     </span>
@@ -18,33 +19,34 @@
                 <button class="col border-left btn btn-primary border m-1" data-bs-toggle="modal" href="#inscriptionModal">Inscription</button>
             <?php endif; ?>
         </span>
-        </div>
-    </div>
-</div>
+       </div>
+     </div>
+   </div>
+ </div>
 
-<div class="modal fade" id="connexionModal" tabindex="-1" aria-labelledby="connexionModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Connexion</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="container" action="?controller=User&action=sign_in" method="post">
-                    <div class="mb-3">
-                        <label class="col form-label" for="login">Identifiant/Mail :</label><input class="col form-control" type="email" id="email" name="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="col form-label" for="password">Mot de passe : </label><input class="col form-control" type="password" id="pass" name="pass" required>
-                    </div>
-                    <div class="modal-footer">
+    <div class="modal fade" id="connexionModal" tabindex="-1" aria-labelledby="connexionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Connexion</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="container" action="?controller=User&action=sign_in" method="post">
+                        <div class="mb-3">
+                            <label class="col form-label" for="login">Identifiant/Mail :</label><input class="col form-control" type="email" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="col form-label" for="password">Mot de passe : </label><input class="col form-control" type="password" id="pass" name="pass" required>
+                        </div>
+                        <div class="modal-footer">
                         <input type="submit" class="btn btn-primary" value="Se connecter"/>
-                    </div>
-                </form>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 <div class="modal fade" id="inscriptionModal" tabindex="-1" aria-labelledby="inscriptionModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -97,7 +99,7 @@
                     */
                     ?>
                     <div class="modal-footer">
-                        <input type="submit" id="submit_signup" class="btn btn-primary"/>
+                        <input type="submit" id="submit_signup" class="btn btn-primary" value="Envoyer"/>
                     </div>
                 </form>
             </div>
