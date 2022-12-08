@@ -10,7 +10,6 @@
         overflow-x: hidden;
         width: auto;
         height: auto;
-        background-attachment: fixed;
     }
 </style>
 
