@@ -101,7 +101,7 @@
                     */
                     ?>
                     <div class="modal-footer">
-                        <input type="submit" id="submit_signup" class="btn btn-primary"/>
+                        <input type="submit" id="submit_signup" class="btn btn-primary" value="Envoyer"/>
                     </div>
                 </form>
             </div>
