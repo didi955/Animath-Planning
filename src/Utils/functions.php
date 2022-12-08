@@ -19,3 +19,11 @@ function hash_pass(string $pass)
 {
     return password_hash($pass, PASSWORD_ARGON2ID);
 }
+
+function is_valid_email(string $email)
+{
+    if(preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/", strtolower($email))){
+        return true;
+    }
+    return false;
+}

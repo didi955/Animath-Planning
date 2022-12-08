@@ -59,7 +59,7 @@ class UserController extends Controller
     public function action_sign_in(){
         if(isset($_POST['email'])){
             $mail = strtolower($_POST['email']);
-            if(preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/", $mail) && isset($_POST['pass'])){
+            if(is_valid_email($mail) && isset($_POST['pass'])){
                 $user = UserModel::getModel()->getUserByEmail($mail);
                 if($user != null) {
                     if(password_verify($_POST['pass'], $user->getPassHash())){
@@ -101,13 +101,13 @@ class UserController extends Controller
     public function action_sign_up(){
         if(isset($_POST['email'])){
             $mail = strtolower($_POST['email']);
-            if(preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/", $_POST['email'])
+            if(is_valid_email($mail)
                 && isset($_POST['pass']) && isset($_POST['pass_confirm']) && $_POST['pass'] === $_POST['pass_confirm'] &&
                 isset($_POST['last_name']) && isset($_POST['first_name']) && isset($_POST['cgu_accept']) && $_POST['cgu_accept'] === 'on'){
 
                 $user = new User();
                 $user->setUUID(Uuid::uuid4()->toString());
-                $user->setEmail($_POST['email']);
+                $user->setEmail($mail);
                 $user->setActive(false);
                 $user->setPassHash(hash_pass($_POST['pass']));
                 $user->setLastName($_POST['last_name']);
