@@ -2,11 +2,11 @@
 
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Nonstandard\Uuid;
-require __DIR__ . '/../../src/Utils/Role.php';
-require __DIR__ . '/../../src/User.php';
-require __DIR__ . '/../../src/Utils/functions.php';
+require __DIR__ . '/../../app/Utils/Role.php';
+require __DIR__ . '/../../app/User.php';
+require __DIR__ . '/../../app/Utils/functions.php';
 
-class testUtils extends TestCase
+class Test extends TestCase
 {
 
     /**
