@@ -4,7 +4,7 @@
             <label for="darkMode"></label><input class="mx-1 form-check-input " type="checkbox" id="darkMode" role="switch">
     </span>
     <span class="col w-50">
-        <img class="w-75 btn" data-bs-toggle="collapse" data-bs-target="#collapseMenu" role="button" aria-expanded="true" aria-controls="collapseMenu" src="public/images/avatar.png" alt="mon_compte">
+        <img class="w-75 btn" style="min-width: 60px" data-bs-toggle="collapse" data-bs-target="#collapseMenu" role="button" aria-expanded="true" aria-controls="collapseMenu" src="public/images/avatar.png" alt="mon_compte">
     </span>
     <div class="collapse" id="collapseMenu">
         <div class="card card-body">
