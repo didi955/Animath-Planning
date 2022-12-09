@@ -35,7 +35,7 @@ include "view_topbar.php";
                 <label class="col form-label" for="password">Mot de passe : </label><input class="col form-control" type="password" id="pass" name="pass" required>
             </div>
             <div class="mb-3">
-                <input type="checkbox" name="remember_ont" id="remember" class="form-check-input"/>
+                <input type="checkbox" name="remember" id="remember" class="form-check-input"/>
                 <label for="remember" class="form-check-label">Se souvenir de moi</label>
             </div>
             <div class="mb-3">

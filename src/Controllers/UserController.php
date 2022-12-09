@@ -64,7 +64,9 @@ class UserController extends Controller
                 if($user != null) {
                     if(password_verify($_POST['pass'], $user->getPassHash())){
                         $_SESSION['user'] = serialize($user);
-                        setcookie('user', serialize($user), time() + 3600 * 24 * 30, '/', '', true, true);
+                        if(isset($_POST['remember']) && $_POST['remember'] == "on"){
+                            setcookie('user', serialize($user), time() + 3600 * 24 * 30, '/', '', true, true);
+                        }
                         $this->render('home');
                     }
                     else {
