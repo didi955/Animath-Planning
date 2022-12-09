@@ -8,9 +8,8 @@
     </span>
     <div class="collapse" id="collapseMenu">
         <div class="card card-body">
-            <?php if(isset($_SESSION['user']) || isset($_COOKIE['uuid'])): ?>
+            <?php if(isset($_SESSION['user'])): ?>
                 <a class="btn btn-primary btn-lg" href="?controller=User&action=my_account">Mon compte</a>
-
                 <a class="btn btn-outline-danger btn-sm mb-1 ms-3 me-3 mt-3" href="?controller=User&action=sign_out">Se déconnecter</a>
             <?php else : ?>
                 <p class="text-center">Vous n'êtes pas connecté !</p>
@@ -40,6 +39,10 @@
                         <div class="mb-3 form-floating">
                             <input class="form-control" type="password" id="pass" name="pass" placeholder="name@example.com" required>
                             <label for="password">Mot de passe : </label>
+                        </div>
+                        <div class="mb-3">
+                            <input type="checkbox" name="remember_ont" id="remember" class="form-check-input"/>
+                            <label for="remember" class="form-check-label">Se souvenir de moi</label>
                         </div>
                         <div class="modal-footer">
                         <input type="submit" class="btn btn-primary" value="Se connecter"/>

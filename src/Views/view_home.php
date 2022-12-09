@@ -27,14 +27,19 @@ include "view_topbar.php";
 
 <div class="accordion shadow" id="accordionExample">
     <div class="bg-light bg-gradient accordion-item accordion-collapse collapse pt-4" id="collapseOne" data-bs-parent="#accordionExample">
-        <form class="container" action="?controller=User&action=sign_in" method="post" style="width: 35%">
-            <div class="mb-3 form-floating">
-                <input class="form-control" type="email" id="email" name="email" placeholder="name@example.com" required>
-                <label for="login">Identifiant/Mail :</label>
+        <form class="container" action="?controller=User&action=sign_in" method="post" style="width: 35%" novalidate>
+            <div class="mb-3">
+                <label class="col form-label" for="login">Identifiant/Mail :</label><input class="col form-control" type="email" id="email" name="email" required>
             </div>
-            <div class="mb-3 form-floating">
-                <input class="form-control" type="password" id="pass" name="pass" placeholder="Password" required>
-                <label for="password">Mot de passe : </label>
+            <div class="mb-3">
+                <label class="col form-label" for="password">Mot de passe : </label><input class="col form-control" type="password" id="pass" name="pass" required>
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" name="remember_ont" id="remember" class="form-check-input"/>
+                <label for="remember" class="form-check-label">Se souvenir de moi</label>
+            </div>
+            <div class="mb-3">
+                <input class="col btn btn-primary" type="submit" value="Se connecter">
             </div>
             <div class="modal-footer">
                 <input type="submit" class="btn btn-primary" value="Se connecter"/>
@@ -44,31 +49,33 @@ include "view_topbar.php";
 
     <div class="bg-light bg-gradient accordion-item accordion-collapse collapse pt-4" id="collapseTwo" data-bs-parent="#accordionExample">
         <form class="container needs-validation" method="post" action="?controller=User&action=sign_up" style="width: 35%" novalidate>
-            <div class="mb-3 form-floating">
-                <input class="form-control" type="email" id="email" name="email" placeholder="name@example.com" required>
-                <label for="email">Mail :</label>
+            <div class="mb-3">
+                <label class="form-label" for="email">Mail :</label>
+                <input class="form-control" type="email" id="email" name="email" required>
+                <div class="invalid-feedback">Veuillez entrer une adresse mail valide.</div>
+                <div class="valid-feedback">Adresse mail valide.</div>
             </div>
-            <div class="mb-3 form-floating">
-                <input class="form-control" type="text" id="first_name" name="first_name" placeholder="name" required>
-                <label for="first_name">Prénom :</label>
+            <div class="mb-3">
+                <label class="form-label" for="first_name">Prénom :</label>
+                <input class="form-control" type="text" id="first_name" name="first_name" required>
                 <div class="invalid-feedback">Veuillez entrer un prénom valide.</div>
                 <div class="valid-feedback">Prénom valide.</div>
             </div>
-            <div class="mb-3 form-floating">
-                <input class="form-control" type="text" id="last_name" name="last_name" placeholder="name" required>
-                <label for="last_name">Nom :</label>
+            <div class="mb-3">
+                <label class="form-label" for="last_name">Nom :</label>
+                <input class="form-control" type="text" id="last_name" name="last_name" required>
                 <div class="invalid-feedback">Veuillez entrer un nom valide.</div>
                 <div class="valid-feedback">Nom valide.</div>
             </div>
-            <div class="mb-3 form-floating">
-                <input class="form-control" type="password" id="pass" name="pass" placeholder="name" required>
-                <label for="pass">Mot de passe : </label>
+            <div class="mb-3">
+                <label class="form-label" for="pass">Mot de passe : </label>
+                <input class="form-control" type="password" id="pass" name="pass" required>
                 <div class="invalid-feedback">Veuillez entrer un mot de passe valide.</div>
                 <div class="valid-feedback">Mot de passe valide.</div>
             </div>
-            <div class="mb-3 form-floating">
-                <input class="form-control" type="password" id="pass_confirm" name="pass_confirm" placeholder="name" required>
-                <label for="pass_confirm">Confirmation mot de passe : </label>
+            <div class="mb-3">
+                <label class="form-label" for="pass_confirm">Confirmation mot de passe : </label>
+                <input class="form-control" type="password" id="pass_confirm" name="pass_confirm" required>
                 <div class="invalid-feedback">Veuillez entrer un mot de passe valide.</div>
                 <div class="valid-feedback">Mot de passe valide.</div>
             </div>
