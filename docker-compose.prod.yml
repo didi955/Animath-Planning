@@ -1,0 +1,13 @@
+version: '1'
+
+services:
+  app:
+    image: php:8.2-apache
+    container_name: animath-prod
+    restart: always
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
