@@ -3,6 +3,7 @@ FROM php:8.2-apache
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 EXPOSE 80
+
 WORKDIR /app
 
 # git, unzip & zip are for composer
@@ -17,10 +18,10 @@ RUN apt-get update -qq && \
 
 # PHP Extensions
 COPY conf/php.ini /usr/local/etc/php/conf.d/app.ini
-RUN docker-php-ext-install pdo_pgsql openssl xml
+RUN docker-php-ext-install pdo_pgsql
 
 # Apache
-COPY errors /errors
+COPY src/errors /errors
 COPY conf/apache.conf /etc/apache2/conf-available/z-app.conf
 COPY * /app/
 
