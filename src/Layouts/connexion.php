@@ -1,5 +1,5 @@
 <div class="mb-3 form-floating">
-    <input class="col form-control verifmail" type="email" id="email" name="email" placeholder="" required>
+    <input class="col form-control" type="email" id="email" name="email" placeholder="" required>
     <label class="col form-label" for="email">Identifiant/Mail :</label>
 </div>
 <div class="mb-3 form-floating">
