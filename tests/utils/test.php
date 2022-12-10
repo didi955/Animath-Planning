@@ -1,10 +1,10 @@
 <?php
 
-namespace utils;
-
 use PHPUnit\Framework\TestCase;
-
-require __DIR__ . '/../src/Utils/functions.php';
+use Ramsey\Uuid\Nonstandard\Uuid;
+require __DIR__ . '/../../src/Utils/Role.php';
+require __DIR__ . '/../../src/User.php';
+require __DIR__ . '/../../src/Utils/functions.php';
 
 class test extends TestCase
 {
@@ -23,6 +23,26 @@ class test extends TestCase
         $mail = "CASSIOPEABESTCHAMP@LOL.COM";
         self::assertTrue(is_valid_email($mail));
     }
+
+    /**
+     * @test
+     */
+    public function testUserSerialization(){
+        $user = new User();
+        $user->setUUID("39378c18-01e0-410a-95c7-4c0822a6fd21");
+        $user->setEmail("didi955@rushcubeland.fr");
+        $user->setFirstName("Dylan");
+        $user->setLastName("Lannuzel");
+        $user->setRole(Role::SUPERVISOR);
+        $serialized = serialize($user);
+        $unserialized = unserialize($serialized);
+        self::assertEquals($user, $unserialized);
+        self::assertEquals($user->getUUID(), $unserialized->getUUID());
+        self::assertEquals($user->getRole(), $unserialized->getRole());
+
+    }
+
+
 
 
 }

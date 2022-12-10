@@ -4,7 +4,7 @@
             <label for="darkMode"></label><input class="mx-1 form-check-input " type="checkbox" id="darkMode" role="switch">
     </span>
     <span class="col w-50">
-        <img class="w-75 btn" data-bs-toggle="collapse" data-bs-target="#collapseMenu" role="button" aria-expanded="true" aria-controls="collapseMenu" src="public/images/avatar.png" alt="mon_compte">
+        <img class="w-75 btn" style="min-width: 60px" data-bs-toggle="collapse" data-bs-target="#collapseMenu" role="button" aria-expanded="true" aria-controls="collapseMenu" src="public/images/avatar.png" alt="mon_compte">
     </span>
     <div class="collapse" id="collapseMenu">
         <div class="card card-body">
@@ -41,7 +41,7 @@
                             <label for="password">Mot de passe : </label>
                         </div>
                         <div class="mb-3">
-                            <input type="checkbox" name="remember_ont" id="remember" class="form-check-input"/>
+                            <input type="checkbox" name="remember" id="remember" class="form-check-input"/>
                             <label for="remember" class="form-check-label">Se souvenir de moi</label>
                         </div>
                         <div class="modal-footer">
