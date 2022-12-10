@@ -48,3 +48,39 @@ for (let check of checked){
     })
 }
 
+(() => {
+    'use strict'
+    
+    const forms = document.querySelectorAll('.needs-validation')
+    
+    Array.from(forms).forEach(form => {
+        let pass = form.querySelector(".verifpass")
+        let passconfirm = form.querySelector(".verifpassconfirm")
+        if(pass && passconfirm){
+            passconfirm.addEventListener("keyup",(e)=>{
+                if(pass.value !== passconfirm.value){
+                    passconfirm.classList.add("is-invalid")
+                }
+                else{
+                    passconfirm.classList.remove("is-invalid")
+                }
+            })
+        }
+        form.addEventListener('submit', event => {
+            let inputs = form.querySelectorAll(".form-control,.form-check-input")
+            inputs.forEach(input => {
+                if(input.classList.contains("is-invalid")){
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+            })
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()
+
