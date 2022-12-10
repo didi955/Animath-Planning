@@ -27,7 +27,7 @@ include "view_topbar.php";
 
 <div class="accordion shadow" id="accordionExample">
     <div class="bg-light bg-gradient accordion-item accordion-collapse collapse pt-4" id="collapseOne" data-bs-parent="#accordionExample">
-        <form class="container needs-validation" method="post" action="?controller=User&action=sign_up" style="width: 35%" novalidate>
+        <form class="container needs-validation" method="post" action="?controller=User&action=sign_in" style="width: 35%" novalidate>
             <?php include "Layouts/connexion.php"?>
         </form>
     </div>

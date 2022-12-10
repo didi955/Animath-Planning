@@ -31,7 +31,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="container needs-validation" method="post" action="?controller=User&action=sign_up" novalidate>
+                    <form class="container needs-validation" method="post" action="?controller=User&action=sign_in" novalidate>
                         <?php include "Layouts/connexion.php"?>
                     </form>
                 </div>

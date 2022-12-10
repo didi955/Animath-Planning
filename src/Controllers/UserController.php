@@ -105,20 +105,25 @@ class UserController extends Controller
             $mail = strtolower($_POST['email']);
             if(is_valid_email($mail)
                 && isset($_POST['pass']) && isset($_POST['pass_confirm']) && $_POST['pass'] === $_POST['pass_confirm'] &&
-                isset($_POST['last_name']) && isset($_POST['first_name']) && isset($_POST['cgu_accept']) && $_POST['cgu_accept'] === 'on'){
+                isset($_POST['last_name']) && isset($_POST['first_name']) && is_valid_name($_POST['last_name']) && is_valid_name($_POST['first_name']) &&isset($_POST['cgu_accept']) && $_POST['cgu_accept'] === 'on'){
 
-                $user = new User();
-                $user->setUUID(Uuid::uuid4()->toString());
-                $user->setEmail($mail);
-                $user->setActive(false);
-                $user->setPassHash(hash_pass($_POST['pass']));
-                $user->setLastName($_POST['last_name']);
-                $user->setFirstName($_POST['first_name']);
-                $user->setRole(Role::PROFESSOR);
-                $user->save();
-                $this->render("home");
-                $_SESSION['user'] = serialize($user);
-                setcookie('user', serialize($user), time() + 3600 * 24 * 30, '/', '', true, true);
+                if(UserModel::getModel()->getUserByEmail($mail) == null) {
+                    $user = new User();
+                    $user->setUUID(Uuid::uuid4()->toString());
+                    $user->setEmail($mail);
+                    $user->setActive(false);
+                    $user->setPassHash(hash_pass($_POST['pass']));
+                    $user->setLastName($_POST['last_name']);
+                    $user->setFirstName($_POST['first_name']);
+                    $user->setRole(Role::PROFESSOR);
+                    $user->save();
+                    $this->render("home");
+                    $_SESSION['user'] = serialize($user);
+                    setcookie('user', serialize($user), time() + 3600 * 24 * 30, '/', '', true, true);
+                }
+                else {
+                    $this->action_error('Adresse mail déjà utilisée', 444);
+                }
             }
             else {
                 $this->action_error('Formulaire invalide', 444);

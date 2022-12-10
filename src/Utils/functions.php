@@ -27,3 +27,11 @@ function is_valid_email(string $email)
     }
     return false;
 }
+
+function is_valid_name(string $name)
+{
+    if(preg_match("/^([a-zA-Z]+)$/", strtolower($name))){
+        return true;
+    }
+    return false;
+}
