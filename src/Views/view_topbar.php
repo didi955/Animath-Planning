@@ -31,22 +31,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="container" action="?controller=User&action=sign_in" method="post">
-                        <div class="mb-3 form-floating">
-                            <input class="form-control" type="email" id="email" name="email" placeholder="name@example.com" required>
-                            <label for="login">Identifiant/Mail :</label>
-                        </div>
-                        <div class="mb-3 form-floating">
-                            <input class="form-control" type="password" id="pass" name="pass" placeholder="name@example.com" required>
-                            <label for="password">Mot de passe : </label>
-                        </div>
-                        <div class="mb-3">
-                            <input type="checkbox" name="remember" id="remember" class="form-check-input"/>
-                            <label for="remember" class="form-check-label">Se souvenir de moi</label>
-                        </div>
-                        <div class="modal-footer">
-                        <input type="submit" class="btn btn-primary" value="Se connecter"/>
-                        </div>
+                    <form class="container needs-validation" method="post" action="?controller=User&action=sign_up" novalidate>
+                        <?php include "Layouts/connexion.php"?>
                     </form>
                 </div>
             </div>
@@ -62,50 +48,7 @@
             </div>
             <div class="modal-body">
                 <form class="container needs-validation" method="post" action="?controller=User&action=sign_up" novalidate>
-                    <div class="mb-3 form-floating">
-                        <input class="form-control" type="email" id="email" name="email" placeholder="name@example.com" required>
-                        <label for="email">Mail :</label>
-                        <div class="invalid-feedback">Veuillez entrer une adresse mail valide.</div>
-                        <div class="valid-feedback">Adresse mail valide.</div>
-                    </div>
-                    <div class="mb-3 form-floating">
-                        <input class="form-control" type="text" id="first_name" name="first_name" placeholder="name@example.com" required>
-                        <label for="first_name">Prénom :</label>
-                        <div class="invalid-feedback">Veuillez entrer un prénom valide.</div>
-                        <div class="valid-feedback">Prénom valide.</div>
-                    </div>
-                    <div class="mb-3 form-floating">
-                        <input class="form-control" type="text" id="last_name" name="last_name" placeholder="name@example.com" required>
-                        <label for="last_name">Nom :</label>
-                        <div class="invalid-feedback">Veuillez entrer un nom valide.</div>
-                        <div class="valid-feedback">Nom valide.</div>
-                    </div>
-                    <div class="mb-3 form-floating">
-                        <input class="form-control" type="password" id="pass" name="pass" placeholder="name@example.com" required>
-                        <label for="pass">Mot de passe : </label>
-                        <div class="invalid-feedback">Veuillez entrer un mot de passe valide.</div>
-                        <div class="valid-feedback">Mot de passe valide.</div>
-                    </div>
-                    <div class="mb-3 form-floating">
-                        <input class="form-control" type="password" id="pass_confirm" name="pass_confirm" placeholder="name@example.com" required>
-                        <label for="pass_confirm">Confirmation mot de passe : </label>
-                        <div class="invalid-feedback">Veuillez entrer un mot de passe valide.</div>
-                        <div class="valid-feedback">Mot de passe valide.</div>
-                    </div>
-                    <div class="mb-3">
-                        <input type="checkbox" name="cgu_accept" id="cgu" class="form-check-input"/>
-                        <label for="cgu">J'accepte les <a data-bs-toggle="modal" href="#cguModalTopbar"><?=e(CGU_TITLE)?></a></label>
-                        <div class="invalid-feedback">Veuillez accepter les CGU, pour continuer</div>
-                    </div>
-                    <?php
-                    /*
-                    $key = parse_ini_file("hcaptcha.ini")['key'];
-                    echo '<div class="h-captcha" data-sitekey="'. $key .'"></div>';
-                    */
-                    ?>
-                    <div class="modal-footer">
-                        <input type="submit" id="submit_signup" class="btn btn-primary" value="Envoyer"/>
-                    </div>
+                    <?php include "Layouts/inscriptionModal.php"?>
                 </form>
             </div>
         </div>
