@@ -103,30 +103,65 @@ class UserController extends Controller
     public function action_sign_up(){
         if(isset($_POST['email'])){
             $mail = strtolower($_POST['email']);
-            if(is_valid_email($mail)
-                && isset($_POST['pass']) && isset($_POST['pass_confirm']) && $_POST['pass'] === $_POST['pass_confirm'] &&
-                isset($_POST['last_name']) && isset($_POST['first_name']) && is_valid_name($_POST['last_name']) && is_valid_name($_POST['first_name']) &&isset($_POST['cgu_accept']) && $_POST['cgu_accept'] === 'on'){
+            if(isset($_POST['h-captcha-response'])){
+                if(is_valid_email($mail)
+                    && isset($_POST['pass']) && isset($_POST['pass_confirm']) && $_POST['pass'] === $_POST['pass_confirm'] &&
+                    isset($_POST['last_name']) && isset($_POST['first_name']) && is_valid_name($_POST['last_name']) && is_valid_name($_POST['first_name']) &&isset($_POST['cgu_accept']) && $_POST['cgu_accept'] === 'on'){
 
-                if(UserModel::getModel()->getUserByEmail($mail) == null) {
-                    $user = new User();
-                    $user->setUUID(Uuid::uuid4()->toString());
-                    $user->setEmail($mail);
-                    $user->setActive(false);
-                    $user->setPassHash(hash_pass($_POST['pass']));
-                    $user->setLastName($_POST['last_name']);
-                    $user->setFirstName($_POST['first_name']);
-                    $user->setRole(Role::PROFESSOR);
-                    $user->save();
-                    $this->render("home");
-                    $_SESSION['user'] = serialize($user);
-                    setcookie('user', serialize($user), time() + 3600 * 24 * 30, '/', '', true, true);
+                    $secret = parse_ini_file("../hcaptcha.ini")['secret'];
+                    $data = array(
+                        'response' => $_POST['h-captcha-response'],
+                        'secret' => $secret
+                    );
+                    // POST REQUEST TO CHECK THE VALIDITY OF THE CAPTCHA TOKEN
+                    //NOT WORK, NEED TO BE FIXED
+                    /*
+                    $verify = curl_init();
+                    curl_setopt($verify, CURLOPT_URL, "https://hcaptcha.com/siteverify");
+                    curl_setopt($verify, CURLOPT_POST, true);
+                    curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
+                    curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+                    $response = curl_exec($verify);
+                    $responseData = json_decode($response);
+
+                    if($responseData->success) {
+                        if(UserModel::getModel()->getUserByEmail($mail) == null) {
+                            $user = new User();
+                            $user->setUUID(Uuid::uuid4()->toString());
+                            $user->setEmail($mail);
+                            $user->setActive(false);
+                            $user->setPassHash(hash_pass($_POST['pass']));
+                            $user->setLastName($_POST['last_name']);
+                            $user->setFirstName($_POST['first_name']);
+                            $user->setRole(Role::PROFESSOR);
+                            $user->save();
+                            $this->render("home");
+                            $_SESSION['user'] = serialize($user);
+                        }
+                    */
+                    if(UserModel::getModel()->getUserByEmail($mail) == null) {
+                        $user = new User();
+                        $user->setUUID(Uuid::uuid4()->toString());
+                        $user->setEmail($mail);
+                        $user->setActive(false);
+                        $user->setPassHash(hash_pass($_POST['pass']));
+                        $user->setLastName($_POST['last_name']);
+                        $user->setFirstName($_POST['first_name']);
+                        $user->setRole(Role::PROFESSOR);
+                        $user->save();
+                        $this->render("home");
+                        $_SESSION['user'] = serialize($user);
+                    }
+                    else {
+                        $this->action_error("Adresse mail déjà utilisée", 444);
+                    }
                 }
                 else {
-                    $this->action_error('Adresse mail déjà utilisée', 444);
+                    $this->action_error('Formulaire invalide', 444);
                 }
             }
             else {
-                $this->action_error('Formulaire invalide', 444);
+                $this->action_error('Captcha invalide', 444);
             }
         }
         else {
