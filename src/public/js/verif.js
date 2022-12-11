@@ -74,6 +74,15 @@ for (let check of checked){
                     event.stopPropagation()
                 }
             })
+            let hcaptcha = form.querySelector('[name=h-captcha-response]')
+            if (hcaptcha.value === "") {
+                form.querySelector('.h-captcha').classList.add("is-invalid")
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            else {
+                form.querySelector('.h-captcha').classList.remove("is-invalid")
+            }
             if (!form.checkValidity()) {
                 event.preventDefault()
                 event.stopPropagation()
