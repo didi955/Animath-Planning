@@ -1,9 +1,10 @@
 <div class="mb-3 form-floating">
-    <input class="col form-control" type="email" id="email" name="email" placeholder="" required>
-    <label class="col form-label" for="email">Identifiant/Mail :</label>
+    <input class="form-control verifmail" type="email" id="email" name="email" placeholder="" required>
+    <label class="form-label" for="email">Identifiant/Mail :</label>
+    <div class="invalid-feedback">Veuillez entrer un mail valide</div>
 </div>
 <div class="mb-3 form-floating">
-    <input class="col form-control" type="password" id="pass" name="pass" placeholder="" required>
+    <input class="form-control" type="password" id="pass" name="pass" placeholder="" required>
     <label for="pass">Mot de passe : </label>
 </div>
 <div class="mb-3">
