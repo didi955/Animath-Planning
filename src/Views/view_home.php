@@ -27,9 +27,15 @@ include "view_topbar.php";
 
 <div class="accordion shadow" id="accordionExample">
     <div class="bg-light bg-gradient accordion-item accordion-collapse collapse pt-4" id="collapseOne" data-bs-parent="#accordionExample">
+        <?php if(isset($_SESSION['user'])): ?>
+        <div class="container text-center pt-3 pb-3 mt-3 mb-3">
+            Vous êtes déja connécté : )
+        </div>
+        <?php else: ?>
         <form class="container needs-validation" method="post" action="?controller=User&action=sign_in" style="width: 35%" novalidate>
             <?php include "Layouts/connexion.php"?>
         </form>
+        <?php endif; ?>
     </div>
     <div class="bg-light bg-gradient accordion-item accordion-collapse collapse pt-4" id="collapseTwo" data-bs-parent="#accordionExample">
         <form class="container needs-validation" method="post" action="?controller=User&action=sign_up" style="width: 35%" novalidate>
