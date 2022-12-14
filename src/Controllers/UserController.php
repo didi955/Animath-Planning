@@ -135,8 +135,8 @@ class UserController extends Controller
                             $user->setFirstName($_POST['first_name']);
                             $user->setRole(Role::PROFESSOR);
                             $user->save();
-                            $this->render("home");
                             $_SESSION['user'] = serialize($user);
+                            $this->render("home");
                         }
                     */
                     if(UserModel::getModel()->getUserByEmail($mail) == null) {
@@ -149,8 +149,8 @@ class UserController extends Controller
                         $user->setFirstName($_POST['first_name']);
                         $user->setRole(Role::PROFESSOR);
                         $user->save();
-                        $this->render("home");
                         $_SESSION['user'] = serialize($user);
+                        $this->render("home");
                     }
                     else {
                         $this->action_error("Adresse mail déjà utilisée", 444);
