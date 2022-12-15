@@ -120,20 +120,6 @@ include 'view_topbar.php';
     </div>
 
 </div>
-    <!--<div class="row">
-        <div class="col-12 card">
-            <h2>Informations personnelles</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <p>Adresse mail : <?= e($user->getEmail()) ?></p>
-            <p>Nom : <?= e($user->getLastName()) ?></p>
-            <p>Prénom : <?= e($user->getFirstName()) ?></p>
-            <p>Role : <?= e($user->getRole()->name) ?></p>
-        </div>
-    </div>
-</div>-->
 
 <div class="position-absolute bottom-0 w-100">
     <?php

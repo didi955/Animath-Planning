@@ -44,24 +44,48 @@ include "view_topbar.php";
     </div>
 </div>
 
-    <div class="container border shadow ps-5 pt-5 pb-5 text-center bg-white">
-        <div class="row w-100 mb-2" style="height: 20%">
-            <div class="col-md-9 h-100 pt-5"> Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet,</div>
-            <div class="col-md-3 h-100 bg-light"> Image </div>
+<div class="container border shadow p-5 text-center bg-white">
+    <div class="row gap-3">
+        <div class="col-1"></div>
+        <div class="card col-3 text-center">
+            <div class="card-header">
+                <img src="public/images/modif.png" alt="" class="card-img-top">
+            </div>
+            <div class="card-body">
+                <h3>Titre</h3>
+                <p class="card-text">Description</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary">Voir les disponibilités</a>
+            </div>
         </div>
-        <div class="row w-100 mb-2" style="height: 20%">
-            <div class="col-md-3 h-100 bg-light"> Image </div>
-            <div class="col-md-9 h-100 pt-5">Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet,</div>
+        <div class="card col-3 text-center">
+            <div class="card-header">
+                <img src="public/images/modif.png" alt="" class="card-img-top">
+            </div>
+            <div class="card-body">
+                <h3>Titre</h3>
+                <p class="card-text">Description</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary">Voir les disponibilités</a>
+            </div>
         </div>
-        <div class="row w-100 mb-2" style="height: 20%">
-            <div class="col-md-9 h-100 pt-5">Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet,</div>
-            <div class="col-md-3 h-100 bg-light"> Image </div>
+        <div class="card col-3 text-center">
+            <div class="card-header">
+                <img src="public/images/modif.png" alt="" class="card-img-top">
+            </div>
+            <div class="card-body">
+                <h3>Titre</h3>
+                <p class="card-text">Description</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary">Voir les disponibilités</a>
+            </div>
         </div>
-        <div class="row w-100 mb-2" style="height: 20%">
-            <div class="col-md-3 h-100 bg-light"> Image </div>
-            <div class="col-md-9 h-100 pt-5">Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet, Lorem Ispum dolor sit amet, </div>
-        </div>
+        <div class="col-1"></div>
     </div>
+</div>
 
 <?php
 include "view_footer.php";
