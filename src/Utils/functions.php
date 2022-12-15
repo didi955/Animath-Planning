@@ -7,6 +7,8 @@
  */
 function e($message)
 {
+    if($message === null)
+        return htmlspecialchars("NULL", ENT_QUOTES);
     return htmlspecialchars($message, ENT_QUOTES);
 }
 

@@ -4,9 +4,6 @@ include "view_topbar.php";
 
 <style>
     body {
-        overflow-x: hidden;
-        width: auto;
-        height: auto;
         background: url("public/images/Animath.jpg") no-repeat fixed center center;
     }
 </style>

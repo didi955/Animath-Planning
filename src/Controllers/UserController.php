@@ -15,6 +15,18 @@ class UserController extends Controller
         $this->action_my_account();
     }
 
+    public function action_gestion(){
+        if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
+            $data = [
+                'users' => UserModel::getModel()->getAllUsers()
+            ];
+            $this->render('gestion', $data);
+        }
+        else {
+            $this->action_error("Vous n'avez pas les droits pour accéder à cette page", 444);
+        }
+    }
+
     /**
      * Action pour afficher la page de mon compte
      */

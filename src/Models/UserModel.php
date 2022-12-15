@@ -25,6 +25,24 @@ class UserModel
         return self::$instance;
     }
 
+    public function getAllUsers(){
+        $db = DatabaseModel::getModel()->getBD();
+        $query = $db->prepare('SELECT uuid, pd.last_name, pd.first_name, pd.email, pd.phone, role, active, created_at FROM "User" INNER JOIN "PersonalData" pd ON "User".uuid = pd.id_user');
+        $query->execute();
+        $users = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $users;
+    }
+
+    public function getProfessors()
+    {
+        $db = DatabaseModel::getModel()->getBD();
+        $query = $db->prepare('SELECT uuid, pd.last_name, pd.first_name, pd.email, pd.phone FROM "User" INNER JOIN "PersonalData" pd ON "User".uuid = pd.id_user WHERE role = :role');
+        $query->bindValue(':role', Role::PROFESSOR->value);
+        $query->execute();
+        $professors = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $professors;
+    }
+
     /**
      * Méthode permettant de savoir si il existe un utilisateur à partir d'un UUID
      * @param string $uuid UUID demandé
@@ -188,17 +206,36 @@ class UserModel
      * @param array $rs Tableau de données
      * @return User Utilisateur construit
      */
-    private function buildUser($rs){
+    public function buildUser($rs){
         $user = new User();
-        $user->setPassHash($rs['pass_hash']);
-        $user->setUUID($rs['uuid']);
-        $user->setRole(Role::valueOf($rs['role']));
-        $user->setActive($rs['active']);
-        $user->setCreatedAt($rs['created_at']);
-        $user->setLastName($rs['last_name']);
-        $user->setFirstName($rs['first_name']);
-        $user->setEmail($rs['email']);
-        $user->setPhone($rs['phone']);
+        if(isset($rs['uuid'])){
+            $user->setUUID($rs['uuid']);
+        }
+        if(isset($rs['role'])){
+            $user->setRole(Role::valueOf($rs['role']));
+        }
+        if(isset($rs['active'])){
+            $user->setActive($rs['active']);
+        }
+        if(isset($rs['pass_hash'])){
+            $user->setPassHash($rs['pass_hash']);
+        }
+        if(isset($rs['last_name'])){
+            $user->setLastName($rs['last_name']);
+        }
+        if(isset($rs['first_name'])){
+            $user->setFirstName($rs['first_name']);
+        }
+        if(isset($rs['email'])){
+            $user->setEmail($rs['email']);
+        }
+        if(isset($rs['phone'])){
+            $user->setPhone($rs['phone']);
+        }
+        if(isset($rs['created_at'])){
+            $user->setCreatedAt($rs['created_at']);
+        }
+
         return $user;
     }
 
