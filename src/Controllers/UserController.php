@@ -38,7 +38,7 @@ class UserController extends Controller
                         return;
                     }
                     else {
-                        $_SESSION['user'] = $user;
+                        $_SESSION['user'] = serialize($user);
                     }
                 }
             }
