@@ -10,6 +10,8 @@ include 'view_topbar.php';
         background: url("public/images/AnimathBlur.png") no-repeat fixed center center;
     }
 </style>
+<script src="public/js/fullcalendar-6.0.0/dist/index.global.js">
+</script>
 
 <div class="border-bottom mt-3 mb-3">
     <div class="container pt-3 pb-3 text-center">
@@ -22,22 +24,16 @@ include 'view_topbar.php';
 </div>
 
 <div class="container shadow border text-center">
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-justified gap-3 p-1">
         <li class="nav-item">
-            <a class="nav-link" href="#accordionInfoPerso">Info Perso</a>
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#accordionInfoPerso" type="button" role="tab" aria-controls="accordionInfoPerso" aria-selected="true">Info Perso</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#planning" type="button" role="tab" aria-controls="planning" aria-selected="true">Planning</a>
         </li>
     </ul>
-
-    <div class="accordion m-3" id="accordionInfoPerso">
+<div class="tab-content">
+    <div class="tab-pane fade show accordion m-3" id="accordionInfoPerso">
         <div class="accordion-item">
             <h2 class="accordion-header" id="HeaderPanelMail">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#PanelMail" aria-expanded="true" aria-controls="PanelMail">
@@ -118,7 +114,37 @@ include 'view_topbar.php';
             </div>
         </div>
     </div>
+    <div class="tab-pane h-50 fade m-3" id="planning">
+        <div class="h-75" id="calendar">
+        </div>
+        <div style="height: 15%">
 
+        </div>
+        <button class="border btn" data-bs-toggle="modal" href="#addEvent">
+                Ajouter evenement
+        </button>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="addEvent" tabindex="-1" aria-labelledby="addEventLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter evenement</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-floating">
+                    <input class="form-control" type="text" id="title" placeholder="">
+                    <label class="form-label" for="title"></label>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Ajouter"/>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="position-absolute bottom-0 w-100">
@@ -126,3 +152,18 @@ include 'view_topbar.php';
     include 'view_footer.php';
     ?>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'timeGridDay',
+            locale: 'fr',
+            editable: true,
+            allDaySlot: false,
+            events: [
+            ]
+        });
+        calendar.render();
+    });
+</script>
