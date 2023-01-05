@@ -60,10 +60,7 @@ class UserModel
         $role = Role::valueOf($rs['role']);
         $pdatas = null;
         if($role == Role::PROFESSOR){
-            $req = DatabaseModel::getModel()->getBD()->prepare('SELECT last_name, first_name, email, phone, school FROM "PersonalData" WHERE id_user=:id');
-            $req->bindValue(":id", $id);
-            $req->execute();
-            $pdatas = $req->fetch(PDO::FETCH_ASSOC);
+            $pdatas = ProfessorModel::getModel()->getPersonalData($id);
             if($pdatas!= null){
                 return $this->buildUser($rs, $pdatas);
             }

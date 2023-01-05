@@ -30,6 +30,7 @@ class ProfessorModel
         $req = DatabaseModel::getModel()->getBD()->prepare('SELECT * from "PersonalData" WHERE id_user=:id');
         $req->bindValue(":id", $id);
         $req->execute();
+        return $req->fetch(PDO::FETCH_ASSOC);
     }
 
 }
