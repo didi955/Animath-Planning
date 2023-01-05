@@ -28,7 +28,7 @@ foreach ($stands as $stand) {
     foreach ($stand as $key => $value) {
         echo "<div>$key: $value</div>";
     }
-    echo "</div><div class='card-footer'></div></div>";
+    echo "</div><div class='card-footer'><div class='btn'>Voir planing</div></div></div>";
 }
 ?>
 </div>
