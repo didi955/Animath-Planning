@@ -20,15 +20,15 @@ include_once "view_topbar.php";
 </div>
 <div class="border">
 <?php
-$req = DatabaseModel::getModel()->getBD()->prepare('select * from Stand') ;
+$req = DatabaseModel::getModel()->getBD()->prepare('select * from "Stand"') ;
 $req->execute();
 $stands = $req->fetchAll(PDO::FETCH_ASSOC);
 foreach ($stands as $stand):?>
-    <div>bonjour</div>
+    <div class="card"><div class="card-header"><?php echo e("$stand[title]") ?></div>
     <?php foreach ($stand as $key => $value):?>
-        <div>aurevoir</div>
+        <div class="card-body"><?php if ($key != 'id_user'){echo e("$key : $value");} ?></div>
     <?php endforeach; ?>
-    <div>rebonjour</div>
+        <div class="card footer"></div></div>
 <?php endforeach; ?>
 </div>
 <?php
