@@ -22,7 +22,7 @@ class HomeController extends Controller
         if(!isset($_SESSION['user'])){
             if(isset($_COOKIE['user'])){
                 $user = unserialize($_COOKIE['user']);
-                $user = UserModel::getModel()->getUser($user->getUUID());
+                $user = UserModel::getModel()->getUser($user->getID());
                 if($user != null){
                     $_SESSION['user'] = serialize($user);
                 }

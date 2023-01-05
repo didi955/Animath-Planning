@@ -17,10 +17,7 @@ class UserController extends Controller
 
     public function action_gestion(){
         if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
-            $data = [
-                'users' => UserModel::getModel()->getAllUsers()
-            ];
-            $this->render('gestion', $data);
+            $this->render('gestion');
         }
         else {
             $this->action_error("Vous n'avez pas les droits pour accéder à cette page", 444);
