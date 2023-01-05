@@ -11,7 +11,13 @@
     <div class="collapse" id="collapseMenu">
         <div class="card card-body">
             <?php if(isset($_SESSION['user'])): ?>
-                <a class="btn btn-primary btn-lg" href="?controller=User&action=my_account">Mon compte</a>
+                <?php if(unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR): ?>
+                    <li class="nav-item">
+                        <a class="btn btn-primary btn-lg" href="?controller=User&action=gestion">Gestion</a>
+                    </li>
+                <?php else: ?>
+                    <a class="btn btn-primary btn-lg" href="?controller=User&action=my_account">Mon compte</a>
+                <?php endif; ?>
                 <a class="btn btn-outline-danger btn-sm mb-1 ms-3 me-3 mt-3" href="?controller=User&action=sign_out">Se déconnecter</a>
             <?php else : ?>
                 <p class="text-center">Vous n'êtes pas connecté !</p>

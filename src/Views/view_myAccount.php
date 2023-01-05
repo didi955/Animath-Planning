@@ -28,11 +28,6 @@ include 'view_topbar.php';
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#planning" type="button" role="tab" aria-controls="planning" aria-selected="true">Planning</a>
         </li>
-        <?php if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR): ?>
-            <li class="nav-item">
-                <a class="nav-link" href="?controller=User&action=gestion" type="button" role="tab" aria-controls="planning" aria-selected="true">Gestion</a>
-            </li>
-        <?php endif; ?>
     </ul>
 <div class="tab-content">
     <div class="tab-pane fade show accordion m-3" id="accordionInfoPerso">

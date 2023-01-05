@@ -16,8 +16,6 @@ var FullCalendar = (function (exports) {
     function elementClosest(el, selector) {
         if (el.closest) {
             return el.closest(selector);
-            // really bad fallback for IE
-            // from https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
         }
         if (!document.documentElement.contains(el)) {
             return null;
