@@ -6,32 +6,19 @@ class User
     /**
      * Attribut caractérisant le UUID de l'utilisateur
      */
-    private $uuid;
+    private $id;
 
     /**
-     * Attribut caractérisant le nom de l'utilisateur
+     * Attribut caractérisant l'identifiant de connexion
      */
-    private $lastName;
-
-    /**
-     * Attribut caractérisant le prénom de l'utilisateur
-     */
-    private $firstName;
-
-    /**
-     * Attribut caractérisant le numéro de téléphone de l'utilisateur
-     */
-    private $phone;
-
-    /**
-     * Attribut caractérisant l'adresse mail de l'utilisateur
-     */
-    private $mail;
+    private $connexion_id;
 
     /**
      * Attribut caractérisant le role de l'utilisateur
      */
     private $role;
+
+    private $personalData;
 
     /**
      * Attribut caractérisant le statut de l'utilisateur
@@ -56,45 +43,14 @@ class User
      * Méthode permettant de récupérer l'UUID de l'utilisateur
      * @return string UUID de l'utilisateur
      */
-    public function getUUID() : string
+    public function getID() : string
     {
-        return $this->uuid;
+        return $this->id;
     }
 
-    /**
-     * Méthode permettant de récupérer le nom de l'utilisateur
-     * @return string Nom de l'utilisateur
-     */
-    public function getLastName() : string
+    public function getConnexionID(): string
     {
-        return $this->lastName;
-    }
-
-    /**
-     * Méthode permettant de récupérer le prénom de l'utilisateur
-     * @return string Prénom de l'utilisateur
-     */
-    public function getFirstName() : string
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * Méthode permettant de récupérer le numéro de téléphone de l'utilisateur
-     * @return string Numéro de téléphone de l'utilisateur
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * Méthode permettant de récupérer l'adresse mail de l'utilisateur
-     * @return string Adresse mail de l'utilisateur
-     */
-    public function getEmail() : string
-    {
-        return $this->mail;
+        return $this->connexion_id;
     }
 
     /**
@@ -133,49 +89,17 @@ class User
         return $this->pass_hash;
     }
 
+    public function getPersonalData(){
+        return $this->personalData;
+    }
+
     /**
      * Méthode permettant de définir l'UUID de l'utilisateur
-     * @param string $uuid Nouvel UUID de l'utilisateur
+     * @param string $id Nouvel UUID de l'utilisateur
      */
-    public function setUUID($uuid): void
+    public function setID(string $id): void
     {
-        $this->uuid = $uuid;
-    }
-
-    /**
-     * Méthode permettant de définir le nom de l'utilisateur
-     * @param string $lastName Nouveau nom de l'utilisateur
-     */
-    public function setLastName(string $lastName): void
-    {
-        $this->lastName = $lastName;
-    }
-
-    /**
-     * Méthode permettant de définir le prénom de l'utilisateur
-     * @param string $firstName Nouveau prénom de l'utilisateur
-     */
-    public function setFirstName(string $firstName): void
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * Méthode permettant de définir le numéro de téléphone de l'utilisateur
-     * @param string $phone Nouveau numéro de téléphone de l'utilisateur
-     */
-    public function setPhone($phone): void
-    {
-        $this->phone = $phone;
-    }
-
-    /**
-     * Méthode permettant de définir l'adresse mail de l'utilisateur
-     * @param string $mail Nouvelle adresse mail de l'utilisateur
-     */
-    public function setEmail(string $mail): void
-    {
-        $this->mail = $mail;
+        $this->id = $id;
     }
 
     /**
@@ -215,11 +139,30 @@ class User
     }
 
     /**
+     * Méthode permettant de définir le mot de passe hashé de l'utilisateur
+     * @param string $pass_hash Nouveau mot de passe hashé de l'utilisateur
+     */
+    public function setConnexionID($connexion_id): void
+    {
+        $this->connexion_id = $connexion_id;
+    }
+
+    public function setPersonalData($data): void
+    {
+        if($this->role == Role::PROFESSOR){
+            $this->personalData = $data;
+        }
+        else {
+            $this->personalData = null;
+        }
+    }
+
+    /**
      * Méthode permettant d'enregistrer l'utilisateur dans la base de données
      */
     public function save(): void
     {
-        if(UserModel::getModel()->isInDatabase($this->uuid))
+        if(UserModel::getModel()->isInDatabase($this->id))
         {
             UserModel::getModel()->updateUser($this);
         }
@@ -228,8 +171,6 @@ class User
             UserModel::getModel()->createUser($this);
         }
     }
-
-
 
 
 

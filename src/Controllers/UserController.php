@@ -44,7 +44,7 @@ class UserController extends Controller
                     return;
                 }
                 else {
-                    $user = UserModel::getModel()->getUser($user->getUUID());
+                    $user = UserModel::getModel()->getUser($user->getID());
                     if($user == null){
                         $this->action_error("Impossible de d'accéder à votre compte", 444);
                         return;
@@ -72,7 +72,7 @@ class UserController extends Controller
         if(isset($_POST['email'])){
             $mail = strtolower($_POST['email']);
             if(is_valid_email($mail) && isset($_POST['pass'])){
-                $user = UserModel::getModel()->getUserByEmail($mail);
+                $user = UserModel::getModel()->getUserByConnexionID($mail);
                 if($user != null) {
                     if(password_verify($_POST['pass'], $user->getPassHash())){
                         $_SESSION['user'] = serialize($user);
@@ -151,14 +151,16 @@ class UserController extends Controller
                             $this->render("home");
                         }
                     */
-                    if(UserModel::getModel()->getUserByEmail($mail) == null) {
+                    if(UserModel::getModel()->getUserByConnexionID($mail) == null) {
                         $user = new User();
-                        $user->setUUID(Uuid::uuid4()->toString());
-                        $user->setEmail($mail);
-                        $user->setActive(false);
+                        $user->setID(Uuid::uuid4()->toString());
+                        $user->setConnexionID($mail);
+                        $user->setActive(true);
                         $user->setPassHash(hash_pass($_POST['pass']));
-                        $user->setLastName($_POST['last_name']);
-                        $user->setFirstName($_POST['first_name']);
+                        $lastName = $_POST['last_name'];
+                        $firstName = $_POST['first_name'];
+                        $pdata = ['last_name'=> $lastName, 'first_name'=>$firstName, 'email' => null, 'phone'=> null, 'school'=>null];
+                        $user->setPersonalData($pdata);
                         $user->setRole(Role::PROFESSOR);
                         $user->save();
                         $_SESSION['user'] = serialize($user);

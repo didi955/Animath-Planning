@@ -1,9 +1,10 @@
 <div class="fixed-top">
   <div class="row align-items-center fixed-top position-absolute mt-2" style="width: 15%;left:85%;height: 10%">
       <a class="col text-center" href="index.php">Accueil</a>
-    <span class="col w-50 form-check-reverse form-switch text-center">
-            <label for="darkMode"></label><input class="mx-1 form-check-input " type="checkbox" id="darkMode" role="switch">
-    </span>
+      <!--<span class="col w-50 form-check-reverse form-switch text-center">
+      <label for="darkMode"></label><input class="mx-1 form-check-input " type="checkbox" id="darkMode" role="switch">
+      </span>
+      -->
     <span class="col w-50">
         <img class="w-75 btn" style="min-width: 80px" data-bs-toggle="collapse" data-bs-target="#collapseMenu" role="button" aria-expanded="true" aria-controls="collapseMenu" src="public/images/avatar.png" alt="mon_compte">
     </span>

@@ -25,32 +25,14 @@ class UserModel
         return self::$instance;
     }
 
-    public function getAllUsers(){
-        $db = DatabaseModel::getModel()->getBD();
-        $query = $db->prepare('SELECT uuid, pd.last_name, pd.first_name, pd.email, pd.phone, role, active, created_at FROM "User" INNER JOIN "PersonalData" pd ON "User".uuid = pd.id_user');
-        $query->execute();
-        $users = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $users;
-    }
-
-    public function getProfessors()
-    {
-        $db = DatabaseModel::getModel()->getBD();
-        $query = $db->prepare('SELECT uuid, pd.last_name, pd.first_name, pd.email, pd.phone FROM "User" INNER JOIN "PersonalData" pd ON "User".uuid = pd.id_user WHERE role = :role');
-        $query->bindValue(':role', Role::PROFESSOR->value);
-        $query->execute();
-        $professors = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $professors;
-    }
-
     /**
      * Méthode permettant de savoir si il existe un utilisateur à partir d'un UUID
      * @param string $uuid UUID demandé
      * @return bool
      */
-    public function isInDatabase($uuid){
-        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT uuid FROM "User" WHERE uuid= :uuid');
-        $req->bindValue(":uuid", $uuid);
+    public function isInDatabase($id){
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT id_user FROM "User" WHERE id_user= :id');
+        $req->bindValue(":id", $id);
         $req->execute();
         $rs = $req->fetch();
         if($rs){
@@ -64,35 +46,55 @@ class UserModel
      * @param string $uuid UUID demandé
      * @return User|null
      */
-    public function getUser(string $uuid){
-        if(!$this->isInDatabase($uuid)){
+    public function getUser(string $id){
+        if(!$this->isInDatabase($id)){
             return null;
         }
-        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT uuid, pass_hash, role, active, created_at, last_name, first_name, email, phone FROM "User" inner join "PersonalData" on uuid = "PersonalData".id_user WHERE uuid= :uuid');
-        $req->bindValue(":uuid", $uuid);
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT id_user, pass_hash, role, active, created_at, connexion_id FROM "User" WHERE id_user=:id');
+        $req->bindValue(":id", $id);
         $req->execute();
         $rs = $req->fetch(PDO::FETCH_ASSOC);
         if(!$rs){
             return null;
         }
-        return $this->buildUser($rs);
+        $role = Role::valueOf($rs['role']);
+        $pdatas = null;
+        if($role == Role::PROFESSOR){
+            $req = DatabaseModel::getModel()->getBD()->prepare('SELECT last_name, first_name, email, phone, school FROM "PersonalData" WHERE id_user=:id');
+            $req->bindValue(":id", $id);
+            $req->execute();
+            $pdatas = $req->fetch(PDO::FETCH_ASSOC);
+            if($pdatas!= null){
+                return $this->buildUser($rs, $pdatas);
+            }
+        }
+        return $this->buildUser($rs, $pdatas);
     }
-
     /**
      * Méthode permettant de récupérer un utilisateur à partir de son mail
      * @param string $email Mail demandé
      * @return User|null
      */
-    public function getUserByEmail(string $email){
-        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT uuid, role, pass_hash, active, created_at, email, 
-       last_name, first_name, phone FROM "User" inner join "PersonalData" on uuid = "PersonalData".id_user WHERE email = :email');
-        $req->bindValue(":email", $email);
+    public function getUserByConnexionID(string $connexion_id){
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT id_user, pass_hash, role, active, created_at, connexion_id FROM "User" WHERE connexion_id=:connexion_id');
+        $req->bindValue(":connexion_id", $connexion_id);
         $req->execute();
         $rs = $req->fetch(PDO::FETCH_ASSOC);
         if(!$rs){
             return null;
         }
-        return $this->buildUser($rs);
+        $role = Role::valueOf($rs['role']);
+        $pdatas = null;
+        if($role == Role::PROFESSOR){
+            $req = DatabaseModel::getModel()->getBD()->prepare('SELECT last_name, first_name, email, phone, school FROM "PersonalData" WHERE id_user=:id');
+            $req->bindValue(":id", $rs['id_user']);
+            $req->execute();
+            $pdatas = $req->fetch(PDO::FETCH_ASSOC);
+            if($pdatas!= null){
+                return $this->buildUser($rs, $pdatas);
+            }
+        }
+        return $this->buildUser($rs, $pdatas);
     }
 
     /**
@@ -101,8 +103,9 @@ class UserModel
      */
     public function desactivateUser(User $user){
         if($this->isInDatabase($user)){
-            $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE SET active=:value FROM "User" WHERE uuid = :value2');
+            $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE SET active=:value FROM "User" WHERE id_user = :value2');
             $req->bindValue(":value", false);
+            $req->bindValue(":value2", $user->getID());
             $req->execute();
         }
     }
@@ -115,7 +118,7 @@ class UserModel
         if($this->isInDatabase($user)){
             $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE SET active=:value FROM "User" WHERE uuid = :value2');
             $req->bindValue(":value", true);
-            $req->bindValue(":value2", $user->getUUID());
+            $req->bindValue(":value2", $user->getID());
             $req->execute();
         }
     }
@@ -125,24 +128,26 @@ class UserModel
      * @param User $user Utilisateur à enregistrer
      */
     public function createUser(User $user){
-        if(!$this->isInDatabase($user->getUUID())){
+        if(!$this->isInDatabase($user->getID())){
             try {
                 DatabaseModel::getModel()->getBD()->beginTransaction();
-                $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "User" (uuid, role, active, pass_hash) VALUES (:uuid, :role, :active, :pass_hash)');
-                $req->bindValue(":uuid", $user->getUUID());
+                $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "User" (id_user, role, active, pass_hash, connexion_id) VALUES (:id, :role, :active, :pass_hash, :connexion_id)');
+                $req->bindValue(":id", $user->getID());
                 $req->bindValue(":role", $user->getRole()->value, PDO::PARAM_INT);
                 $req->bindValue(":active", $user->isActive(), PDO::PARAM_BOOL);
                 $req->bindValue(":pass_hash", $user->getPassHash());
+                $req->bindValue(":connexion_id", $user->getConnexionID());
                 $req->execute();
 
-                $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "PersonalData" (id_user, last_name, first_name, email, phone) VALUES (:uuid, :last_name, :first_name, :mail, :phone)');
-                $req->bindValue(":uuid", $user->getUUID());
-                $req->bindValue(":last_name", $user->getLastName(), );
-                $req->bindValue(":first_name", $user->getFirstName());
-                $req->bindValue(":mail", $user->getEmail());
-                $req->bindValue(":phone", $user->getPhone());
+                if($user->getPersonalData() !== null){
+                    $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "PersonalData" (id_user, last_name, first_name, email, phone, school) VALUES (:id, :last_name, :first_name, :email, :phone, :school)');
+                    $req->bindValue(":id", $user->getID());
+                    foreach ($user->getPersonalData() as $key=>$value){
+                        $req->bindValue($key, $value);
+                    }
+                    $req->execute();
+                }
 
-                $req->execute();
                 DatabaseModel::getModel()->getBD()->commit();
 
             } catch (PDOException $e) {
@@ -158,24 +163,27 @@ class UserModel
      * @param User $user Utilisateur à mettre à jour
      */
     public function updateUser(User $user){
-        if($this->isInDatabase($user->getUUID())){
+        if($this->isInDatabase($user->getID())){
             try {
                 DatabaseModel::getModel()->getBD()->beginTransaction();
-                $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE "User" SET role=:role, active=:active, pass_hash=:pass_hash WHERE uuid = :uuid');
-                $req->bindValue(":uuid", $user->getUUID());
+                $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE "User" SET role=:role, active=:active, pass_hash=:pass_hash, connexion_id=:connexion_id WHERE id_user = :id');
+                $req->bindValue(":id", $user->getID());
                 $req->bindValue(":role", $user->getRole()->value, PDO::PARAM_INT);
                 $req->bindValue(":active", $user->isActive(), PDO::PARAM_BOOL);
                 $req->bindValue(":pass_hash", $user->getPassHash());
+                $req->bindValue(":connexion_id", $user->getConnexionID());
                 $req->execute();
 
-                $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE "PersonalData" SET last_name=:last_name, first_name=:first_name, email=:mail, phone=:phone WHERE id_user = :uuid');
-                $req->bindValue(":uuid", $user->getUUID());
-                $req->bindValue(":last_name", $user->getLastName(), );
-                $req->bindValue(":first_name", $user->getFirstName());
-                $req->bindValue(":mail", $user->getEmail());
-                $req->bindValue(":phone", $user->getPhone());
+                //PERSONAL DATA
+                if($user->getPersonalData() !== null && $user->getRole() == Role::PROFESSOR){
+                    $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE "PersonalData" SET last_name=:last_name, first_name=:first_name, email=:email, phone=:phone, school=:school) WHERE id_user = :id');
+                    $req->bindValue(":id", $user->getID());
+                    foreach ($user->getPersonalData() as $key=>$value){
+                        $req->bindValue($key, $value);
+                    }
+                    $req->execute();
+                }
 
-                $req->execute();
                 DatabaseModel::getModel()->getBD()->commit();
 
             } catch (PDOException $e) {
@@ -193,10 +201,10 @@ class UserModel
      */
     public function changePass(User $user, $newPass){
         if($this->isInDatabase($user)){
-            $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE SET pass_hash=:value FROM "User" WHERE uuid = :value2');
+            $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE SET pass_hash=:value FROM "User" WHERE id_user = :value2');
             $hash = hash_pass($newPass);
             $req->bindValue(":value", $hash);
-            $req->bindValue(":value2", $user->getUUID());
+            $req->bindValue(":value2", $user->getID());
             $req->execute();
         }
     }
@@ -206,10 +214,10 @@ class UserModel
      * @param array $rs Tableau de données
      * @return User Utilisateur construit
      */
-    public function buildUser($rs){
+    public function buildUser($rs, $pdatas){
         $user = new User();
         if(isset($rs['uuid'])){
-            $user->setUUID($rs['uuid']);
+            $user->setID($rs['uuid']);
         }
         if(isset($rs['role'])){
             $user->setRole(Role::valueOf($rs['role']));
@@ -220,22 +228,12 @@ class UserModel
         if(isset($rs['pass_hash'])){
             $user->setPassHash($rs['pass_hash']);
         }
-        if(isset($rs['last_name'])){
-            $user->setLastName($rs['last_name']);
-        }
-        if(isset($rs['first_name'])){
-            $user->setFirstName($rs['first_name']);
-        }
-        if(isset($rs['email'])){
-            $user->setEmail($rs['email']);
-        }
-        if(isset($rs['phone'])){
-            $user->setPhone($rs['phone']);
-        }
         if(isset($rs['created_at'])){
             $user->setCreatedAt($rs['created_at']);
         }
-
+        if(isset($pdatas) && $pdatas != null){
+            $user->setPersonalData($pdatas);
+        }
         return $user;
     }
 
