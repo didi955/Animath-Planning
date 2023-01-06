@@ -12,9 +12,7 @@
         <div class="card card-body">
             <?php if(isset($_SESSION['user'])): ?>
                 <?php if(unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR): ?>
-                    <li class="nav-item">
-                        <a class="btn btn-primary btn-lg" href="?controller=User&action=gestion">Gestion</a>
-                    </li>
+                    <a class="btn btn-primary btn-lg" href="?controller=User&action=gestion">Gestion</a>
                 <?php else: ?>
                     <a class="btn btn-primary btn-lg" href="?controller=User&action=my_account">Mon compte</a>
                 <?php endif; ?>
