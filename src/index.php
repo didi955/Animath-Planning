@@ -1,3 +1,9 @@
+<html>
+<title>Animath - Acceuil </title>
+<head>
+    <link rel="icon" href="public\images\favicon.ico" />
+</head>
+</html>
 <?php
 
 session_start();
