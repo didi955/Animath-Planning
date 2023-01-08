@@ -15,7 +15,7 @@ class ProfessorModel
 
     /**
      * Méthode permettant de récupérer un modèle car le constructeur est privé (Implémentation du Design Pattern Singleton)
-     * @return UserModel
+     * @return ProfessorModel
      */
     public static function getModel()
     {

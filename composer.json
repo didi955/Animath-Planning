@@ -2,7 +2,7 @@
   "require": {
     "phpunit/phpunit": "^9",
     "ext-pdo_pgsql": "^8",
-    "ramsey/uuid": "^4.6",
+    "ramsey/uuid": "^4.7",
     "ext-curl": "*"
   }
 }

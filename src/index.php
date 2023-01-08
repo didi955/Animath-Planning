@@ -1,9 +1,3 @@
-<html>
-<title>Animath - Acceuil </title>
-<head>
-    <link rel="icon" href="public\images\favicon.ico" />
-</head>
-</html>
 <?php
 
 session_start();
@@ -14,8 +8,11 @@ require_once "Utils/constant.php";
 require_once "Utils/functions.php";
 require_once "Models/UserModel.php";
 require_once "Models/DatabaseModel.php";
+require_once "Models/StandModel.php";
+require_once "Models/ActivitiesModel.php";
+require_once "Models/ProfessorModel.php";
 require_once "Controllers/Controller.php";
-require "Layouts/header.php";
+require_once "Layouts/header.php";
 
 //Liste des contrôleurs
 $controllers = ["Home", "User"];
