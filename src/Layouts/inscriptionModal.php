@@ -28,7 +28,7 @@
     </div>
     <div class="mb-3">
         <?php
-        $key = parse_ini_file("../hcaptcha.ini")['key'];
+            $key = parse_ini_file("../hcaptcha.ini")['key'];
         ?>
         <?php if(CAPTCHA_ENABLED):?>
             <div class="h-captcha" data-sitekey="<?= $key ?>"></div>

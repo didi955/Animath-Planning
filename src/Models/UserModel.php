@@ -228,6 +228,9 @@ class UserModel
         if(isset($rs['created_at'])){
             $user->setCreatedAt($rs['created_at']);
         }
+        if(isset($rs['connexion_id'])){
+            $user->setConnexionID($rs['connexion_id']);
+        }
         if(isset($pdatas) && $pdatas != null){
             $user->setPersonalData($pdatas);
         }

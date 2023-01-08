@@ -25,76 +25,100 @@ include 'view_topbar.php';
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#accordionInfoPerso" type="button" role="tab" aria-controls="accordionInfoPerso" aria-selected="true">Paramètres</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#planning" type="button" role="tab" aria-controls="planning" aria-selected="true">Planning</a>
-        </li>
+        <?php if($user->getRole() !== Role::SUPERVISOR): ?>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#planning" type="button" role="tab" aria-controls="planning" aria-selected="true">Planning</a>
+            </li>
+        <?php endif; ?>
     </ul>
 <div class="tab-content">
     <div class="tab-pane fade show accordion m-3" id="accordionInfoPerso">
         <div class="accordion-item">
-            <h2 class="accordion-header" id="HeaderPanelLastName">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#PanelLastName" aria-expanded="true" aria-controls="PanelLastName">
+            <h2 class="accordion-header" id="HeaderPanelInfo">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#PanelInfo" aria-expanded="true" aria-controls="PanelInfo">
                     Informations personnelles
                 </button>
             </h2>
-            <div id="PanelLastName" class="accordion-collapse collapse show" aria-labelledby="HeaderPanelLastName">
-                <div class="accordion-body row">
-                    <div class="col-1">
-                        Mail :
+            <?php if($user->getRole() === Role::PROFESSOR):?>
+
+                <div id="PanelInfo" class="accordion-collapse collapse show" aria-labelledby="HeaderPanelInfo">
+                    <div class="accordion-body row">
+                        <div class="col-1">
+                            Mail :
+                        </div>
+                        <div class="col-10 text-center">
+                            <strong> <?= e($user->getPersonalData()['email']) ?> </strong>
+                        </div>
+                        <div class="col-1">
+                            <div class="h-50">
+                                <img class="w-25" src="public/images/modif.png" alt="modif">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-10 text-center">
-                        <strong> <?= e($user->getPersonalData()['email']) ?> </strong>
+                    <div class="accordion-body row">
+                        <div class="col-1">
+                            Nom :
+                        </div>
+                        <div class="col-10">
+                            <strong><?= e($user->getPersonalData()['last_name']) ?></strong>
+                        </div>
+                        <div class="col-1">
+                            <div class="h-50">
+                                <img class="w-25" src="public/images/modif.png" alt="modif">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-1">
-                        <div class="h-50">
-                            <img class="w-25" src="public/images/modif.png" alt="modif">
+                    <div class="accordion-body row">
+                        <div class="col-1">
+                            Prénom :
+                        </div>
+                        <div class="col-10">
+                            <strong><?= e($user->getPersonalData()['first_name']) ?></strong>
+                        </div>
+                        <div class="col-1">
+                            <div class="h-50">
+                                <img class="w-25" src="public/images/modif.png" alt="modif">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-body row">
+                        <div class="col-1">
+                            Téléphone :
+                        </div>
+                        <div class="col-10">
+                            <?php if ($user->getPersonalData()['phone'] != null) : ?>
+                                <strong><?= e($user->getPersonalData()['phone']) ?></strong>
+                            <?php else : ?>
+                                <strong>Non renseigné</strong>
+                            <?php endif; ?>
+                        </div>
+                        <div class="col-1">
+                            <div class="h-50">
+                                <img class="w-25" src="public/images/modif.png" alt="modif">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-body row">
-                    <div class="col-1">
-                        Nom :
-                    </div>
-                    <div class="col-10">
-                        <strong><?= e($user->getPersonalData()['last_name']) ?></strong>
-                    </div>
-                    <div class="col-1">
-                        <div class="h-50">
-                            <img class="w-25" src="public/images/modif.png" alt="modif">
+
+            <?php elseif($user->getRole() === Role::EXHIBITOR):?>
+
+                <div id="PanelInfo" class="accordion-collapse collapse show" aria-labelledby="HeaderPanelInfo">
+                    <div class="accordion-body row">
+                        <div class="col-1">
+                            Mail :
+                        </div>
+                        <div class="col-10 text-center">
+                            <strong> <?= e($user->getConnexionID()) ?> </strong>
+                        </div>
+                        <div class="col-1">
+                            <div class="h-50">
+                                <img class="w-25" src="public/images/modif.png" alt="modif">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-body row">
-                    <div class="col-1">
-                        Prénom :
-                    </div>
-                    <div class="col-10">
-                        <strong><?= e($user->getPersonalData()['first_name']) ?></strong>
-                    </div>
-                    <div class="col-1">
-                        <div class="h-50">
-                            <img class="w-25" src="public/images/modif.png" alt="modif">
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-body row">
-                    <div class="col-1">
-                        Téléphone :
-                    </div>
-                    <div class="col-10">
-                        <?php if ($user->getPersonalData()['phone'] != null) : ?>
-                            <strong><?= e($user->getPersonalData()['phone']) ?></strong>
-                        <?php else : ?>
-                            <strong>Non renseigné</strong>
-                        <?php endif; ?>
-                    </div>
-                    <div class="col-1">
-                        <div class="h-50">
-                            <img class="w-25" src="public/images/modif.png" alt="modif">
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            <?php endif;?>
         </div>
         <div class="accordion-item">
             <h2 class="accordion-header" id="HeaderPanelSecurity">
