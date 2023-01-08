@@ -1,7 +1,6 @@
 <h1>
     Choisissez vos horaires : 
 </h1>
-
 <div class="date">
     <div class="form-check-jeudi">
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -28,15 +27,10 @@
         </label>
     </div>    
 </div>
-
 <h1>
     Choisissez le nombres d'élèves : ‎
 </h1>
-
-
 <style>
-
-    
     h1{
         margin-left: 75px;
         margin-top: 50px;
@@ -54,11 +48,4 @@
         box-shadow:  5px 5px 10px #666666,
         -5px -5px 10px #ffffff;
     }
-    
 </style>
-<script>
-  
-</script>
-
-</body>
-</html>

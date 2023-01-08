@@ -3,7 +3,7 @@ include_once "view_topbar.php";
 ?>
 <?php
 $req = StandModel::getModel()->getAllStand();
-$stands = $req?>
+$stands = $req ?>
 <style>
     body {
         background: url("public/images/AnimathBlur.png") no-repeat fixed center center;
