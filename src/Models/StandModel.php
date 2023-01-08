@@ -67,7 +67,7 @@ class StandModel
             $stand->setDesc($rs['desc']);
         }
         if(isset($activities)){
-            $stand->setActivities($rs['activities']);
+            $stand->setActivities($activities);
         }
         return $stand;
     }
