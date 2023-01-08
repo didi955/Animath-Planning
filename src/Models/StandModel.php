@@ -27,7 +27,7 @@ class StandModel
         return false;
     }
 
-    public function getStand(string $id){
+    public function getStand($id){
         if(!$this->isInDatabase($id)){
             return null;
         }
@@ -38,11 +38,18 @@ class StandModel
         if(!$rs){
             return null;
         }
-        $activities = null;
-        if ($activities != null) {
-            $activities = ActivitiesModel::getModel()->getAllDataByStand($id);
-        }
+        $activities = ActivitiesModel::getModel()->getAllActivitiesByStand($id);
         return $this->buildStand($rs, $activities);
+    }
+
+    public function getAllStand(){
+        $allStand = [];
+        $id = 1;
+        while($this->isInDatabase($id)){
+            $allStand["$id"] = $this->getStand($id);
+            $id += 1;
+        }
+        return $allStand;
     }
 
     public function buildStand($rs, $activities){

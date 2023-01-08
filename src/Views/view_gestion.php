@@ -2,10 +2,8 @@
 include_once "view_topbar.php";
 ?>
 <?php
-$req = DatabaseModel::getModel()->getBD()->prepare('select * from "Stand"') ;
-$req->execute();
-$stands = $req->fetchAll(PDO::FETCH_ASSOC);
-$i = 0?>
+$req = StandModel::getModel()->getAllStand();
+$stands = $req?>
 <style>
     body {
         background: url("public/images/AnimathBlur.png") no-repeat fixed center center;
