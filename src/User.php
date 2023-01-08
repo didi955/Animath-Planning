@@ -90,6 +90,9 @@ class User
     }
 
     public function getPersonalData(){
+        if($this->role !== Role::PROFESSOR){
+            return null;
+        }
         return $this->personalData;
     }
 
@@ -149,11 +152,8 @@ class User
 
     public function setPersonalData($data): void
     {
-        if($this->role == Role::PROFESSOR){
+        if($this->role === Role::PROFESSOR){
             $this->personalData = $data;
-        }
-        else {
-            $this->personalData = null;
         }
     }
 

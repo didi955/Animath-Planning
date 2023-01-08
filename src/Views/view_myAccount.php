@@ -23,7 +23,7 @@ include 'view_topbar.php';
 <div class="container shadow border text-center">
     <ul class="nav nav-justified gap-3 p-1">
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#accordionInfoPerso" type="button" role="tab" aria-controls="accordionInfoPerso" aria-selected="true">Informations Personnelles</a>
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#accordionInfoPerso" type="button" role="tab" aria-controls="accordionInfoPerso" aria-selected="true">Paramètres</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#planning" type="button" role="tab" aria-controls="planning" aria-selected="true">Planning</a>
@@ -32,18 +32,18 @@ include 'view_topbar.php';
 <div class="tab-content">
     <div class="tab-pane fade show accordion m-3" id="accordionInfoPerso">
         <div class="accordion-item">
-            <h2 class="accordion-header" id="HeaderPanelMail">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#PanelMail" aria-expanded="true" aria-controls="PanelMail">
-                    Adresse Mail
+            <h2 class="accordion-header" id="HeaderPanelLastName">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#PanelLastName" aria-expanded="true" aria-controls="PanelLastName">
+                    Informations personnelles
                 </button>
             </h2>
-            <div id="PanelMail" class="accordion-collapse collapse show" aria-labelledby="HeaderPanelMail">
+            <div id="PanelLastName" class="accordion-collapse collapse show" aria-labelledby="HeaderPanelLastName">
                 <div class="accordion-body row">
                     <div class="col-1">
                         Mail :
                     </div>
                     <div class="col-10 text-center">
-                        <strong> <?= e($user->getEmail()) ?> </strong>
+                        <strong> <?= e($user->getPersonalData()['email']) ?> </strong>
                     </div>
                     <div class="col-1">
                         <div class="h-50">
@@ -51,21 +51,12 @@ include 'view_topbar.php';
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="HeaderPanelLastName">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#PanelLastName" aria-expanded="true" aria-controls="PanelLastName">
-                    Nom
-                </button>
-            </h2>
-            <div id="PanelLastName" class="accordion-collapse collapse show" aria-labelledby="HeaderPanelLastName">
                 <div class="accordion-body row">
                     <div class="col-1">
                         Nom :
                     </div>
                     <div class="col-10">
-                        <strong><?= e($user->getLastName()) ?></strong>
+                        <strong><?= e($user->getPersonalData()['last_name']) ?></strong>
                     </div>
                     <div class="col-1">
                         <div class="h-50">
@@ -78,7 +69,24 @@ include 'view_topbar.php';
                         Prénom :
                     </div>
                     <div class="col-10">
-                        <strong><?= e($user->getFirstName()) ?></strong>
+                        <strong><?= e($user->getPersonalData()['first_name']) ?></strong>
+                    </div>
+                    <div class="col-1">
+                        <div class="h-50">
+                            <img class="w-25" src="public/images/modif.png" alt="modif">
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-body row">
+                    <div class="col-1">
+                        Téléphone :
+                    </div>
+                    <div class="col-10">
+                        <?php if ($user->getPersonalData()['phone'] != null) : ?>
+                            <strong><?= e($user->getPersonalData()['phone']) ?></strong>
+                        <?php else : ?>
+                            <strong>Non renseigné</strong>
+                        <?php endif; ?>
                     </div>
                     <div class="col-1">
                         <div class="h-50">
@@ -89,12 +97,25 @@ include 'view_topbar.php';
             </div>
         </div>
         <div class="accordion-item">
-            <h2 class="accordion-header" id="HeaderPanelRole">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#PanelRole" aria-expanded="true" aria-controls="PanelRole">
-                    Role
+            <h2 class="accordion-header" id="HeaderPanelSecurity">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#PanelSecurity" aria-expanded="true" aria-controls="PanelRole">
+                    Sécurité
                 </button>
             </h2>
-            <div id="PanelRole" class="accordion-collapse collapse show" aria-labelledby="HeaderPanelRole">
+            <div id="PanelSecurity" class="accordion-collapse collapse show" aria-labelledby="HeaderPanelSecurity">
+                <div class="accordion-body row">
+                    <div class="col-1">
+                        Mot de passe :
+                    </div>
+                    <div class="col-10">
+                        <strong><?= e("•••••••••••") ?></strong>
+                    </div>
+                    <div class="col-1">
+                        <div class="h-50">
+                            <img class="w-25" src="public/images/modif.png" alt="modif">
+                        </div>
+                    </div>
+                </div>
                 <div class="accordion-body row">
                     <div class="col-1">
                         Role :
@@ -112,7 +133,7 @@ include 'view_topbar.php';
         <div style="height: 15%">
 
         </div>
-        <button class="border btn" data-bs-toggle="modal" href="#addEvent">
+        <button class="border btn" data-bs-toggle="modal" data-bs-target="#addEvent" href="#addEvent">
                 Ajouter evenement
         </button>
     </div>

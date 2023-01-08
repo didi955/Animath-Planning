@@ -154,11 +154,11 @@ class UserController extends Controller
                         $user->setConnexionID($mail);
                         $user->setActive(true);
                         $user->setPassHash(hash_pass($_POST['pass']));
+                        $user->setRole(Role::PROFESSOR);
                         $lastName = $_POST['last_name'];
                         $firstName = $_POST['first_name'];
-                        $pdata = ['last_name'=> $lastName, 'first_name'=>$firstName, 'email' => null, 'phone'=> null, 'school'=>null];
+                        $pdata = ['last_name' => $lastName, 'first_name' => $firstName, 'email' => $mail, 'phone' => null, 'school' => null];
                         $user->setPersonalData($pdata);
-                        $user->setRole(Role::PROFESSOR);
                         $user->save();
                         $_SESSION['user'] = serialize($user);
                         $this->render("home");
