@@ -25,6 +25,11 @@ include 'view_topbar.php';
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#accordionInfoPerso" type="button" role="tab" aria-controls="accordionInfoPerso" aria-selected="true">Paramètres</a>
         </li>
+        <?php if($user->getRole() === Role::PROFESSOR): ?>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#booking" type="button" role="tab" aria-controls="booking" aria-selected="true">Booking</a>
+        </li>
+        <?php endif; ?>
         <?php if($user->getRole() !== Role::SUPERVISOR): ?>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" data-bs-target="#planning" type="button" role="tab" aria-controls="planning" aria-selected="true">Planning</a>
@@ -151,15 +156,8 @@ include 'view_topbar.php';
             </div>
         </div>
     </div>
-    <div class="tab-pane h-50 fade m-3" id="planning">
-        <div class="h-75" id="calendar">
-        </div>
-        <div style="height: 15%">
-
-        </div>
-        <button class="border btn" data-bs-toggle="modal" data-bs-target="#addEvent" href="#addEvent">
-                Ajouter evenement
-        </button>
+    <div class="tab-pane h-50 fade m-3" id="booking">
+        <?php include "Layouts/booking.php"?>
     </div>
 </div>
 </div>

@@ -45,6 +45,9 @@
                         ]
                     });
                     calendar.render();
+                    document.getElementById('buttonAjout<?php echo e("$id")?>').addEventListener("click",()=>{
+                        console.log(calendar.getCurrentData())
+                    })
                 });
             </script>
         <?php endforeach; ?>
