@@ -20,7 +20,7 @@
 </div>
 
 <h1>
-    Choisissez le nombre d'élèves : ‎
+    Choisissez le nombre d'élèves :
 </h1>
 
 <div class="form-group col-md-4">
