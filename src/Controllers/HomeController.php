@@ -1,8 +1,5 @@
 <?php
 
-require 'User.php';
-require 'Utils/Role.php';
-
 class HomeController extends Controller
 {
     /**
