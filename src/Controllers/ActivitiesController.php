@@ -12,12 +12,23 @@ class ActivitiesController extends Controller
     }
 
     public function action_create(){
-        if(isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['niveau']) && isset($_POST['capacity']) && isset($_POST['id'])){
+        if(isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['niveau']) && isset($_POST['capacity']) && isset($_POST['id']) && isset($_SESSION['user'])){
+            $user = unserialize($_SESSION['user']);
+            if(!($user->getRole() === Role::SUPERVISOR)){
+                $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
+                return;
+            }
             $debut = $_POST['debut'];
             $fin = $_POST['fin'];
             $niveau = $_POST['niveau'];
             $capacity = $_POST['capacity'];
             $id = $_POST['id'];
+            $date_debut = date("Y-m-d H:i", strtotime($debut));
+            $date_fin = date("Y-m-d H:i", strtotime($fin));
+            if($date_debut > $date_fin){
+                $this->action_error("La date de début doit être inférieure à la date de fin", 444);
+                return;
+            }
             $stand = StandModel::getModel()->getStand($id);
             if($stand == null){
                 $this->action_error("Le stand n'existe pas", 444);
@@ -42,7 +53,7 @@ class ActivitiesController extends Controller
             $activity->setCapacity($capacity);
             $activity->setStand($stand);
             ActivitiesModel::getModel()->create($activity, $id);
-            $this->render("gestion");
+            $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand()]);
         }
         else {
             $this->action_error("Veuillez remplir tous les champs", 444);

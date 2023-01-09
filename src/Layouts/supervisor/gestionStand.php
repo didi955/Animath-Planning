@@ -1,4 +1,4 @@
-<div class="ps-5 container">
+<div class="p-5 container">
     <div class="ps-5 ms-5 row gap-5">
         <?php foreach ($stands as $stand):
             $id = $stand->getId();
@@ -66,7 +66,8 @@
                     let calendar = new FullCalendar.Calendar(calendarEl, {
                         initialView: 'timeGridDay',
                         locale: 'fr',
-                        <!--editable: true,-->
+                        editable: false,
+                        snapDuration: '00:15:00',
                         allDaySlot: false,
                         slotMinTime: '08:30:00',
                         slotMaxTime: '19:00:00',
@@ -83,14 +84,11 @@
                                 end: '<?php echo e("$end") ?>',
                                 capacity: '<?php echo e("$capacity") ?>',
                                 studentLevel: '<?php echo e("$student_level") ?>'
-                            }
+                            },
                             <?php endforeach;?>
                         ]
                     });
                     calendar.render();
-                    document.getElementById('buttonAjout<?php echo e("$id")?>').addEventListener("click",()=>{
-                        console.log(calendar.getCurrentData())
-                    })
                 });
             </script>
         <?php endforeach; ?>

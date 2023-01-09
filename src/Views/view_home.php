@@ -4,7 +4,7 @@ include "view_topbar.php";
 
 <style>
     body {
-        background: url("public/images/Animath.jpg") no-repeat fixed center center;
+        background: url("public/images/main-logo.jpg") no-repeat fixed center center;
     }
 </style>
 

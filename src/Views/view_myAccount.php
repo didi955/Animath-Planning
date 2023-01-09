@@ -27,12 +27,12 @@ include 'view_topbar.php';
         </li>
         <?php if($user->getRole() === Role::PROFESSOR): ?>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#booking" type="button" role="tab" aria-controls="booking" aria-selected="true">Booking</a>
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#booking" type="button" role="tab" aria-controls="booking" aria-selected="true">Réserver</a>
         </li>
         <?php endif; ?>
         <?php if($user->getRole() !== Role::SUPERVISOR): ?>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#planning" type="button" role="tab" aria-controls="planning" aria-selected="true">Planning</a>
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#planning" type="button" role="tab" aria-controls="planning" aria-selected="true">Mes visites</a>
             </li>
         <?php endif; ?>
     </ul>
