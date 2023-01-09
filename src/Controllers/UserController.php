@@ -114,7 +114,7 @@ class UserController extends Controller
             $mail = strtolower($_POST['email']);
             if(is_valid_email($mail)
                 && isset($_POST['pass']) && isset($_POST['pass_confirm']) && $_POST['pass'] === $_POST['pass_confirm'] &&
-                isset($_POST['last_name']) && isset($_POST['first_name']) && is_valid_name($_POST['last_name']) && is_valid_name($_POST['first_name']) &&isset($_POST['cgu_accept']) && $_POST['cgu_accept'] === 'on'){
+                isset($_POST['last_name']) && isset($_POST['first_name']) && is_valid_name($_POST['last_name']) && is_valid_name($_POST['first_name']) && isset($_POST['cgu_accept']) && $_POST['cgu_accept'] === 'on'){
 
                 if(CAPTCHA_ENABLED){
                     if(!isset($_POST['h-captcha-response'])){
@@ -123,18 +123,26 @@ class UserController extends Controller
                     }
                     $secret = parse_ini_file("../hcaptcha.ini")['secret'];
                     $data = array(
-                        'response' => $_POST['h-captcha-response'],
-                        'secret' => $secret
+                        'secret' => $secret,
+                        'response' => $_POST['h-captcha-response']
                     );
                     // POST REQUEST TO CHECK THE VALIDITY OF THE CAPTCHA TOKEN
 
-                    $verify = curl_init();
-                    curl_setopt($verify, CURLOPT_URL, "https://hcaptcha.com/siteverify");
-                    curl_setopt($verify, CURLOPT_POST, true);
-                    curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
-                    curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
-                    $response = curl_exec($verify);
-                    $responseData = json_decode($response);
+                    $options = array(
+                        'http' => array(
+                            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                            'method'  => 'POST',
+                            'content' => http_build_query($data),
+                        ),
+                    );
+                    $context  = stream_context_create($options);
+
+                    // envoi de la requête de vérification à HCaptcha
+                    $verify_url = 'https://hcaptcha.com/siteverify';
+                    $result = file_get_contents($verify_url, false, $context);
+
+                    // décodage du résultat de la requête
+                    $responseData = json_decode($result);
 
                     if($responseData->success) {
                         if (UserModel::getModel()->getUserByConnexionID($mail) == null) {
