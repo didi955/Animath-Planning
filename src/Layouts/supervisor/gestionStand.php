@@ -3,7 +3,8 @@
         <?php foreach ($stands as $stand):
             $id = $stand->getId();
             $title = $stand->getTitle();
-            $desc = $stand->getDesc();?>
+            $desc = $stand->getDesc();
+            $activities = $stand->getActivities();?>
             <div class="modal fade" id="<?php echo e("standCalendar$id") ?>" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
@@ -35,13 +36,25 @@
                     let calendar = new FullCalendar.Calendar(calendarEl, {
                         initialView: 'timeGridDay',
                         locale: 'fr',
-                        editable: true,
+                        <!--editable: true,-->
                         allDaySlot: false,
+                        slotMinTime: '08:30:00',
+                        slotMaxTime: '19:00:00',
                         events: [
+                            <?php foreach ($activities as $activity):
+                            $start = $activity->getStart();
+                            $end = $activity->getEnd();
+                            $capacity = $activity->getCapacity();
+                            $student_level = $activity->getStudentLevel();
+                            ?>
                             {
-                                title: '<?php echo e("$id") ?>',
-                                start: '2023-01-06T15:00:00'
+                                title: '<?php echo e("$title") ?>',
+                                start: '<?php echo e("$start") ?>',
+                                end: '<?php echo e("$end") ?>',
+                                capacity: '<?php echo e("$capacity") ?>',
+                                studentLevel: '<?php echo e("$student_level") ?>'
                             }
+                            <?php endforeach;?>
                         ]
                     });
                     calendar.render();
