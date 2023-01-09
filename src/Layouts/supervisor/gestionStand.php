@@ -12,7 +12,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button id="buttonAjout<?php echo e("$id")?>" class="btn btn-secondary" >Ajouter</button>
+                            <button id="buttonAjout<?php echo e("$id")?>" data-bs-toggle="modal" data-bs-target="<?php echo e("standAjout$id") ?>" class="btn btn-secondary">Ajouter</button>
                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sauvegarder</button>
                         </div>
                     </div>
@@ -50,6 +50,56 @@
                     })
                 });
             </script>
+        <?php endforeach; ?>
+            $id = $stand->getId();
+            $title = $stand->getTitle();
+            $desc = $stand->getDesc();?>
+            <div class="modal fade" id="<?php echo e("standAjout$id") ?>" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-body" style="height: 50rem">
+                            <div class="h-75">
+                                <div class="date">
+                                    <div class="data-debut">
+                                        <label for="start-date">Horaire de début :</label>
+                                        <input type="datetime-local" id="start-date"
+                                               name="meeting-time" value="2018-06-12T19:30"
+                                               min="2018-06-07T00:00" max="2018-06-14T00:00">
+                                    </div>
+                                    <div class="data-fin">
+                                        <label for="end-date">Horaire de fin:</label>
+                                        <input type="datetime-local" id="end-date"
+                                               name="meeting-time" value="2018-06-12T19:30"
+                                               min="2018-06-07T00:00" max="2018-06-14T00:00">
+
+                                    </div>
+                                </div>
+                                <h1>
+                                    Choisissez le nombre d'élèves que vous voulez assigner à ce créneau :
+                                </h1>
+                                <div class="form-group col-md-4">
+                                    <label for="inputNb">Nombres d'élèves</label>
+                                    <select id="inputNb" class="form-control">
+                                        <option selected>...</option>
+                                        <?php
+                                        for ($i = 1; $i <= 30; $i++) {
+                                            echo "<option>$i</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <h1>
+                                    Choisissez le niveau recommandé des élèves que vous voulez assigner à ce créneau :
+                                </h1>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="buttonStandAjout<?php echo e("$id")?>" class="btn btn-secondary">Ajouter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <?php endforeach; ?>
     </div>
 </div>
