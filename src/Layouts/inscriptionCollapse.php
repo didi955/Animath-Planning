@@ -28,10 +28,13 @@
     </div>
     <div class="mb-3">
         <?php
-        $key = parse_ini_file("../hcaptcha.ini")['key'];
+            $key = parse_ini_file("../hcaptcha.ini")['key'];
         ?>
-        <div class="h-captcha" data-sitekey="<?= $key ?>"></div>
-        <div class="invalid-feedback">Veuillez compléter le Captcha</div>
+        <?php if(CAPTCHA_ENABLED):?>
+            <div class="h-captcha" data-sitekey="<?= $key ?>"></div>
+            <div class="invalid-feedback">Veuillez compléter le Captcha</div>
+        <?php endif?>
+
     </div>
     <div class="modal-footer">
         <input type="submit" id="submit_signup" class="btn btn-primary" value="Envoyer"/>

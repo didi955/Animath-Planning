@@ -12,7 +12,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button id="buttonAjout<?php echo e("$id")?>" class="btn btn-primary">Ajouter</button>
+                            <button id="buttonAjout<?php echo e("$id")?>" class="btn btn-secondary" >Ajouter</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sauvegarder</button>
                         </div>
                     </div>
                 </div>
