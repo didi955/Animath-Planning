@@ -70,7 +70,7 @@
                 <button type="button" class="btn-close" data-bs-target="#inscriptionModal" data-bs-toggle="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-dialog modal-dialog-scrollable">
                     <?php include "Layouts/legal.php"?>
                 </div>
             </div>
