@@ -1,8 +1,6 @@
 <?php
 
 use Ramsey\Uuid\Nonstandard\Uuid;
-require 'User.php';
-require 'Utils/Role.php';
 
 class UserController extends Controller
 {

@@ -12,12 +12,12 @@ class ActivitiesController extends Controller
     }
 
     public function action_create(){
-        if(isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['niveau']) && isset($_POST['capacity']) && isset($_GET['id'])){
+        if(isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['niveau']) && isset($_POST['capacity']) && isset($_POST['id'])){
             $debut = $_POST['debut'];
             $fin = $_POST['fin'];
             $niveau = $_POST['niveau'];
             $capacity = $_POST['capacity'];
-            $id = $_GET['id'];
+            $id = $_POST['id'];
             $stand = StandModel::getModel()->getStand($id);
             if($stand == null){
                 $this->action_error("Le stand n'existe pas", 444);
@@ -42,7 +42,7 @@ class ActivitiesController extends Controller
             $activity->setCapacity($capacity);
             $activity->setStand($stand);
             ActivitiesModel::getModel()->create($activity, $id);
-            $this->action_gestion();
+            $this->render("gestion");
         }
         else {
             $this->action_error("Veuillez remplir tous les champs", 444);

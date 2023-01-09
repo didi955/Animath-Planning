@@ -9,24 +9,25 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <form class="form" action="?controller=activities&action=create&id=<?php echo e('$id')?>" method="post">
+                            <form class="form" action="?controller=Activities&action=create" method="post">
+                                <input type="hidden" name="id" value="<?php echo e($id)?>">
                                 <div>
                                     <label for="debut">Date de début</label>
-                                    <input type="datetime-local" id="debut">
+                                    <input type="datetime-local" id="debut" name="debut">
                                 </div>
                                 <div>
                                     <label for="fin">Date de Fin</label>
-                                    <input type="datetime-local" id="fin">
+                                    <input type="datetime-local" id="fin" name="fin">
                                 </div>
                                 <div>
                                     <label for="niveau">Niveau des élèves</label>
-                                    <input type="checkbox" id="niveau" value="Primaire">Primaire
-                                    <input type="checkbox" id="niveau" value="College">Collège
-                                    <input type="checkbox" id="niveau" value="Lycee">Lycée
+                                    <input type="checkbox" id="niveau" name="niveau" value="Primaire">Primaire
+                                    <input type="checkbox" id="niveau" name="niveau" value="College">Collège
+                                    <input type="checkbox" id="niveau" name="niveau" value="Lycee">Lycée
                                 </div>
                                 <div>
                                     <label for="capacity">Capacité d'élève</label>
-                                    <input type="number" id="capacity">
+                                    <input type="number" id="capacity" name="capacity">
                                 </div>
                                 <input type="submit" value="Envoyer">
                             </form>
