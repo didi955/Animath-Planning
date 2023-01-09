@@ -41,7 +41,7 @@ class ActivitiesController extends Controller
             $activity->setStudentLevel($niveau);
             $activity->setCapacity($capacity);
             $activity->setStand($stand);
-            ActivitiesModel::getModel()->create($activity);
+            ActivitiesModel::getModel()->create($activity, $id);
             $this->action_gestion();
         }
         else {

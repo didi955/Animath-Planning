@@ -45,13 +45,13 @@ class ActivitiesModel
         return $acts;
     }
 
-    public function create($activity){
+    public function create($activity, $id){
         $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "Activities" (start, end, student_level, capacity, stand) VALUES (:debut, :fin, :niveau, :capacity, :stand)');
         $req->bindValue(":debut", $activity->getDebut());
         $req->bindValue(":fin", $activity->getFin());
         $req->bindValue(":niveau", $activity->getNiveau());
         $req->bindValue(":capacity", $activity->getCapacity());
-        $req->bindValue(":stand", $activity->getStand()->getId());
+        $req->bindValue(":stand", $id);
         $req->execute();
     }
 
