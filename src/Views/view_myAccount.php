@@ -1,5 +1,6 @@
 <?php
 include 'view_topbar.php';
+include 'Layouts/modifierProf.php'
 ?>
 
 <style>
@@ -56,7 +57,7 @@ include 'view_topbar.php';
                         </div>
                         <div class="col-1">
                             <div class="h-50">
-                                <img class="w-25" src="public/images/modif.png" alt="modif">
+                                <img class="w-25" type="button" data-bs-toggle="modal" href="#emailModal" src="public/images/modif.png" alt="modif">
                             </div>
                         </div>
                     </div>
@@ -69,7 +70,7 @@ include 'view_topbar.php';
                         </div>
                         <div class="col-1">
                             <div class="h-50">
-                                <img class="w-25" src="public/images/modif.png" alt="modif">
+                                <img class="w-25" type="button" data-bs-toggle="modal" href="#nomModal" src="public/images/modif.png" alt="modif">
                             </div>
                         </div>
                     </div>
@@ -82,7 +83,7 @@ include 'view_topbar.php';
                         </div>
                         <div class="col-1">
                             <div class="h-50">
-                                <img class="w-25" src="public/images/modif.png" alt="modif">
+                                <img class="w-25" type="button" data-bs-toggle="modal" href="#prenomModal" src="public/images/modif.png" alt="modif">
                             </div>
                         </div>
                     </div>
@@ -99,7 +100,7 @@ include 'view_topbar.php';
                         </div>
                         <div class="col-1">
                             <div class="h-50">
-                                <img class="w-25" src="public/images/modif.png" alt="modif">
+                                <img class="w-25" type="button" data-bs-toggle="modal" href="#telephoneModal" src="public/images/modif.png" alt="modif">
                             </div>
                         </div>
                     </div>
@@ -141,7 +142,7 @@ include 'view_topbar.php';
                     </div>
                     <div class="col-1">
                         <div class="h-50">
-                            <img class="w-25" src="public/images/modif.png" alt="modif">
+                            <img class="w-25" type="button" data-bs-toggle="modal" href="#MdpModal" src="public/images/modif.png" alt="modif">
                         </div>
                     </div>
                 </div>

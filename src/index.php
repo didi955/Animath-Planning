@@ -20,7 +20,7 @@ require_once "Layouts/header.php";
 
 //Liste des contrôleurs
 $controllers = ["Home", "User", "Activities"];
-//Nom du contrôleur par défaut
+//Nom du contrôleur par défaut5
 $controller_default = "Home";
 
 //On teste si le paramètre controller existe et correspond à un contrôleur de la liste $controllers
