@@ -36,6 +36,6 @@
         <?php endif?>
     </div>
     <div class="modal-footer">
-        <input type="submit" id="submit_signup" class="btn btn-primary" value="Envoyer"/>
+        <input type="submit" id="submit_signup" class="btn btn-primary" value="S'inscrire"/>
     </div>
 

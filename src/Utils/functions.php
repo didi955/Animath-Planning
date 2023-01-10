@@ -37,3 +37,7 @@ function is_valid_name(string $name)
     }
     return false;
 }
+
+function getJson($file){
+    return json_decode($file);
+}
