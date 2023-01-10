@@ -13,7 +13,7 @@ require_once "Stand.php";
 require_once "User.php";
 require_once "Activities.php";
 require_once "Models/UserModel.php";
-require_once "Models/DatabaseModel.php";;
+require_once "Models/DatabaseModel.php";
 require_once "Models/ProfessorModel.php";
 require_once "Controllers/Controller.php";
 require_once "Layouts/header.php";
