@@ -13,6 +13,15 @@ class UserController extends Controller
         $this->action_my_account();
     }
 
+    public function action_generateStands(){
+        if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
+            StandModel::getModel()->generateStands();
+            $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand()]);
+        } else {
+            $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
+        }
+    }
+
     public function action_gestion(){
         if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
             $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand()]);

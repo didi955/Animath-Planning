@@ -11,6 +11,16 @@ class ActivitiesController extends Controller
         // TODO: Implement action_default() method.
     }
 
+    public function action_generate(){
+        if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
+            ActivitiesModel::getModel()->generateActivities();
+            $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand()]);
+        }
+        else {
+            $this->action_error("Vous n'avez pas les droits effectuer cette action", 444);
+        }
+    }
+
     public function action_create(){
         if(isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['niveau']) && isset($_POST['capacity']) && isset($_POST['id']) && isset($_SESSION['user'])){
             $user = unserialize($_SESSION['user']);

@@ -52,6 +52,28 @@ class StandModel
         return $allStand;
     }
 
+    public function create($stand){
+        if(!$this->isInDatabase($stand->getId())){
+            $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "Stand" (id_user, title, "desc") VALUES (:id_user, :title, :desc)');
+            $req->bindValue(":id_user", $stand->getIdUser());
+            $req->bindValue(":title", $stand->getTitle());
+            $req->bindValue(":desc", $stand->getDesc());
+            $req->execute();
+        }
+    }
+
+    public function fetchStandsFromJson(){
+        return getJson("../plann_stand.json");
+    }
+
+    public function generateStands(){
+        $file = $this->fetchStandsFromJson();
+        foreach ($file as $value){
+            $stand = $this->buildStand($value, null);
+            $this->create($stand);
+        }
+    }
+
     public function buildStand($rs, $activities){
         $stand = new Stand();
         if(isset($rs['id'])){
