@@ -68,33 +68,20 @@ class ActivitiesModel
             $date = $datedep1;
             $datefin = $datedep;
             while ($datefin < $datearr) {
-                if ($datefin < $debutpause) {
-                    $datefin = date_add($datefin, date_interval_create_from_date_string("$val[duree] minutes"));
-                    echo "<p> Date début = " . $date->format("Y-m-d H:i") . "   Date fin = " . $datefin->format("Y-m-d H:i") . "</p>";
-                    $act = new Activities();
-                    $act->setId(null);
-                    $act->setStand($id);
-                    $act->setStart($date->format("Y-m-dTH:i"));
-                    $act->setEnd($datefin->format("Y-m-dTH:i"));
-                    $act->setStudentLevel($val["student_level"]);
-                    $act->setCapacity($val["capacity"]);
-                    $this->create($act);
-
+                if ($datefin >= $debutpause) {
+                    $date = $finpause;
+                    $datefin = $finpause1;
                 }
-                else {
-                    $date= $finpause;
-                    $datefin= $finpause1;
-                    $datefin= date_add($datefin, date_interval_create_from_date_string("$val[duree] minutes"));
-                    echo "<p> Date début = " . $date->format("Y-m-d H:i") . "   Date fin = " . $datefin->format("Y-m-d H:i") . "</p>";
-                    $act = new Activities();
-                    $act->setId(null);
-                    $act->setStand($id);
-                    $act->setStart($date->format("Y-m-dTH:i"));
-                    $act->setEnd($datefin->format("Y-m-dTH:i"));
-                    $act->setStudentLevel($val["student_level"]);
-                    $act->setCapacity($val["capacity"]);
-                    $this->create($act);
-                }
+                $datefin = date_add($datefin, date_interval_create_from_date_string("$val[duree] minutes"));
+                echo "<p> Date début = " . $date->format("Y-m-d H:i") . "   Date fin = " . $datefin->format("Y-m-d H:i") . "</p>";
+                $act = new Activities();
+                $act->setId(null);
+                $act->setStand($id);
+                $act->setStart($date->format("Y-m-dTH:i"));
+                $act->setEnd($datefin->format("Y-m-dTH:i"));
+                $act->setStudentLevel($val["student_level"]);
+                $act->setCapacity($val["capacity"]);
+                $this->create($act);
                 $date = date_add($date, date_interval_create_from_date_string("$val[duree] minutes"));
                 $date = date_add($date, date_interval_create_from_date_string("$val[inter] minutes"));
                 $datefin = date_add($datefin, date_interval_create_from_date_string("$val[inter] minutes"));

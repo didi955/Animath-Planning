@@ -1,6 +1,5 @@
 [
   {
-    "id": 1,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Math & Magie",
     "desc": "Tours de magie réussissant automatiquement grâce aux maths et à la logique, susceptibles de motiver les élèves à s'investir davantage en maths, et de montrer au grand public que les maths peuvent, aussi, être un talent de société.",
@@ -14,7 +13,6 @@
     "pause_end": "13:30:00"
   },
   {
-    "id": 2,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "PARIS JEUNES ECHECS",
     "desc": "ECHECS",
@@ -28,7 +26,6 @@
     "pause_end": "12:30:00"
   },
   {
-    "id": 3,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "L'aventure du calcul",
     "desc": "Différents objets et instruments de calcul (machines, bâtons, abaques, ...)",
@@ -42,7 +39,6 @@
     "pause_end": "14:00:00"
   },
   {
-    "id": 4,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Le jeu d'Awale",
     "desc": "Initiation au jeu d'Awale",
@@ -56,7 +52,6 @@
     "pause_end": "12:00:00"
   },
   {
-    "id": 5,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Palais de la découverte",
     "desc": "ateliers de récréations mathématiques",
@@ -70,7 +65,6 @@
     "pause_end": "13:30:00"
   },
   {
-    "id": 6,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Méthode des Abaques",
     "desc": "Fonctionnement du boulier didactique (Boulier chinois) et Méthodologie des Abaques",
@@ -84,7 +78,6 @@
     "pause_end": "14:00:00"
   },
   {
-    "id": 7,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Kafemath",
     "desc": "présentation de l'activité de l'association Kafemath",
@@ -98,7 +91,6 @@
     "pause_end": "13:30:00"
   },
   {
-    "id": 8,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "MATHADOR",
     "desc": "Pratique ludique du calcul mental avec le jeu Mathador",
@@ -112,7 +104,6 @@
     "pause_end": "13:00:00"
   },
   {
-    "id": 9,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Recreamaths",
     "desc": "Ebooks sur tablette et objets 3D à manipuler",
@@ -126,7 +117,6 @@
     "pause_end": "14:00:00"
   },
   {
-    "id": 10,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Le Magix 34",
     "desc": "Atelier de jeux mathématiques",
@@ -140,7 +130,6 @@
     "pause_end": "14:00:00"
   },
   {
-    "id": 11,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Le Duel des Mages",
     "desc": "Jeu de cartes où les pouvoirs sont modifiés par des fonctions ",
@@ -154,7 +143,6 @@
     "pause_end": "13:00:00"
   },
   {
-    "id": 12,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Jeu de Go",
     "desc": "Initiation au jeu de Go",
@@ -168,7 +156,6 @@
     "pause_end": "14:00:00"
   },
   {
-    "id": 13,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Zellij expérience",
     "desc": "Manipulations de plusieurs ensembles de pièces engendrant des motifs traditionnels ou originaux en relation avec les arts traditionnels géométriques arabo-andalous (famille octogonale) ou persan (familles pentagonales).",
@@ -182,7 +169,6 @@
     "pause_end": "14:00:00"
   },
   {
-    "id": 14,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "MathLive",
     "desc": "Activité MathLive",
@@ -196,7 +182,6 @@
     "pause_end": "13:00:00"
   },
   {
-    "id": 15,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Géorègle Trigonométrique et Quadratur",
     "desc": "jeu de société 2-3-4 joueurs",
@@ -210,7 +195,6 @@
     "pause_end": "12:00:00"
   },
   {
-    "id": 16,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Maths à Modeler",
     "desc": "Serez-vous carreler ma cuisine ? Le chemin de fer reliera-t-il toutes les villes ?... Venez explorer la recherche en mathématiques en tentant de résoudre ces casse-têtes présentés sous forme de jeux et avec un support matériel en bois. Ils sont inspirés de problèmes actuels. Ces situations sont conçues pour approcher au plus près la pratique scientifique d’un mathématicien et de mettre les participants dans la peau d’un chercheur : expérimentation, conjecture, contre-exemple, preuve...",
@@ -226,7 +210,6 @@
     "pause_end": "13:30:00"
   },
   {
-    "id": 17,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Fédération Française de Bridge",
     "desc": "Initiation rapide et démonstration de bridge. Présentation du bridge scolaire",
@@ -242,7 +225,6 @@
     "pause_end": "14:00:00"
   },
   {
-    "id": 18,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Art of Games",
     "desc": "Jeux de société éducatifs ou de réflexion",
@@ -256,7 +238,6 @@
     "pause_end": "13:15:00"
   },
   {
-    "id": 19,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Espéranto",
     "desc": "Nous ne planifions pas nos activités cinq mois à l'avance, je n'ai pas encore organisé mes voyages de janvier 2023.",
@@ -270,7 +251,6 @@
     "pause_end": "14:00:00"
   },
   {
-    "id": 20,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Faire Rimer les Maths Avec Plaisir",
     "desc": "Maths étonnantes:  atelier Origami, atelier jeu d'Hex, atelier prison, atelier qui est ce?  La prison, Escape Game etc",
@@ -284,7 +264,6 @@
     "pause_end": "13:30:00"
   },
   {
-    "id": 21,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Terraquée ",
     "desc": "Atelier d'écriture autour des maths. Et si on faisait un pas de côté ? Et si un moyen d’appréhender les maths, c’était d’inventer une histoire de fiction ? A partir d’une question toute simple (ou pas ?) : « qu’est-ce que c’est, mesurer ?  » on inventera collectivement des histoires qui pourront nous emmener très loin dans l’imaginaire … Première initiation à la démarche d’écriture de spectacles autour des maths de la cie Terraquée.",
@@ -298,7 +277,6 @@
     "pause_end": "13:30:00"
   },
   {
-    "id": 22,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Astrolabe Lycée Branly Créteil",
     "desc": "Fabrication et utilisation d'un instrument d'astronomie ancien : l'astrolabe ; présentation de fractales (travaux d'élèves) ; atelier light-painting",
@@ -312,7 +290,6 @@
     "pause_end": "13:00:00"
   },
   {
-    "id": 23,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "PlayMaths",
     "desc": "Polyèdres, Casse-têtes",
@@ -326,7 +303,6 @@
     "pause_end": "13:00:00"
   },
   {
-    "id": 24,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Logiciels libres pour l'éducation et la recherche",
     "desc": "Logiciels libres pour l'éducation de la recherche",
@@ -340,7 +316,6 @@
     "pause_end": "13:30:00"
   },
   {
-    "id": 25,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Logiciels libres pour apprendre les sciences",
     "desc": "Démonstrations sur ordinateurs et tablettes (ou affiches ou livres)",
@@ -354,7 +329,6 @@
     "pause_end": "14:00:00"
   },
   {
-    "id": 26,
     "id_user": "d8a4b4fb-5e3c-4159-b0a7-68915d0561b9",
     "title": "Maison des Mathématiques et de l'Informatique",
     "desc": "Atelier sur les systèmes de vote. A partir de la 4ème !!!",
