@@ -45,11 +45,20 @@ class StandModel
     public function getAllStand(){
         $allStand = [];
         $id = 1;
-        while($this->isInDatabase($id)){
-            $allStand["$id"] = $this->getStand($id);
-            $id += 1;
+        while ($id<=self::getModel()->maxStand()){
+            if($this->isInDatabase($id)){
+                $allStand["$id"] = $this->getStand($id);
+                $id += 1;
+            }
         }
         return $allStand;
+    }
+
+    public function maxStand(){
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT "id" FROM "Stand" ORDER BY "id" desc');
+        $req->execute();
+        $id = $req->fetch(PDO::FETCH_ASSOC);
+        return $id["id"];
     }
 
     public function create($stand){
