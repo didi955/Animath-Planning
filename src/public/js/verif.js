@@ -74,7 +74,6 @@ for (let check of checked){
                     event.stopPropagation()
                 }
             })
-            /*
             FRONT END CAPTCHA FORM VALIDATION
             let hcaptcha = form.querySelector('[name=h-captcha-response]')
             if (hcaptcha.value === "") {
@@ -85,8 +84,6 @@ for (let check of checked){
             else {
                 form.querySelector('.h-captcha').classList.remove("is-invalid")
             }
-
-             */
             if (!form.checkValidity()) {
                 event.preventDefault()
                 event.stopPropagation()

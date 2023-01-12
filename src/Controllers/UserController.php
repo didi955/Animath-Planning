@@ -31,6 +31,108 @@ class UserController extends Controller
         }
     }
 
+
+    public function action_changeFirstName(){
+        if(isset($_POST['name']) && unserialize($_POST['user']) === Role::PROFESSOR){
+            $user = unserialize($_POST['user']);
+            $user->getPersonalData()['first_name']($_POST['name']);
+            $user->save();
+            $_SESSION['user'] = serialize($user);
+            $this->render('my_account', ['user' => $user]);
+        }
+        else {
+            $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
+        }
+    }
+
+    public function action_changeLastName(){
+        if(isset($_POST['name']) && unserialize($_POST['user']) === Role::PROFESSOR){
+            $user = unserialize($_POST['user']);
+            $user->getPersonalData()['last_name']($_POST['name']);
+            $user->save();
+            $_SESSION['user'] = serialize($user);
+            $this->render('my_account', ['user' => $user]);
+        }
+        else {
+            $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
+        }
+    }
+
+    public function action_changePhone(){
+        if(isset($_POST['phone']) && unserialize($_POST['user']) === Role::PROFESSOR){
+            $user = unserialize($_POST['user']);
+            $user->getPersonalData()['phone']($_POST['phone']);
+            $user->save();
+            $_SESSION['user'] = serialize($user);
+            $this->render('my_account', ['user' => $user]);
+        }
+        else {
+            $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
+        }
+    }
+
+    public function action_changeSchool(){
+        if(isset($_POST['school']) && unserialize($_POST['user']) === Role::PROFESSOR){
+            $user = unserialize($_POST['user']);
+            $user->getPersonalData()['school']($_POST['school']);
+            $user->save();
+            $_SESSION['user'] = serialize($user);
+            $this->render('my_account', ['user' => $user]);
+        }
+        else {
+            $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
+        }
+    }
+
+    public function action_changePass(){
+        if(isset($_POST['old_pass']) && isset($_POST['pass']) && isset($_POST['pass_confirm'])){
+            $user = unserialize($_SESSION['user']);
+            if($_POST['pass'] === $_POST['pass_confirm']){
+                if(password_verify($_POST['old_pass'], $user->getPassHash())){
+                    $user->setPassHash(hash_pass($_POST['pass']));
+                    $user->save();
+                    $_SESSION['user'] = serialize($user);
+                    $this->action_my_account();
+                }
+                else {
+                    $this->action_error("L'ancien mot de passe est incorrect", 444);
+                }
+            }
+            else {
+                $this->action_error("Les mots de passe ne correspondent pas", 444);
+            }
+        }
+        else {
+            $this->action_error("Erreur dans les données envoyées", 444);
+        }
+    }
+
+    public function action_changeEmail(){
+        if(isset($_POST['email']) && is_valid_email($_POST['email'])){
+            if(isset($_POST['pass'])){
+                $user = unserialize($_SESSION['user']);
+                if(password_verify($_POST['pass'], $user->getPassHash())){
+                    $user->setConnexionID()($_POST['email']);
+                    if($user->getRole() === Role::PROFESSOR && $user->getPersonalData() !== null){
+                        $user->getPersonalData()['email']($_POST['email']);
+                    }
+                    $user->save();
+                    $_SESSION['user'] = serialize($user);
+                    $this->action_my_account();
+                }
+                else {
+                    $this->action_error("Le mot de passe est incorrect", 444);
+                }
+            }
+            else {
+                $this->action_error("Le mot de passe est incorrect", 444);
+            }
+        }
+        else {
+            $this->action_error("L'adresse email est incorrecte", 444);
+        }
+    }
+
     /**
      * Action pour afficher la page de mon compte
      */
