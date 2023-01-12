@@ -43,6 +43,15 @@ function is_valid_activity(){
 
 }
 
+function parseDate(string $date){
+    $tab = explode(":",$date);
+    $res = [];
+    foreach ($tab as $i){
+        $res[] = (int)$i;
+    }
+    return $res;
+}
+
 function getJson($file){
     return json_decode(file_get_contents($file), true);
 }
