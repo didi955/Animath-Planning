@@ -4,8 +4,6 @@ class Stand
 {
     private $id;
 
-    private $id_user;
-
     private $title;
 
     private $desc;
@@ -40,16 +38,6 @@ class Stand
     public function setId($id): void
     {
         $this->id = $id;
-    }
-
-    public function getIdUser()
-    {
-        return $this->id_user;
-    }
-
-    public function setIdUser($id_user): void
-    {
-        $this->id_user = $id_user;
     }
 
     public function getTitle()

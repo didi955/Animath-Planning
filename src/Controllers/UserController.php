@@ -178,7 +178,6 @@ class UserController extends Controller
 
     private function initUser($mail){
         $user = new User();
-        $user->setID(Uuid::uuid4()->toString());
         $user->setConnexionID($mail);
         $user->setActive(true);
         $user->setPassHash(hash_pass($_POST['pass']));

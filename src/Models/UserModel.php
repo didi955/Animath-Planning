@@ -128,8 +128,7 @@ class UserModel
         if(!$this->isInDatabase($user->getID())){
             try {
                 DatabaseModel::getModel()->getBD()->beginTransaction();
-                $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "User" (id_user, role, active, pass_hash, connexion_id) VALUES (:id, :role, :active, :pass_hash, :connexion_id)');
-                $req->bindValue(":id", $user->getID());
+                $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "User" (role, active, pass_hash, connexion_id) VALUES (:id, :role, :active, :pass_hash, :connexion_id)');
                 $req->bindValue(":role", $user->getRole()->value, PDO::PARAM_INT);
                 $req->bindValue(":active", $user->isActive(), PDO::PARAM_BOOL);
                 $req->bindValue(":pass_hash", $user->getPassHash());
@@ -213,8 +212,8 @@ class UserModel
      */
     public function buildUser($rs, $pdatas){
         $user = new User();
-        if(isset($rs['uuid'])){
-            $user->setID($rs['uuid']);
+        if(isset($rs['id'])){
+            $user->setID($rs['id']);
         }
         if(isset($rs['role'])){
             $user->setRole(Role::valueOf($rs['role']));
