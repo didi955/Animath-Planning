@@ -5,6 +5,7 @@ include "view_topbar.php";
 <style>
     body {
         background: url("public/images/main-logo.jpg") no-repeat fixed center center;
+        background-color : #019EE3;
     }
 </style>
 
