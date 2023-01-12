@@ -107,6 +107,12 @@ class UserModel
         }
     }
 
+    public function getMaxID(){
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT id_user FROM "User" ORDER BY id_user DESC LIMIT 1');
+        $req->execute();
+        $rs = $req->fetch(PDO::FETCH_ASSOC);
+    }
+
     /**
      * Méthode permettant d'activer le compte d'un utilisateur
      * @param User $user Utilisateur à activer
@@ -127,7 +133,8 @@ class UserModel
     public function createUser(User $user){
         try {
             DatabaseModel::getModel()->getBD()->beginTransaction();
-            $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "User" (role, active, pass_hash, connexion_id) VALUES (:id, :role, :active, :pass_hash, :connexion_id)');
+            $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "User" (id_user, role, active, pass_hash, connexion_id) VALUES (:id_user, :role, :active, :pass_hash, :connexion_id)');
+            $req->bindValue(":id_user", $user->getID());
             $req->bindValue(":role", $user->getRole()->value, PDO::PARAM_INT);
             $req->bindValue(":active", $user->isActive(), PDO::PARAM_BOOL);
             $req->bindValue(":pass_hash", $user->getPassHash());

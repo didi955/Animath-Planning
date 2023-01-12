@@ -43,7 +43,7 @@ class User
      * Méthode permettant de récupérer l'UUID de l'utilisateur
      * @return string UUID de l'utilisateur
      */
-    public function getID() : string
+    public function getID() : int
     {
         return $this->id;
     }
