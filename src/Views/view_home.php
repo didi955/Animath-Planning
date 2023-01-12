@@ -84,8 +84,4 @@ include "view_topbar.php";
     </div>
 </div>
 
-<?php
-include "view_footer.php";
-?>
-
 

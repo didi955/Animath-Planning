@@ -22,6 +22,4 @@ include_once "view_topbar.php";
 
 </div>
 <?php include_once "Layouts/supervisor/gestionStand.php"?>
-<?php
-include_once "view_footer.php";
-?>
+

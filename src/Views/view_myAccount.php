@@ -183,12 +183,6 @@ include 'Layouts/modifierProf.php'
     </div>
 </div>
 
-<div class="position-absolute bottom-0 w-100">
-    <?php
-    include 'view_footer.php';
-    ?>
-</div>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         let calendarEl = document.getElementById('calendar');
