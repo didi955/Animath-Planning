@@ -77,10 +77,13 @@ class StandModel
 
     public function generateStands(){
         $file = $this->fetchStandsFromJson();
+        $tab = [];
         foreach ($file as $value){
             $stand = $this->buildStand($value, null);
+            $tab[]=$stand;
             $this->create($stand);
         }
+        return $tab;
     }
 
     public function buildStand($rs, $activities){
@@ -96,6 +99,30 @@ class StandModel
         }
         if(isset($rs['desc'])){
             $stand->setDesc($rs['desc']);
+        }
+        if(isset($rs['student_level'])){
+            $stand->setStudentLevel($rs['student_level']);
+        }
+        if(isset($rs['capacity'])){
+            $stand->setCapacity($rs['capacity']);
+        }
+        if(isset($rs['nbAnim_jeudi'])){
+            $stand->setNbAnimJeudi($rs['nbAnim_jeudi']);
+        }
+        if(isset($rs['nbAnim_vendredi'])){
+            $stand->setNbAnimVendredi($rs['nbAnim_vendredi']);
+        }
+        if(isset($rs['duree'])){
+            $stand->setDuree($rs['duree']);
+        }
+        if(isset($rs['inter'])){
+            $stand->setInter($rs['inter']);
+        }
+        if(isset($rs['pause_start'])){
+            $stand->setPauseStart($rs['pause_start']);
+        }
+        if(isset($rs['pause_end'])){
+            $stand->setPauseEnd($rs['pause_end']);
         }
         if(isset($activities)){
             $stand->setActivities($activities);

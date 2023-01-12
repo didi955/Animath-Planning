@@ -55,16 +55,17 @@ class ActivitiesModel
     }
 
     // TODO NEED REWORK
-    public function generateActivities(){
-        $tab = StandModel::getModel()->fetchStandsFromJson();
+    /*public function generateActivities(){
+        $stands = StandModel::getModel()->generateStands();
+        $activities = [];
         $datedep1= new DateTime("2023-05-25T09:00");
         $datedep= new DateTime("2023-05-25T09:00");
         $datearr = new DateTime("2023-05-25T18:00");
-        foreach($tab as $cle=>$val){
-            $debutpause = new DateTime("2023-05-25T$val[pause_start]");
-            $finpause = new DateTime("2023-05-25T$val[pause_end]");
-            $finpause1 = new DateTime("2023-05-25T$val[pause_end]");
-            $id = $cle + 1;
+        $i = 1;
+        foreach($stands as $val){
+            $debutpause = new DateTime("2023-05-25T".$val->getPauseStart());
+            $finpause = new DateTime("2023-05-25T".$val->getPauseEnd());
+            $finpause1 = new DateTime("2023-05-25T".$val->getPauseEnd());
             $date = $datedep1;
             $datefin = $datedep;
             while ($datefin < $datearr) {
@@ -72,22 +73,19 @@ class ActivitiesModel
                     $date = $finpause;
                     $datefin = $finpause1;
                 }
-                $datefin = date_add($datefin, date_interval_create_from_date_string("$val[duree] minutes"));
-                echo "<p> Date début = " . $date->format("Y-m-d H:i") . "   Date fin = " . $datefin->format("Y-m-d H:i") . "</p>";
-                $act = new Activities();
-                $act->setId(null);
-                $act->setStand($id);
-                $act->setStart($date->format("Y-m-dTH:i"));
-                $act->setEnd($datefin->format("Y-m-dTH:i"));
-                $act->setStudentLevel($val["student_level"]);
-                $act->setCapacity($val["capacity"]);
-                $this->create($act);
-                $date = date_add($date, date_interval_create_from_date_string("$val[duree] minutes"));
-                $date = date_add($date, date_interval_create_from_date_string("$val[inter] minutes"));
-                $datefin = date_add($datefin, date_interval_create_from_date_string("$val[inter] minutes"));
+                $datefin = date_add($datefin, date_interval_create_from_date_string($val->getDuree()." minutes"));
+                $act = ['stand' => $i,'start' => $date->format("Y-m-dTH:i"), 'end' => $datefin->format("Y-m-dTH:i"), 'student_level' => $val->getStudentLevel(), 'capacity'=> $val->getCapacity()];
+                $i += 1;
+                $activities[] = self::getModel()->buildActivities($act);
+                $date = date_add($date, date_interval_create_from_date_string($val->getDuree()." minutes"));
+                $date = date_add($date, date_interval_create_from_date_string($val->getInter()." minutes"));
+                $datefin = date_add($datefin, date_interval_create_from_date_string($val->getInter()." minutes"));
             }
         }
-    }
+        foreach($activities as $activity){
+            $this->create($activity);
+        }
+    }*/
 
     private function buildActivities($rs)
     {
