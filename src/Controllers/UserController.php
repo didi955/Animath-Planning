@@ -35,7 +35,7 @@ class UserController extends Controller
     public function action_changeFirstName(){
         if(isset($_POST['name']) && unserialize($_POST['user']) === Role::PROFESSOR){
             $user = unserialize($_POST['user']);
-            $user->getPersonalData()['first_name']($_POST['name']);
+            $user->getPersonalData()['first_name'] = $_POST['name'];
             $user->save();
             $_SESSION['user'] = serialize($user);
             $this->render('my_account', ['user' => $user]);
@@ -48,7 +48,7 @@ class UserController extends Controller
     public function action_changeLastName(){
         if(isset($_POST['name']) && unserialize($_POST['user']) === Role::PROFESSOR){
             $user = unserialize($_POST['user']);
-            $user->getPersonalData()['last_name']($_POST['name']);
+            $user->getPersonalData()['last_name'] = $_POST['name'];
             $user->save();
             $_SESSION['user'] = serialize($user);
             $this->render('my_account', ['user' => $user]);
@@ -61,7 +61,7 @@ class UserController extends Controller
     public function action_changePhone(){
         if(isset($_POST['phone']) && unserialize($_POST['user']) === Role::PROFESSOR){
             $user = unserialize($_POST['user']);
-            $user->getPersonalData()['phone']($_POST['phone']);
+            $user->getPersonalData()['phone'] = $_POST['phone'];
             $user->save();
             $_SESSION['user'] = serialize($user);
             $this->render('my_account', ['user' => $user]);
@@ -74,7 +74,7 @@ class UserController extends Controller
     public function action_changeSchool(){
         if(isset($_POST['school']) && unserialize($_POST['user']) === Role::PROFESSOR){
             $user = unserialize($_POST['user']);
-            $user->getPersonalData()['school']($_POST['school']);
+            $user->getPersonalData()['school'] = $_POST['school'];
             $user->save();
             $_SESSION['user'] = serialize($user);
             $this->render('my_account', ['user' => $user]);
@@ -112,9 +112,9 @@ class UserController extends Controller
             if(isset($_POST['pass'])){
                 $user = unserialize($_SESSION['user']);
                 if(password_verify($_POST['pass'], $user->getPassHash())){
-                    $user->setConnexionID()($_POST['email']);
+                    $user->setConnexionID($_POST['email']);
                     if($user->getRole() === Role::PROFESSOR && $user->getPersonalData() !== null){
-                        $user->getPersonalData()['email']($_POST['email']);
+                        $user->getPersonalData()['email'] = $_POST['email'];
                     }
                     $user->save();
                     $_SESSION['user'] = serialize($user);

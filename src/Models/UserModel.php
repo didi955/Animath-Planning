@@ -111,6 +111,10 @@ class UserModel
         $req = DatabaseModel::getModel()->getBD()->prepare('SELECT id_user FROM "User" ORDER BY id_user DESC LIMIT 1');
         $req->execute();
         $rs = $req->fetch(PDO::FETCH_ASSOC);
+        if(!$rs){
+            return 0;
+        }
+        return $rs['id_user'];
     }
 
     /**
@@ -155,7 +159,6 @@ class UserModel
         } catch (PDOException $e) {
             // rollback the changes
             DatabaseModel::getModel()->getBD()->rollback();
-            throw $e;
         }
     }
 
@@ -176,7 +179,7 @@ class UserModel
                 $req->execute();
 
                 //PERSONAL DATA
-                if($user->getPersonalData() !== null && $user->getRole() === Role::PROFESSOR){
+                if($user->getPersonalData() != null && $user->getRole() === Role::PROFESSOR){
                     $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE "PersonalData" SET last_name=:last_name, first_name=:first_name, email=:email, phone=:phone, school=:school WHERE id_user = :id');
                     $req->bindValue(":id", $user->getID());
                     foreach ($user->getPersonalData() as $key=>$value){
@@ -200,12 +203,12 @@ class UserModel
      * @param User $user Utilisateur à mettre à jour
      * @param string $newPass Nouveau mot de passe
      */
-    public function changePass(User $user, $newPass){
-        if($this->isInDatabase($user)){
+    public function changePass($id, $newPass){
+        if($this->isInDatabase($id)){
             $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE SET pass_hash=:value FROM "User" WHERE id_user = :value2');
             $hash = hash_pass($newPass);
             $req->bindValue(":value", $hash);
-            $req->bindValue(":value2", $user->getID());
+            $req->bindValue(":value2", $id);
             $req->execute();
         }
     }
