@@ -63,6 +63,7 @@ class ActivitiesModel
             echo e("<div class='alert alert-primary' role='alert'>
                 Deja stand
                 </div>");
+            return;
         }
         $activities = [];
         $datedep1= new DateTime("2023-05-25T09:00");
@@ -93,10 +94,8 @@ class ActivitiesModel
             try {
                 $this->create($activity);
             }
-            catch (PDOException $exception){
-                echo e("<div class='alert alert-primary' role='alert'>
-                Deja Activités
-                </div>");
+            catch (PDOException){
+                throw new PDOException("Problème de chargement");
             }
         }
 

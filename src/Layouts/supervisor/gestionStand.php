@@ -1,5 +1,10 @@
 <div class="p-5 container">
     <div class="ps-5 ms-5 row gap-5">
+        <?php if(isset($err)):?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo e($err) ?>
+        </div>
+        <?php endif;?>
         <?php foreach ($stands as $stand):
             $id = $stand->getId();
             $title = $stand->getTitle();

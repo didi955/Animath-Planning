@@ -11,10 +11,18 @@ class ActivitiesController extends Controller
         // TODO: Implement action_default() method.
     }
 
+    // TODO: Changer PDOException par Exception perso
     public function action_generate(){
         if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
-            ActivitiesModel::getModel()->generateActivities();
-            $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand()]);
+            $datas = [];
+            try {
+                ActivitiesModel::getModel()->generateActivities();
+            }
+            catch (PDOException $exception){
+                $datas['err'] = $exception->getMessage();
+            }
+            $datas['stands'] = StandModel::getModel()->getAllStand();
+            $this->render('gestion', $datas);
         }
         else {
             $this->action_error("Vous n'avez pas les droits effectuer cette action", 444);
