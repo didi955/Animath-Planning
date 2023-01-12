@@ -177,7 +177,7 @@ class UserModel
 
                 //PERSONAL DATA
                 if($user->getPersonalData() !== null && $user->getRole() === Role::PROFESSOR){
-                    $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE "PersonalData" SET last_name=:last_name, first_name=:first_name, email=:email, phone=:phone, school=:school) WHERE id_user = :id');
+                    $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE "PersonalData" SET last_name=:last_name, first_name=:first_name, email=:email, phone=:phone, school=:school WHERE id_user = :id');
                     $req->bindValue(":id", $user->getID());
                     foreach ($user->getPersonalData() as $key=>$value){
                         $req->bindValue($key, $value);
