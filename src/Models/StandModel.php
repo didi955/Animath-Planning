@@ -63,7 +63,8 @@ class StandModel
 
     public function create($stand){
         if(!$this->isInDatabase($stand->getId())){
-            $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "Stand" (title, "desc") VALUES (:title, :desc)');
+            $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "Stand" (id,title, "desc") VALUES (:id,:title, :desc)');
+            $req->bindValue(":id", $stand->getId());
             $req->bindValue(":title", $stand->getTitle());
             $req->bindValue(":desc", $stand->getDesc());
             $req->execute();

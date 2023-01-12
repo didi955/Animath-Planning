@@ -56,7 +56,14 @@ class ActivitiesModel
 
     // TODO NEED REWORK
     public function generateActivities(){
-        $stands = StandModel::getModel()->generateStands();
+        try {
+            $stands = StandModel::getModel()->generateStands();
+        }
+        catch (PDOException $exception){
+            echo e("<div class='alert alert-primary' role='alert'>
+                Deja stand
+                </div>");
+        }
         $activities = [];
         $datedep1= new DateTime("2023-05-25T09:00");
         $datedep= new DateTime("2023-05-25T09:00");
@@ -83,8 +90,16 @@ class ActivitiesModel
             $i += 1;
         }
         foreach($activities as $activity){
-            $this->create($activity);
+            try {
+                $this->create($activity);
+            }
+            catch (PDOException $exception){
+                echo e("<div class='alert alert-primary' role='alert'>
+                Deja Activités
+                </div>");
+            }
         }
+
     }
 
     private function buildActivities($rs)
