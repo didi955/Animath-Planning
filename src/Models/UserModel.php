@@ -125,32 +125,30 @@ class UserModel
      * @param User $user Utilisateur à enregistrer
      */
     public function createUser(User $user){
-        if(!$this->isInDatabase($user->getID())){
-            try {
-                DatabaseModel::getModel()->getBD()->beginTransaction();
-                $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "User" (role, active, pass_hash, connexion_id) VALUES (:id, :role, :active, :pass_hash, :connexion_id)');
-                $req->bindValue(":role", $user->getRole()->value, PDO::PARAM_INT);
-                $req->bindValue(":active", $user->isActive(), PDO::PARAM_BOOL);
-                $req->bindValue(":pass_hash", $user->getPassHash());
-                $req->bindValue(":connexion_id", $user->getConnexionID());
-                $req->execute();
+        try {
+            DatabaseModel::getModel()->getBD()->beginTransaction();
+            $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "User" (role, active, pass_hash, connexion_id) VALUES (:id, :role, :active, :pass_hash, :connexion_id)');
+            $req->bindValue(":role", $user->getRole()->value, PDO::PARAM_INT);
+            $req->bindValue(":active", $user->isActive(), PDO::PARAM_BOOL);
+            $req->bindValue(":pass_hash", $user->getPassHash());
+            $req->bindValue(":connexion_id", $user->getConnexionID());
+            $req->execute();
 
-                if($user->getPersonalData() !== null && $user->getRole() === Role::PROFESSOR){
-                    $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "PersonalData" (id_user, last_name, first_name, email, phone, school) VALUES (:id, :last_name, :first_name, :email, :phone, :school)');
-                    $req->bindValue(":id", $user->getID());
-                    foreach ($user->getPersonalData() as $key=>$value){
-                        $req->bindValue($key, $value);
-                    }
-                    $req->execute();
+            if($user->getPersonalData() !== null && $user->getRole() === Role::PROFESSOR){
+                $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "PersonalData" (id_user, last_name, first_name, email, phone, school) VALUES (:id, :last_name, :first_name, :email, :phone, :school)');
+                $req->bindValue(":id", $user->getID());
+                foreach ($user->getPersonalData() as $key=>$value){
+                    $req->bindValue($key, $value);
                 }
-
-                DatabaseModel::getModel()->getBD()->commit();
-
-            } catch (PDOException $e) {
-                // rollback the changes
-                DatabaseModel::getModel()->getBD()->rollback();
-                throw $e;
+                $req->execute();
             }
+
+            DatabaseModel::getModel()->getBD()->commit();
+
+        } catch (PDOException $e) {
+            // rollback the changes
+            DatabaseModel::getModel()->getBD()->rollback();
+            throw $e;
         }
     }
 
@@ -212,8 +210,8 @@ class UserModel
      */
     public function buildUser($rs, $pdatas){
         $user = new User();
-        if(isset($rs['id'])){
-            $user->setID($rs['id']);
+        if(isset($rs['id_user'])){
+            $user->setID($rs['id_user']);
         }
         if(isset($rs['role'])){
             $user->setRole(Role::valueOf($rs['role']));
