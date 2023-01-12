@@ -75,7 +75,6 @@ class ActivitiesModel
                 }
                 $datefin = date_add($datefin, date_interval_create_from_date_string($val->getDuree()." minutes"));
                 $act = ['stand' => $i,'start' => $date->format("Y-m-d\TH:i"), 'end' => $datefin->format("Y-m-d\TH:i"), 'student_level' => $val->getStudentLevel(), 'capacity'=> $val->getCapacity()];
-                echo "<p>Date de début : ".$date->format("Y-m-d\TH:i")."| Date de fin : ".$datefin->format("Y-m-d\TH:i")."</p>";
                 $activities[] = self::getModel()->buildActivities($act);
                 $date = date_add($date, date_interval_create_from_date_string($val->getDuree()." minutes"));
                 $date = date_add($date, date_interval_create_from_date_string($val->getInter()." minutes"));

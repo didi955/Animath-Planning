@@ -93,4 +93,5 @@
             </script>
         <?php endforeach; ?>
     </div>
+    <a class="btn btn-primary" href="?controller=Activities&action=generate">Generer les stands</a>
 </div>
