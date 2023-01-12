@@ -13,7 +13,6 @@ class ActivitiesController extends Controller
 
     public function action_generate(){
         if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
-            ActivitiesModel::getModel()->generateActivities();
             $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand()]);
         }
         else {

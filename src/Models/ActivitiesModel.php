@@ -55,7 +55,7 @@ class ActivitiesModel
     }
 
     // TODO NEED REWORK
-    /*public function generateActivities(){
+    public function generateActivities(){
         $stands = StandModel::getModel()->generateStands();
         $activities = [];
         $datedep1= new DateTime("2023-05-25T09:00");
@@ -74,18 +74,19 @@ class ActivitiesModel
                     $datefin = $finpause1;
                 }
                 $datefin = date_add($datefin, date_interval_create_from_date_string($val->getDuree()." minutes"));
-                $act = ['stand' => $i,'start' => $date->format("Y-m-dTH:i"), 'end' => $datefin->format("Y-m-dTH:i"), 'student_level' => $val->getStudentLevel(), 'capacity'=> $val->getCapacity()];
-                $i += 1;
+                $act = ['stand' => $i,'start' => $date->format("Y-m-d\TH:i"), 'end' => $datefin->format("Y-m-d\TH:i"), 'student_level' => $val->getStudentLevel(), 'capacity'=> $val->getCapacity()];
+                echo "<p>Date de début : ".$date->format("Y-m-d\TH:i")."| Date de fin : ".$datefin->format("Y-m-d\TH:i")."</p>";
                 $activities[] = self::getModel()->buildActivities($act);
                 $date = date_add($date, date_interval_create_from_date_string($val->getDuree()." minutes"));
                 $date = date_add($date, date_interval_create_from_date_string($val->getInter()." minutes"));
                 $datefin = date_add($datefin, date_interval_create_from_date_string($val->getInter()." minutes"));
             }
+            $i += 1;
         }
         foreach($activities as $activity){
             $this->create($activity);
         }
-    }*/
+    }
 
     private function buildActivities($rs)
     {
