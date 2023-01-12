@@ -1,5 +1,6 @@
 <!-- E-mail Modal -->
 <div class="modal fade modal-lg" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+    <form class="container needs-validation" method="post" action="?controller=User&action=changeEmail" novalidate>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,16 +9,26 @@
             </div>
             <div class="modal-body">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">E-mail</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1">
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">E-mail</span>
+                            <input type="text" name="email" class="form-control" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Mot de passe</span>
+                            <input type="password" name="pass" class="form-control" aria-describedby="basic-addon1">
+                        </div>
+
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary">Valider</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+    </form>
             </div>
         </div>
     </div>
+
 </div>
 
 <!-- Nom Modal -->
@@ -30,13 +41,17 @@
             </div>
             <div class="modal-body">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Nom</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    <form class="container needs-validation" method="post" action="?controller=User&action=changeLastName" novalidate>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Nom</span>
+                            <input type="text" class="form-control" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary">Valider</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </div>
     </div>
@@ -52,13 +67,43 @@
             </div>
             <div class="modal-body">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Prenom</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    <form class="container needs-validation" method="post" action="?controller=User&action=changeFirstName" novalidate>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Prenom</span>
+                            <input type="text" class="form-control" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary">Valider</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- School Modal -->
+<div class="modal fade modal-lg" id="schoolModal" tabindex="-1" aria-labelledby="schoolModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Changer votre établissement</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <form class="container" method="post" action="?controller=User&action=changeSchool" novalidate>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Etablissement</span>
+                            <input type="text" class="form-control" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </div>
     </div>
@@ -74,13 +119,17 @@
             </div>
             <div class="modal-body">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Telephone</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    <form class="container" method="post" action="?controller=User&action=changePhone" novalidate>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Telephone</span>
+                            <input type="text" class="form-control" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary">Valider</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </div>
     </div>
@@ -96,27 +145,30 @@
             </div>
 
             <div class="modal-body">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Ancien mot de passe</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1">
-                </div>
+                <form class="container needs-validation" method="post" action="?controller=User&action=changePass" novalidate>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Ancien mot de passe</span>
+                        <input type="text" name="old_pass" class="form-control" aria-describedby="basic-addon1">
+                    </div>
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Nouveau mot de passe</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1">
-                </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Nouveau mot de passe</span>
+                        <input type="text" name="pass" class="form-control verifpass" aria-describedby="basic-addon1">
+                    </div>
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Confirmez nouveau mot de passe</span>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1">
-                </div>
-
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Confirmez nouveau mot de passe</span>
+                        <input type="text" name="pass_confirm" class="form-control verifpassconfirm" aria-describedby="basic-addon1">
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary">Valider</button>
+                <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </div>
     </div>
 </div>
+
+
 
