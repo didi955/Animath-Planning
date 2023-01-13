@@ -9,7 +9,7 @@ include_once "view_topbar.php";
 <script src="public/js/fullcalendar-6.0.0/dist/index.global.js">
 </script>
 
-<div class="border-bottom mt-3 mb-3">
+<div class="border-top border-bottom mt-3 mb-3">
     <div class="container pt-3 pb-3 text-center">
         <div class="row">
             <div class="col-12">
