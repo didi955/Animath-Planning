@@ -120,6 +120,16 @@ class DateUtil
         }
     }
 
+    public function isInterval($date2,$a,$b): bool
+    {
+        if($this->compare($a)===0 and $date2->compare($b)===0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public function compare($a): int
     {
         $a = parseDate($a);
