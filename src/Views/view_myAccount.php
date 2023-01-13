@@ -104,26 +104,24 @@ include 'Layouts/modifierProf.php'
                             </div>
                         </div>
                     </div>
-                </div>
-
-            <?php elseif($user->getRole() === Role::EXHIBITOR):?>
-
-                <div id="PanelInfo" class="accordion-collapse collapse show" aria-labelledby="HeaderPanelInfo">
                     <div class="accordion-body row">
                         <div class="col-1">
-                            Mail :
+                            Établissement :
                         </div>
-                        <div class="col-10 text-center">
-                            <strong> <?= e($user->getConnexionID()) ?> </strong>
+                        <div class="col-10">
+                            <?php if ($user->getPersonalData()['school'] != null) : ?>
+                                <strong><?= e($user->getPersonalData()['school']) ?></strong>
+                            <?php else : ?>
+                                <strong>Non renseigné</strong>
+                            <?php endif; ?>
                         </div>
                         <div class="col-1">
                             <div class="h-50">
-                                <img class="w-25" src="public/images/modif.png" alt="modif">
+                                <img class="w-25" type="button" data-bs-toggle="modal" href="#schoolModal" src="public/images/modif.png" alt="modif">
                             </div>
                         </div>
                     </div>
                 </div>
-
             <?php endif;?>
         </div>
         <div class="accordion-item">
