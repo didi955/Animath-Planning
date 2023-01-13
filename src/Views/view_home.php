@@ -25,7 +25,6 @@ include "view_topbar.php";
             <p class="pb-1"> Je suis exposant</p>
         </div>
     </div>
-
     <div class="col-2"></div>
 </div>
 <div class="w-100" style="height: 10%"></div>
