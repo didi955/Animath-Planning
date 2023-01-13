@@ -1,5 +1,8 @@
 <nav class="fixed-top d-flex mb-3 navbar bg-body-tertiary bg-white">
     <div class="container-fluid">
+        <a class="navbar-brand" href="https://salon-math.fr/" target="_blank">
+            <img src="public/images/Logo-bleu.png" alt="Bootstrap" width="110" height="50">
+        </a>
         <a class="btn btn-primary" href="index.php" role="button">Acceuil</a>
         <a class="ms-auto p-3 nav-item" role="button" aria-expanded="true" aria-controls="collapseMenu" data-bs-toggle="collapse" data-bs-target="#collapseMenu" alt="mon_compte" >
             <svg width="30" height="30" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
