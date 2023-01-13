@@ -33,8 +33,8 @@ class UserController extends Controller
 
 
     public function action_changeFirstName(){
-        if(isset($_POST['name']) && unserialize($_POST['user']) === Role::PROFESSOR){
-            $user = unserialize($_POST['user']);
+        if(isset($_POST['name']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
+            $user = unserialize($_SESSION['user']);
             $user->getPersonalData()['first_name'] = $_POST['name'];
             $user->save();
             $_SESSION['user'] = serialize($user);
@@ -46,21 +46,26 @@ class UserController extends Controller
     }
 
     public function action_changeLastName(){
-        if(isset($_POST['name']) && unserialize($_POST['user']) === Role::PROFESSOR){
-            $user = unserialize($_POST['user']);
-            $user->getPersonalData()['last_name'] = $_POST['name'];
-            $user->save();
-            $_SESSION['user'] = serialize($user);
-            $this->render('my_account', ['user' => $user]);
+        if(isset($_POST['name']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
+            if(unserialize($_SESSION['user'])->getRole() === Role::PROFESSOR){
+                $user = unserialize($_SESSION['user']);
+                $user->getPersonalData()['last_name'] = $_POST['name'];
+                $user->save();
+                $_SESSION['user'] = serialize($user);
+                $this->render('my_account', ['user' => $user]);
+            }
+            else {
+                $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
+            }
         }
         else {
-            $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
+            $this->action_error("NAME NON DEFINI", 444);
         }
     }
 
     public function action_changePhone(){
-        if(isset($_POST['phone']) && unserialize($_POST['user']) === Role::PROFESSOR){
-            $user = unserialize($_POST['user']);
+        if(isset($_POST['phone']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
+            $user = unserialize($_SESSION['user']);
             $user->getPersonalData()['phone'] = $_POST['phone'];
             $user->save();
             $_SESSION['user'] = serialize($user);
@@ -72,8 +77,8 @@ class UserController extends Controller
     }
 
     public function action_changeSchool(){
-        if(isset($_POST['school']) && unserialize($_POST['user']) === Role::PROFESSOR){
-            $user = unserialize($_POST['user']);
+        if(isset($_POST['school']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
+            $user = unserialize($_SESSION['user']);
             $user->getPersonalData()['school'] = $_POST['school'];
             $user->save();
             $_SESSION['user'] = serialize($user);
