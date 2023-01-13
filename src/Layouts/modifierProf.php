@@ -41,12 +41,10 @@
             </div>
             <div class="modal-body">
                 <div class="input-group mb-3">
-                    <form class="container needs-validation" method="post" action="?controller=User&action=changeLastName" novalidate>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Nom</span>
-                            <input type="text" class="form-control" aria-describedby="basic-addon1">
-                        </div>
-                    </form>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Nom</span>
+                        <input type="text" class="form-control" name="name" aria-describedby="basic-addon1">
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -69,12 +67,10 @@
             </div>
             <div class="modal-body">
                 <div class="input-group mb-3">
-                    <form class="container needs-validation" method="post" action="?controller=User&action=changeFirstName" novalidate>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Prenom</span>
-                            <input type="text" class="form-control" aria-describedby="basic-addon1">
-                        </div>
-                    </form>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Prenom</span>
+                        <input type="text" class="form-control"  name="name" aria-describedby="basic-addon1">
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -97,12 +93,10 @@
             </div>
             <div class="modal-body">
                 <div class="input-group mb-3">
-                    <form class="container" method="post" action="?controller=User&action=changeSchool" novalidate>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Etablissement</span>
-                            <input type="text" class="form-control" aria-describedby="basic-addon1">
-                        </div>
-                    </form>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Etablissement</span>
+                        <input type="text" class="form-control" name="school" aria-describedby="basic-addon1">
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -125,12 +119,10 @@
             </div>
             <div class="modal-body">
                 <div class="input-group mb-3">
-                    <form class="container" method="post" action="?controller=User&action=changePhone" novalidate>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Telephone</span>
-                            <input type="text" class="form-control" aria-describedby="basic-addon1">
-                        </div>
-                    </form>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Telephone</span>
+                        <input type="text" class="form-control" name="phone" aria-describedby="basic-addon1">
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -154,9 +146,7 @@
             <div class="modal-body">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Ancien mot de passe</span>
-                    <label>
-                        <input type="text" name="old_pass" class="form-control" aria-describedby="basic-addon1">
-                    </label>
+                    <input type="text" name="old_pass" class="form-control" aria-describedby="basic-addon1">
                 </div>
 
                 <div class="input-group mb-3">

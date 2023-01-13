@@ -33,7 +33,7 @@ class UserController extends Controller
 
 
     public function action_changeFirstName(){
-        if(isset($_POST['name']) && unserialize($_POST['user']) === Role::PROFESSOR){
+        if(isset($_POST['name']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
             $user = unserialize($_POST['user']);
             $user->getPersonalData()['first_name'] = $_POST['name'];
             $user->save();
@@ -46,7 +46,7 @@ class UserController extends Controller
     }
 
     public function action_changeLastName(){
-        if(isset($_POST['name']) && unserialize($_POST['user']) === Role::PROFESSOR){
+        if(isset($_POST['name']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
             $user = unserialize($_POST['user']);
             $user->getPersonalData()['last_name'] = $_POST['name'];
             $user->save();
@@ -59,7 +59,7 @@ class UserController extends Controller
     }
 
     public function action_changePhone(){
-        if(isset($_POST['phone']) && unserialize($_POST['user']) === Role::PROFESSOR){
+        if(isset($_POST['phone']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
             $user = unserialize($_POST['user']);
             $user->getPersonalData()['phone'] = $_POST['phone'];
             $user->save();
@@ -72,7 +72,7 @@ class UserController extends Controller
     }
 
     public function action_changeSchool(){
-        if(isset($_POST['school']) && unserialize($_POST['user']) === Role::PROFESSOR){
+        if(isset($_POST['school']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
             $user = unserialize($_POST['user']);
             $user->getPersonalData()['school'] = $_POST['school'];
             $user->save();
