@@ -146,14 +146,6 @@ include 'Layouts/modifierProf.php'
                         </div>
                     </div>
                 </div>
-                <div class="accordion-body row">
-                    <div class="col-1">
-                        Role :
-                    </div>
-                    <div class="col-10">
-                        <strong><?= e($user->getRole()->name) ?></strong>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
