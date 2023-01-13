@@ -75,7 +75,7 @@ class DateUtil
         if($m<0){
           return;
         }
-        if($this->min+$m>60){
+        if($this->min+$m>=60){
             $r = $this->min;
             $this->min = 0;
             $this->hour += 1;
@@ -103,10 +103,11 @@ class DateUtil
         return $this->day."T$h:$m";
     }
 
-    public function default(): void
+    public function default($hm = "09:00"): void
     {
-        $this->setHour(9);
-        $this->setMin(0);
+        $hm = parseDate($hm);
+        $this->setHour($hm[0]);
+        $this->setMin($hm[1]);
     }
 
     public function isValid($a,$b): bool
@@ -119,7 +120,7 @@ class DateUtil
         }
     }
 
-    private function compare($a): int
+    public function compare($a): int
     {
         $a = parseDate($a);
         if($a[0] > $this->hour){

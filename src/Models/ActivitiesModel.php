@@ -59,36 +59,30 @@ class ActivitiesModel
         try {
             $stands = StandModel::getModel()->generateStands();
         }
-        catch (PDOException $exception){
-            echo e("<div class='alert alert-primary' role='alert'>
-                Deja stand
-                </div>");
-            return;
+        catch (PDOException){
+            throw new PDOException("Problème de chargement");
         }
         $activities = [];
-        $datedep1= new DateTime("2023-05-25T09:00");
-        $datedep= new DateTime("2023-05-25T09:00");
-        $datearr = new DateTime("2023-05-25T18:00");
-        $i = 1;
+        $debut = "09:00";
+        $fin = "18:00";
         foreach($stands as $val){
-            $debutpause = new DateTime("2023-05-25T".$val->getPauseStart());
-            $finpause = new DateTime("2023-05-25T".$val->getPauseEnd());
-            $finpause1 = new DateTime("2023-05-25T".$val->getPauseEnd());
-            $date = $datedep1;
-            $datefin = $datedep;
-            while ($datefin < $datearr) {
-                if ($datefin >= $debutpause) {
-                    $date = $finpause;
-                    $datefin = $finpause1;
+            $date = DateUtil::create("2023-05-25",9,0);
+            $datefin = DateUtil::create("2023-05-25",9,0);
+            while ($datefin->compare("18:00")===-1) {
+                $datefin->addMin($val->getDuree());
+                if ($date->isValid($val->getPauseStart(),$val->getPauseEnd()) and $datefin->isValid($val->getPauseStart(),$val->getPauseEnd())) {
+                    $act = ['stand' => $val->getId(), 'start' => $date->format(), 'end' => $datefin->format(), 'student_level' => $val->getStudentLevel(), 'capacity' => $val->getCapacity()];
+                    $activities[] = self::getModel()->buildActivities($act);
+                    $date->addMin($val->getDuree());
+                    $date->addMin($val->getInter());
+                    $datefin->addMin($val->getInter());
                 }
-                $datefin = date_add($datefin, date_interval_create_from_date_string($val->getDuree()." minutes"));
-                $act = ['stand' => $i,'start' => $date->format("Y-m-d\TH:i"), 'end' => $datefin->format("Y-m-d\TH:i"), 'student_level' => $val->getStudentLevel(), 'capacity'=> $val->getCapacity()];
-                $activities[] = self::getModel()->buildActivities($act);
-                $date = date_add($date, date_interval_create_from_date_string($val->getDuree()." minutes"));
-                $date = date_add($date, date_interval_create_from_date_string($val->getInter()." minutes"));
-                $datefin = date_add($datefin, date_interval_create_from_date_string($val->getInter()." minutes"));
+
+                else{
+                    $date->default($val->getPauseEnd());
+                    $datefin->default($val->getPauseEnd());
+                }
             }
-            $i += 1;
         }
         foreach($activities as $activity){
             try {
@@ -98,7 +92,6 @@ class ActivitiesModel
                 throw new PDOException("Problème de chargement");
             }
         }
-
     }
 
     private function buildActivities($rs)

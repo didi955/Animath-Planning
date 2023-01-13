@@ -3,6 +3,7 @@
 session_start();
 
 // NEED TO BE SEPARETED IN DIFFERENT FILES
+require_once "Utils/DateUtil.php";
 require_once '../vendor/autoload.php';
 require_once "Utils/constant.php";
 require_once "Utils/functions.php";

@@ -1,4 +1,4 @@
-<nav class="d-flex mb-3 navbar bg-body-tertiary bg-white">
+<nav class="fixed-top d-flex mb-3 navbar bg-body-tertiary bg-white">
     <div class="container-fluid">
         <a class="btn btn-primary" href="index.php" role="button">Acceuil</a>
         <a class="ms-auto p-3 nav-item" role="button" aria-expanded="true" aria-controls="collapseMenu" data-bs-toggle="collapse" data-bs-target="#collapseMenu" alt="mon_compte" >
@@ -10,7 +10,7 @@
 </nav>
 
 
-<div class="collapse" id="collapseMenu" style="width: 10%; margin-left: 88%">
+<div class="collapse position-absolute" id="collapseMenu" style="width: 13%; margin-left: 86%; margin-top: 5%">
     <div class="card card-body">
         <?php if(isset($_SESSION['user'])): ?>
             <?php if(unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR): ?>
