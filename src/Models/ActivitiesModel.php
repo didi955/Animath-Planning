@@ -70,14 +70,13 @@ class ActivitiesModel
             $datefin = DateUtil::create("2023-05-25",9,0);
             while ($datefin->compare("18:00")===-1) {
                 $datefin->addMin($val->getDuree());
-                if ($date->isValid($val->getPauseStart(),$val->getPauseEnd()) and $datefin->isValid($val->getPauseStart(),$val->getPauseEnd())) {
+                if ($date->isValid($val->getPauseStart(),$val->getPauseEnd()) and $datefin->isValid($val->getPauseStart(),$val->getPauseEnd()) and !$date->isInterval($datefin,$val->getPauseStart(),$val->getPauseEnd())) {
                     $act = ['stand' => $val->getId(), 'start' => $date->format(), 'end' => $datefin->format(), 'student_level' => $val->getStudentLevel(), 'capacity' => $val->getCapacity()];
                     $activities[] = self::getModel()->buildActivities($act);
                     $date->addMin($val->getDuree());
                     $date->addMin($val->getInter());
                     $datefin->addMin($val->getInter());
                 }
-
                 else{
                     $date->default($val->getPauseEnd());
                     $datefin->default($val->getPauseEnd());

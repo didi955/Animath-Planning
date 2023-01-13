@@ -14,10 +14,10 @@ include "view_topbar.php";
 
 <div class="card bg-light" style="height: 7%">
     <div class="row text-center fs-5 h-100">
-       <span class="col-6 border-end pt-3" role="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <span class="col-6 border-end pt-3" role="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="setTimeout(()=>window.scrollTo(0, 2000),250)">
             <span>Connexion</span>
         </span>
-        <span class="col-6 border-start pt-3" role="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <span class="col-6 border-start pt-3" role="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" onclick="setTimeout(()=>window.scrollTo(0, 2000),300)">
             <span>Inscription</span>
         </span>
     </div>
