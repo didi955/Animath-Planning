@@ -77,7 +77,6 @@ class ActivitiesModel
                     $date->addMin($val->getInter());
                     $datefin->addMin($val->getInter());
                 }
-
                 else{
                     $date->default($val->getPauseEnd());
                     $datefin->default($val->getPauseEnd());
