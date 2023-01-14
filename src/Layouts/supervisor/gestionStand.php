@@ -44,10 +44,10 @@
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-body" style="height: 50rem">
-                            <div class="h-75" id="calendar<?php echo e("$id") ?>">
+                            <div class="h-100" id="calendar<?php echo e("$id") ?>">
                             </div>
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer mt-4">
                             <button class="btn btn-secondary" href="<?php echo e("#standAjout$id")?>" data-bs-toggle="modal">Ajouter</button>
                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fermer</button>
                         </div>
@@ -69,21 +69,31 @@
                 document.addEventListener('DOMContentLoaded', function() {
                     let calendarEl = document.getElementById('calendar<?php echo e("$id") ?>');
                     let calendar = new FullCalendar.Calendar(calendarEl, {
+                        themeSystem: 'bootstrap5',
+                        initialDate: '2023-05-25',
                         initialView: 'timeGridDay',
                         locale: 'fr',
                         editable: false,
                         snapDuration: '00:15:00',
                         allDaySlot: false,
-                        slotMinTime: '08:30:00',
-                        slotMaxTime: '19:00:00',
+                        slotMinTime: '09:00:00',
+                        slotMaxTime: '18:15:00',
+                        slotDuration: '00:15:00',
+                        eventClick: function (info){
+                            let modal = document.getElementById("suppr"+info.event.id);
+                            modal.classList.add("show")
+                            modal.style.display = "block";
+                        },
                         events: [
                             <?php foreach ($activities as $activity):
                             $start = $activity->getStart();
                             $end = $activity->getEnd();
                             $capacity = $activity->getCapacity();
                             $student_level = $activity->getStudentLevel();
+                            $idact = $activity->getId();
                             ?>
                             {
+                                id: <?php echo e($idact) ?>,
                                 title: '<?php echo e("$title") ?>',
                                 start: '<?php echo e("$start") ?>',
                                 end: '<?php echo e("$end") ?>',
@@ -96,7 +106,32 @@
                     calendar.render();
                 });
             </script>
+            <?php foreach ($activities as $activity):
+            $start = $activity->getStart();
+            $end = $activity->getEnd();
+            $idact = $activity->getId();
+            ?>
+                <div class="modal fade" id="suppr<?php echo("$idact") ?>" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="?controller=Activities&action=remove">
+                                <input type="hidden" name="id" value="<?php echo e($idact)?>">
+                                <label for="sub">Voulez vous supprimez cette activité ?</label>
+                                <input class="btn btn-primary" type="submit" value="Oui" id="suboui">
+                                <button type="button" class="btn btn-secondary" onclick="function dismiss(){
+                                    let modal = document.getElementById('suppr'+<?php echo e("$idact")?>);
+                                        modal.classList.remove('show');
+                                        modal.style.display = 'none';
+                                        } dismiss();"
+                                >Non</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         <?php endforeach; ?>
     </div>
-    <a class="btn btn-primary" href="?controller=Activities&action=generate">Generer les stands</a>
+    <div class="w-100 mt-3 pt-3 border-top">
+        <a class="btn btn-primary" href="?controller=Activities&action=generate">Generer les stands</a>
+    </div>
 </div>

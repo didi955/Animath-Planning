@@ -18,13 +18,13 @@ include 'Layouts/modifierProf.php'
     <div class="container pt-3 pb-2 text-center" >
         <div class="row">
             <div class="col-12">
-                    <h3>Mon compte</h3>
+                <h3>Mon compte</h3>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container shadow border text-center bg-light">
+<div class="container shadow border text-center" style="background-color: #E7F1FF; width:69%">
     <ul class="nav nav-justified gap-3 p-1">
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#accordionInfoPerso" type="button" role="tab" aria-controls="accordionInfoPerso" aria-selected="true">Paramètres</a>
@@ -34,7 +34,7 @@ include 'Layouts/modifierProf.php'
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#booking" type="button" role="tab" aria-controls="booking" aria-selected="true">Réserver</a>
         </li>
         <?php endif; ?>
-        <?php if($user->getRole() !== Role::SUPERVISOR): ?>
+        <?php if($user->getRole() === Role::PROFESSOR): ?>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" data-bs-target="#planning" type="button" role="tab" aria-controls="planning" aria-selected="true">Mes visites</a>
             </li>
@@ -44,7 +44,7 @@ include 'Layouts/modifierProf.php'
     <div class="tab-pane fade show accordion m-3" id="accordionInfoPerso">
         <div class="accordion-item">
             <h2 class="accordion-header" id="HeaderPanelInfo">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#PanelInfo" aria-expanded="true" aria-controls="PanelInfo">
+                <button class="accordion-button bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#PanelInfo" aria-expanded="true" aria-controls="PanelInfo">
                     Informations personnelles
                 </button>
             </h2>
@@ -129,7 +129,7 @@ include 'Layouts/modifierProf.php'
         </div>
         <div class="accordion-item">
             <h2 class="accordion-header" id="HeaderPanelSecurity">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#PanelSecurity" aria-expanded="true" aria-controls="PanelRole">
+                <button class="accordion-button bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#PanelSecurity" aria-expanded="true" aria-controls="PanelRole">
                     Sécurité
                 </button>
             </h2>
