@@ -40,9 +40,11 @@ include 'Layouts/modifierProf.php'
             </li>
         <?php endif; ?>
     </ul>
+
+
 <div class="tab-content">
     <div class="tab-pane fade show accordion m-3" id="accordionInfoPerso">
-        <?php include "Layouts/personnalData.php"; ?>
+        <?php include "Layouts/personalData.php"; ?>
     </div>
     <div class="tab-pane h-50 fade m-3" id="booking">
         <?php include "Layouts/booking.php"?>

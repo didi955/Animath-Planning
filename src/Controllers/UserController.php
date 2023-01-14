@@ -15,7 +15,7 @@ class UserController extends Controller
 
     public function action_gestion(){
         if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
-            $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand()]);
+            $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand(), 'user' => unserialize($_SESSION['user'])]);
         }
         else {
             $this->action_error("Vous n'avez pas les droits pour accéder à cette page");
@@ -204,6 +204,12 @@ class UserController extends Controller
                         if(isset($_POST['remember']) && $_POST['remember'] == "on"){
                             setcookie('user', serialize($user), time() + 3600 * 24 * 30, '/', '', true, true);
                         }
+                        if(unserialize($_SESSION['user'])->getRole() === Role::PROFESSOR){
+                            $this->action_my_account();
+                        }
+                        else {
+                            $this->action_gestion();
+                        }
                     }
                     else {
                         $this->action_error('Mot de passe incorrect');
@@ -217,7 +223,9 @@ class UserController extends Controller
                 $this->action_error('Adresse mail ou mot de passe invalide');
             }
         }
-        $this->action_error('Adresse mail non spécifiée');
+        else {
+            $this->action_error('Adresse mail non spécifiée');
+        }
     }
 
     /**

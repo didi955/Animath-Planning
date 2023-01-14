@@ -12,7 +12,7 @@
                     Mail :
                 </div>
                 <div class="col-10 text-center">
-                    <strong> <?= e($user->getPersonalData()['email']) ?> </strong>
+                    <strong> <?= e($user->getConnexionID()) ?> </strong>
                 </div>
                 <div class="col-1">
                     <div class="h-50">
