@@ -111,7 +111,7 @@
             $end = $activity->getEnd();
             $idact = $activity->getId();
             ?>
-                <div class="modal fade" id="suppr<?php echo("$idact") ?>" tabindex="-1" aria-hidden="true">
+                <div class="modal fade" id="suppr<?php echo("$idact") ?>" tabindex="-1" aria-hidden="true" style="height: 50rem">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <form action="?controller=Activities&action=remove">

@@ -22,6 +22,10 @@ class UserController extends Controller
         }
     }
 
+    public function action_exposant(){
+        $this->render('exposant');
+    }
+
     public function action_changeFirstName(){
         if(isset($_POST['name']) && unserialize($_SESSION['user'])->getRole() === Role::PROFESSOR){
             if(is_valid_name($_POST['name'])){
@@ -200,7 +204,6 @@ class UserController extends Controller
                         if(isset($_POST['remember']) && $_POST['remember'] == "on"){
                             setcookie('user', serialize($user), time() + 3600 * 24 * 30, '/', '', true, true);
                         }
-                        $this->action_my_account();
                     }
                     else {
                         $this->action_error('Mot de passe incorrect');
