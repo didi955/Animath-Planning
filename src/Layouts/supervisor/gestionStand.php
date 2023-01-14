@@ -145,8 +145,8 @@
                                 <form class="container" action="?controller=Activities&action=remove">
                                     <input type="hidden" name="id" value="<?php echo e($idact)?>">
                                     <label for="sub">Voulez vous supprimez cette activité ?</label>
-                                    <input class="btn btn-primary" type="submit" value="Oui" id="suboui">
-                                    <button type="button" class="btn btn-secondary" onclick="function dismiss(){
+                                    <input class="ms-2 btn btn-primary" type="submit" value="Oui" id="suboui">
+                                    <button type="button" class="ms-2 btn btn-secondary" onclick="function dismiss(){
                                             let modal = document.getElementById('suppr'+<?php echo e("$idact")?>);
                                             modal.classList.remove('show');
                                             modal.style.display = 'none';
