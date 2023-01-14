@@ -13,15 +13,6 @@ class UserController extends Controller
         $this->action_my_account();
     }
 
-    public function action_generateStands(){
-        if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
-            StandModel::getModel()->generateStands();
-            $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand()]);
-        } else {
-            $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
-        }
-    }
-
     public function action_gestion(){
         if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
             $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand()]);
@@ -31,14 +22,18 @@ class UserController extends Controller
         }
     }
 
-
     public function action_changeFirstName(){
         if(isset($_POST['name']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
-            $user = unserialize($_SESSION['user']);
-            $user->getPersonalData()['first_name'] = $_POST['name'];
-            $user->save();
-            $_SESSION['user'] = serialize($user);
-            $this->render('my_account', ['user' => $user]);
+            if(is_valid_name($_POST['name'])){
+                $user = unserialize($_SESSION['user']);
+                $user->getPersonalData()['first_name'] = $_POST['name'];
+                $user->save();
+                $_SESSION['user'] = serialize($user);
+                $this->render('my_account', ['user' => $user]);
+            }
+            else{
+                $this->action_error("Le nom n'est pas valide", 444);
+            }
         }
         else {
             $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
@@ -46,13 +41,18 @@ class UserController extends Controller
     }
 
     public function action_changeLastName(){
-        if(isset($_POST['name']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
+        if(isset($_POST['name'])){
             if(unserialize($_SESSION['user'])->getRole() === Role::PROFESSOR){
-                $user = unserialize($_SESSION['user']);
-                $user->getPersonalData()['last_name'] = $_POST['name'];
-                $user->save();
-                $_SESSION['user'] = serialize($user);
-                $this->render('my_account', ['user' => $user]);
+                if(is_valid_name($_POST['name'])){
+                    $user = unserialize($_SESSION['user']);
+                    $user->getPersonalData()['last_name'] = $_POST['name'];
+                    $user->save();
+                    $_SESSION['user'] = serialize($user);
+                    $this->render('my_account', ['user' => $user]);
+                }
+                else {
+                    $this->action_error("Le nom n'est pas valide", 444);
+                }
             }
             else {
                 $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
@@ -65,11 +65,16 @@ class UserController extends Controller
 
     public function action_changePhone(){
         if(isset($_POST['phone']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
-            $user = unserialize($_SESSION['user']);
-            $user->getPersonalData()['phone'] = $_POST['phone'];
-            $user->save();
-            $_SESSION['user'] = serialize($user);
-            $this->render('my_account', ['user' => $user]);
+            if(is_valid_phone($_POST['phone'])){
+                $user = unserialize($_SESSION['user']);
+                $user->getPersonalData()['phone'] = $_POST['phone'];
+                $user->save();
+                $_SESSION['user'] = serialize($user);
+                $this->render('my_account', ['user' => $user]);
+            }
+            else {
+                $this->action_error("Le numéro de téléphone n'est pas valide", 444);
+            }
         }
         else {
             $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
@@ -190,7 +195,7 @@ class UserController extends Controller
                         if(isset($_POST['remember']) && $_POST['remember'] == "on"){
                             setcookie('user', serialize($user), time() + 3600 * 24 * 30, '/', '', true, true);
                         }
-                        $this->render('home');
+                        $this->action_my_account();
                     }
                     else {
                         $this->action_error('Mot de passe incorrect', 444);

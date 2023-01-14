@@ -23,7 +23,7 @@
     </div>
     <div class="mb-3">
         <input type="checkbox" name="cgu_accept" id="cgu" class="form-check-input check-must-valid"/>
-        <label for="cgu">J'accepte les <a data-bs-toggle="modal" href="#cguModalFooter"><?=e(CGU_TITLE)?></a></label>
+        <label for="cgu">J'accepte les <a data-bs-toggle="modal" href="#cguModalHome"><?=e(CGU_TITLE)?></a></label>
         <div class="invalid-feedback">Veuillez accepter les CGU, pour continuer</div>
     </div>
     <div class="mb-3">

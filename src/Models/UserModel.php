@@ -199,21 +199,6 @@ class UserModel
     }
 
     /**
-     * Méthode permettant de mettre à jour le mot de passe d'un utilisateur dans la base de données
-     * @param User $user Utilisateur à mettre à jour
-     * @param string $newPass Nouveau mot de passe
-     */
-    public function changePass($id, $newPass){
-        if($this->isInDatabase($id)){
-            $req = DatabaseModel::getModel()->getBD()->prepare('UPDATE SET pass_hash=:value FROM "User" WHERE id_user = :value2');
-            $hash = hash_pass($newPass);
-            $req->bindValue(":value", $hash);
-            $req->bindValue(":value2", $id);
-            $req->execute();
-        }
-    }
-
-    /**
      * Méthode permettant de construire un objet User à partir d'un tableau de données
      * @param array $rs Tableau de données
      * @return User Utilisateur construit

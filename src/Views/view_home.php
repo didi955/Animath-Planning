@@ -62,3 +62,9 @@ include "view_topbar.php";
     </div>
 </div>
 
+<div class="modal fade" id="cguModalHome" tabindex="-1" aria-labelledby="cguModalLabel" aria-hidden="true">
+    <?php
+    include_once "view_legal.php";
+    ?>
+</div>
+
