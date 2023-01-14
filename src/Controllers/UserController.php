@@ -22,6 +22,10 @@ class UserController extends Controller
         }
     }
 
+    public function action_exposant(){
+        $this->render('exposant');
+    }
+
     public function action_changeFirstName(){
         if(isset($_POST['name']) && unserialize($_SESSION['user'])->getRole() === Role::PROFESSOR){
             if(is_valid_name($_POST['name'])){

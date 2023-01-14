@@ -21,9 +21,9 @@ include "view_topbar.php";
     <div class="col-4"></div>
 
     <div class="container col-2">
-        <div class="h-100 w-100 fs-4 text-white shadow-lg rounded-2 d-flex justify-content-center align-items-center" style="background-color: #007ea7">
+        <a class="text-decoration-none h-100 w-100 fs-4 text-white shadow-lg rounded-2 d-flex justify-content-center align-items-center" href="?controller=User&action=exposant" style="background-color: #007ea7">
             <p class="pb-1"> Je suis exposant</p>
-        </div>
+        </a>
     </div>
     <div class="col-2"></div>
 </div>
