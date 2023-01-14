@@ -23,7 +23,7 @@ class UserController extends Controller
     }
 
     public function action_exposant(){
-        $this->render('exposant');
+        $this->render('exposant',['stands' => StandModel::getModel()->getAllStand()]);
     }
 
     public function action_changeFirstName(){
