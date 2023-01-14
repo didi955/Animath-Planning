@@ -238,7 +238,7 @@ class UserController extends Controller
             $mail = strtolower($_POST['email']);
             if(is_valid_email($mail)
                 && isset($_POST['pass']) && isset($_POST['pass_confirm']) && $_POST['pass'] === $_POST['pass_confirm'] &&
-                isset($_POST['last_name']) && isset($_POST['first_name']) && is_valid_name($_POST['last_name']) && is_valid_name($_POST['first_name']) && isset($_POST['cgu_accept']) && $_POST['cgu_accept'] === 'on'){
+                isset($_POST['last_name']) && isset($_POST['first_name']) && isset($_POST['school']) && is_valid_name($_POST['last_name']) && is_valid_name($_POST['first_name']) && isset($_POST['cgu_accept']) && $_POST['cgu_accept'] === 'on'){
 
                 if(CAPTCHA_ENABLED){
                     if(!isset($_POST['h-captcha-response'])){
@@ -302,7 +302,8 @@ class UserController extends Controller
         $user->setRole(Role::PROFESSOR);
         $lastName = $_POST['last_name'];
         $firstName = $_POST['first_name'];
-        $pdata = ['last_name' => $lastName, 'first_name' => $firstName, 'email' => $mail, 'phone' => null, 'school' => null];
+        $school = $_POST['school'];
+        $pdata = ['last_name' => $lastName, 'first_name' => $firstName, 'email' => $mail, 'phone' => null, 'school' => $school];
         $user->setPersonalData($pdata);
         $user->save();
         $_SESSION['user'] = serialize($user);
