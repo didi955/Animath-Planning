@@ -306,7 +306,7 @@ class UserController extends Controller
         $user->setPersonalData($pdata);
         $user->save();
         $_SESSION['user'] = serialize($user);
-        $this->render("home");
+        $this->action_my_account();
     }
 
 }
