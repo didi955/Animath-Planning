@@ -16,12 +16,18 @@ class ActivitiesController extends Controller
         if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
             $datas = [];
             try {
-                ActivitiesModel::getModel()->generateActivities();
+                $stands = ActivitiesModel::getModel()->generateActivities();
             }
             catch (PDOException $exception){
                 $datas['err'] = $exception->getMessage();
             }
-            $datas['stands'] = StandModel::getModel()->getAllStand();
+            if(isset($stands)){
+                $datas['stands'] = $stands;
+            }
+            else
+            {
+                $datas['stands'] = StandModel::getModel()->getAllStand();
+            }
             $this->render('gestion', $datas);
         }
         else {

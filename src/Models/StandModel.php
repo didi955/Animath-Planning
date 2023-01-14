@@ -45,7 +45,8 @@ class StandModel
     public function getAllStand(){
         $allStand = [];
         $id = 1;
-        while ($id<=self::getModel()->maxStand()){
+        $max = $this->maxStand();
+        while ($id<=$max){
             if($this->isInDatabase($id)){
                 $allStand["$id"] = $this->getStand($id);
                 $id += 1;
