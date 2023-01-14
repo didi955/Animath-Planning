@@ -161,7 +161,10 @@
             <?php endforeach; ?>
         <?php endforeach; ?>
     </div>
-    <div class="w-100 mt-3 pt-3 border-top">
-        <a class="btn btn-primary" href="?controller=Activities&action=generate">Generer les stands</a>
+    <div class="d-flex justify-content-center w-100 mt-3 pt-3 border-top">
+        <a class="btn btn-primary this" href="?controller=Activities&action=generate" onclick="document.querySelector('.spinner-border').style.display = 'block';document.querySelector('.this').style.display = 'none' ">Generer les stands</a>
+        <div class="spinner-border text-primary" role="status" style="display: none">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
 </div>

@@ -35,7 +35,6 @@ include_once "view_topbar.php";
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade show accordion m-3" id="InfoPerso">
-            <?php include "Layouts/personalData.php"; ?>
         </div>
         <div  class="tab-pane fade" id="gestionStand">
             <?php include_once "Layouts/supervisor/gestionStand.php"?>
