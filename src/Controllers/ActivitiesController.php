@@ -13,6 +13,7 @@ class ActivitiesController extends Controller
 
     // TODO: Changer PDOException par Exception perso
     public function action_generate(){
+
         if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
             $datas = [];
             try {

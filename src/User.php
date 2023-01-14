@@ -26,6 +26,7 @@ class User
     private $active;
 
     /**
+     *
      * Attribut caractérisant la date de création de l'utilisateur
      */
     private $created_at;

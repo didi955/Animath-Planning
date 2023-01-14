@@ -28,6 +28,7 @@
                     <strong><?= e($user->getPersonalData()['last_name']) ?></strong>
                 </div>
                 <div class="col-1">
+
                     <div class="h-50">
                         <img class="w-25" type="button" data-bs-toggle="modal" href="#nomModal" src="public/images/modif.png" alt="modif">
                     </div>

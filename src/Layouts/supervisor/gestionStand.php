@@ -66,6 +66,7 @@
                 </div>
             </div>
             <script>
+
                 document.addEventListener('DOMContentLoaded', function() {
                     let calendarEl = document.getElementById('calendar<?php echo e("$id") ?>');
                     let calendar = new FullCalendar.Calendar(calendarEl, {

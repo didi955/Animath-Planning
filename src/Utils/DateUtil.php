@@ -104,6 +104,7 @@ class DateUtil
     }
 
     public function default($hm = "09:00"): void
+
     {
         $hm = parseDate($hm);
         $this->setHour($hm[0]);

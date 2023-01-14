@@ -19,6 +19,7 @@
 
 </p>
 
+
 <h3 class="fw-bold fs-4">Article 2: Accès au site/à l’application </h3>
 
 <p>

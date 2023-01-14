@@ -16,6 +16,7 @@ abstract class Controller
         } else {
             //Sinon, on appelle l'action par défaut
             $this->action_default();
+
         }
     }
 

@@ -9,6 +9,7 @@ include "view_topbar.php";
     }
 </style>
 
+
 <div class="w-100" style="height: 70%"></div>
 
 <div class="row w-100 text-center" style="height: 15%">

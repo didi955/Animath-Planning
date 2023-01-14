@@ -54,6 +54,7 @@ class ActivitiesModel
         }
     }
 
+
     // TODO NEED REWORK
     public function generateActivities(){
         try {

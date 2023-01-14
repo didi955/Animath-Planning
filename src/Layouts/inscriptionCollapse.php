@@ -31,6 +31,7 @@
         <div class="invalid-feedback">Veuillez accepter les CGU, pour continuer</div>
     </div>
     <div class="mb-3">
+
         <?php
             $key = parse_ini_file("../hcaptcha.ini")['key'];
         ?>

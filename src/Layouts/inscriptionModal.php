@@ -27,6 +27,7 @@
         <div class="invalid-feedback">Les mots de passe ne correspondent pas</div>
     </div>
     <div class="mb-3">
+
         <input type="checkbox" name="cgu_accept" id="cgu" class="form-check-input check-must-valid is-invalid"/>
         <label for="cgu">J'accepte les <a data-bs-toggle="modal" href="#cguModalTopbar"><?=e(CGU_TITLE)?></a></label>
         <div class="invalid-feedback">Veuillez accepter les CGU, pour continuer</div>

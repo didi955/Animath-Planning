@@ -132,6 +132,7 @@ class Stand
         return $this->duree;
     }
 
+
     /**
      * @param mixed $duree
      */

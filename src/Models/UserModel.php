@@ -185,6 +185,7 @@ class UserModel
                     foreach ($user->getPersonalData() as $key=>$value){
                         $req->bindValue($key, $value);
                     }
+
                     $req->execute();
                 }
 

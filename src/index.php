@@ -24,6 +24,7 @@ $controllers = ["Home", "User", "Activities"];
 //Nom du contrôleur par défaut5
 $controller_default = "Home";
 
+
 //On teste si le paramètre controller existe et correspond à un contrôleur de la liste $controllers
 if (isset($_GET['controller']) and in_array($_GET['controller'], $controllers)) {
     $nom_controller = $_GET['controller'];

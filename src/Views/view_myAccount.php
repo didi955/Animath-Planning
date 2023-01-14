@@ -9,6 +9,7 @@ include 'Layouts/modifierProf.php'
         background-color: rgba(1,158,227,0.60);
 
     }
+
 </style>
 <script src="public/js/fullcalendar-6.0.0/dist/index.global.js">
 </script>

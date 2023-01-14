@@ -9,6 +9,7 @@ drop table if exists "LogUser" cascade;
 drop table if exists "LogStand" cascade ;
 drop table if exists "LogActivities" cascade ;
 
+
 CREATE TABLE "Role"(
                        "id" INTEGER NOT NULL,
                        "name" VARCHAR(50) NOT NULL

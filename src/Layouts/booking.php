@@ -9,6 +9,7 @@
             <option value="l">Lycée</option>
         </select>
         </div>
+
         <div class="border-2 border-bottom" style="color: #98c1d9"></div>
         <h4 class="pt-3 pb-1" style="text-align: left">Quelles sont vos disponiblités ?</h4>
         <label class="fs-7 pt-1" style="justify-content: left" for="meeting-time">Début :</label><input class="fs-6  w-100 h-30" type="datetime-local" id="meeting-time"

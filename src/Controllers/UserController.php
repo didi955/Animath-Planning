@@ -19,6 +19,7 @@ class UserController extends Controller
         }
         else {
             $this->action_error("Vous n'avez pas les droits pour accéder à cette page");
+
         }
     }
 

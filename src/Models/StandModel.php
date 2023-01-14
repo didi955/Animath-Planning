@@ -24,6 +24,7 @@ class StandModel
         if($rs){
             return true;
         }
+
         return false;
     }
 

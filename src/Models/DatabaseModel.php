@@ -14,6 +14,7 @@ class DatabaseModel
     private static $instance = null;
 
     /**
+     *
      * Constructeur : effectue la connexion à la base de données.
      */
     private function __construct()
