@@ -29,17 +29,6 @@ include "view_topbar.php";
 </div>
 <div class="w-100" style="height: 10% "></div>
 <div class="w-100  border-bottom strong bg-light" style="height: 5%"></div>
-<!-- <div class="card bg-light" style="height: 7%">
-    <div class="row text-center fs-5 h-100">
-        <span class="col-6 border-end pt-3" role="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="setTimeout(()=>window.scrollTo(0, 2000),250)">
-            <span>Connexion</span>
-        </span>
-        <span class="col-6 border-start pt-3" role="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" onclick="setTimeout(()=>window.scrollTo(0, 2000),300)">
-            <span>Inscription</span>
-        </span>
-    </div>
-</div> -->
-
 <div class="row collapse " style="background-color: #89dafe;" id="collapseOne">
 
     <div class=" bg-gradient pt-4 col-6 border-end">
@@ -47,8 +36,12 @@ include "view_topbar.php";
         <?php if(isset($_SESSION['user'])): ?>
         <div class="container text-center pt-3 pb-3 mt-3 mb-3 fs-5">
             Vous êtes déjà  connecté
-            <br>
-            <a class="btn btn-primary btn-lg pt-2" href="?controller=User&action=my_account">Mon compte</a>
+            <br><br>
+            <?php if(unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR): ?>
+                <a class="btn btn-primary btn-lg" href="?controller=User&action=gestion">Gestion</a>
+            <?php else: ?>
+                <a class="btn btn-primary btn-lg" href="?controller=User&action=my_account">Mon compte</a>
+            <?php endif; ?>
         </div>
         <?php else: ?>
         <form class="container needs-validation w-75" method="post" action="?controller=User&action=sign_in" novalidate>
