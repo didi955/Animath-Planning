@@ -204,7 +204,6 @@ class UserController extends Controller
                         if(isset($_POST['remember']) && $_POST['remember'] == "on"){
                             setcookie('user', serialize($user), time() + 3600 * 24 * 30, '/', '', true, true);
                         }
-                        $this->action_my_account();
                     }
                     else {
                         $this->action_error('Mot de passe incorrect');
