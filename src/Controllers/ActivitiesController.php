@@ -16,16 +16,22 @@ class ActivitiesController extends Controller
         if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
             $datas = [];
             try {
-                ActivitiesModel::getModel()->generateActivities();
+                $stands = ActivitiesModel::getModel()->generateActivities();
             }
             catch (PDOException $exception){
                 $datas['err'] = $exception->getMessage();
             }
-            $datas['stands'] = StandModel::getModel()->getAllStand();
+            if(isset($stands)){
+                $datas['stands'] = $stands;
+            }
+            else
+            {
+                $datas['stands'] = StandModel::getModel()->getAllStand();
+            }
             $this->render('gestion', $datas);
         }
         else {
-            $this->action_error("Vous n'avez pas les droits effectuer cette action", 444);
+            $this->action_error("Vous n'avez pas les droits effectuer cette action");
         }
     }
 
@@ -33,7 +39,7 @@ class ActivitiesController extends Controller
         if(isset($_POST['debut']) && isset($_POST['fin']) && isset($_POST['niveau']) && isset($_POST['capacity']) && isset($_POST['id']) && isset($_SESSION['user'])){
             $user = unserialize($_SESSION['user']);
             if(!($user->getRole() === Role::SUPERVISOR)){
-                $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
+                $this->action_error("Vous n'avez pas les droits pour effectuer cette action");
                 return;
             }
             $debut = $_POST['debut'];
@@ -44,24 +50,24 @@ class ActivitiesController extends Controller
             $date_debut = date("Y-m-d H:i", strtotime($debut));
             $date_fin = date("Y-m-d H:i", strtotime($fin));
             if($date_debut > $date_fin){
-                $this->action_error("La date de début doit être inférieure à la date de fin", 444);
+                $this->action_error("La date de début doit être inférieure à la date de fin");
                 return;
             }
             $stand = StandModel::getModel()->getStand($id);
             if($stand == null){
-                $this->action_error("Le stand n'existe pas", 444);
+                $this->action_error("Le stand n'existe pas");
                 return;
             }
             if($debut == null || $fin == null || $niveau == null || $capacity == null){
-                $this->action_error("Veuillez remplir tous les champs", 444);
+                $this->action_error("Veuillez remplir tous les champs");
                 return;
             }
             if($debut > $fin){
-                $this->action_error("La date de début doit être inférieure à la date de fin", 444);
+                $this->action_error("La date de début doit être inférieure à la date de fin");
                 return;
             }
             if($capacity < 0){
-                $this->action_error("La capacité doit être supérieure ou égale à 0", 444);
+                $this->action_error("La capacité doit être supérieure ou égale à 0");
                 return;
             }
             $activity = new Activities();
@@ -74,7 +80,7 @@ class ActivitiesController extends Controller
             $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand()]);
         }
         else {
-            $this->action_error("Veuillez remplir tous les champs", 444);
+            $this->action_error("Veuillez remplir tous les champs");
         }
     }
 

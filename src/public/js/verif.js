@@ -36,6 +36,18 @@ for (let name of names){
     })
 }
 
+let phones = document.querySelectorAll(".verifphone")
+for (let phone of phones){
+    phone.addEventListener("keyup",(e)=>{
+        if(/^((\+)33|0)[1-9](\d{2}){4}$/.test(e.target.value)){
+            e.target.classList.remove("is-invalid")
+        }
+        else{
+            e.target.classList.add("is-invalid")
+        }
+    })
+}
+
 let checked = document.querySelectorAll(".check-must-valid")
 for (let check of checked){
     check.addEventListener("change",(e)=>{

@@ -15,9 +15,7 @@
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Mot de passe</span>
-                            <label>
-                                <input type="password" name="pass" class="form-control" aria-describedby="basic-addon1">
-                            </label>
+                            <input type="password" name="pass" class="form-control" aria-describedby="basic-addon1">
                         </div>
                     </div>
                 </div>
@@ -43,7 +41,7 @@
                     <div class="input-group mb-3">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Nom</span>
-                            <input type="text" class="form-control" name="name" value="<?=e($user->getPersonalData()['last_name']) ?>" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control verifname" name="name" value="<?=e($user->getPersonalData()['last_name']) ?>" aria-describedby="basic-addon1">
                         </div>
                     </div>
                 </div>
@@ -69,7 +67,7 @@
                     <div class="input-group mb-3">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Prenom</span>
-                            <input type="text" class="form-control"  name="name" value="<?=e($user->getPersonalData()['first_name']) ?>" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control verifname"  name="name" value="<?=e($user->getPersonalData()['first_name']) ?>" aria-describedby="basic-addon1">
                         </div>
                     </div>
                 </div>
@@ -134,7 +132,7 @@
                                 $phone = "";
                             }
                             ?>
-                            <input type="text" class="form-control" name="phone" value="<?=e($phone) ?>" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control verifphone" name="phone" value="<?=e($phone) ?>" aria-describedby="basic-addon1">
                         </div>
                     </div>
                 </div>
@@ -159,17 +157,17 @@
                 <div class="modal-body">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Ancien mot de passe</span>
-                        <input type="text" name="old_pass" class="form-control" aria-describedby="basic-addon1">
+                        <input type="password" name="old_pass" class="form-control" aria-describedby="basic-addon1">
                     </div>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Nouveau mot de passe</span>
-                        <input type="text" name="pass" class="form-control verifpass" aria-describedby="basic-addon1">
+                        <input type="password" name="pass" class="form-control verifpass" aria-describedby="basic-addon1">
                     </div>
 
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Confirmez nouveau mot de passe</span>
-                        <input type="text" name="pass_confirm" class="form-control verifpassconfirm" aria-describedby="basic-addon1">
+                        <input type="password" name="pass_confirm" class="form-control verifpassconfirm" aria-describedby="basic-addon1">
                     </div>
                 </div>
                 <div class="modal-footer">

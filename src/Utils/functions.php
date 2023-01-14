@@ -38,9 +38,12 @@ function is_valid_name(string $name)
     return false;
 }
 
-function is_valid_activity(){
-
-
+function is_valid_phone(string $phone)
+{
+    if(preg_match("/^((\+)33|0)[1-9](\d{2}){4}$/", $phone)){
+        return true;
+    }
+    return false;
 }
 
 function parseDate(string $date){

@@ -11,6 +11,11 @@
         <input class="form-control verifname" type="text" id="last_name" name="last_name" placeholder="" required>
         <label for="last_name">Nom :</label>
     </div>
+
+    <div class="mb-3 form-floating">
+        <input class="form-control" type="text" id="school" name="school" placeholder="" required>
+        <label for="school">Etablissement scolaire :</label>
+    </div>
     <div class="mb-3 form-floating">
         <input class="form-control verifpass" type="password" id="pass" name="pass" placeholder="" required>
         <label for="pass">Mot de passe : </label>

@@ -13,79 +13,91 @@ class UserController extends Controller
         $this->action_my_account();
     }
 
-    public function action_generateStands(){
-        if (isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
-            StandModel::getModel()->generateStands();
-            $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand()]);
-        } else {
-            $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
-        }
-    }
-
     public function action_gestion(){
         if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
-            $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand()]);
+            $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand(), 'user' => unserialize($_SESSION['user'])]);
         }
         else {
-            $this->action_error("Vous n'avez pas les droits pour accéder à cette page", 444);
+            $this->action_error("Vous n'avez pas les droits pour accéder à cette page");
         }
     }
 
+    public function action_exposant(){
+        $this->render('exposant',['stands' => StandModel::getModel()->getAllStand(), 'user' => unserialize($_SESSION['user'])]);
+    }
 
     public function action_changeFirstName(){
-        if(isset($_POST['name']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
-            $user = unserialize($_SESSION['user']);
-            $user->getPersonalData()['first_name'] = $_POST['name'];
-            $user->save();
-            $_SESSION['user'] = serialize($user);
-            $this->render('my_account', ['user' => $user]);
+        if(isset($_POST['name']) && unserialize($_SESSION['user'])->getRole() === Role::PROFESSOR){
+            if(is_valid_name($_POST['name'])){
+                $user = unserialize($_SESSION['user']);
+                $pdata = $user->getPersonalData();
+                $pdata['first_name'] = $_POST['name'];
+                $user->setPersonalData($pdata);
+                $user->save();
+                $_SESSION['user'] = serialize($user);
+                $this->action_my_account();
+            }
+            else{
+                $this->action_error("Le nom n'est pas valide");
+            }
         }
         else {
-            $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
+            $this->action_error("Vous n'avez pas les droits pour effectuer cette action");
         }
     }
 
     public function action_changeLastName(){
-        if(isset($_POST['name']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
-            if(unserialize($_SESSION['user'])->getRole() === Role::PROFESSOR){
+        if(isset($_POST['name']) && unserialize($_SESSION['user'])->getRole() === Role::PROFESSOR){
+            if(is_valid_name($_POST['name'])){
                 $user = unserialize($_SESSION['user']);
-                $user->getPersonalData()['last_name'] = $_POST['name'];
+                $pdata = $user->getPersonalData();
+                $pdata['last_name'] = $_POST['name'];
+                $user->setPersonalData($pdata);
                 $user->save();
                 $_SESSION['user'] = serialize($user);
-                $this->render('my_account', ['user' => $user]);
+                $this->action_my_account();
             }
             else {
-                $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
+                $this->action_error("Le nom n'est pas valide");
             }
         }
         else {
-            $this->action_error("NAME NON DEFINI", 444);
+            $this->action_error("Vous n'avez pas les droits pour effectuer cette action");
         }
     }
 
     public function action_changePhone(){
-        if(isset($_POST['phone']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
-            $user = unserialize($_SESSION['user']);
-            $user->getPersonalData()['phone'] = $_POST['phone'];
-            $user->save();
-            $_SESSION['user'] = serialize($user);
-            $this->render('my_account', ['user' => $user]);
+        if(isset($_POST['phone']) && unserialize($_SESSION['user'])->getRole() === Role::PROFESSOR){
+            if(is_valid_phone($_POST['phone'])){
+                $user = unserialize($_SESSION['user']);
+                $pdata = $user->getPersonalData();
+                $pdata['phone'] = $_POST['phone'];
+                $user->setPersonalData($pdata);
+                $user->save();
+                $_SESSION['user'] = serialize($user);
+                $this->action_my_account();
+            }
+            else {
+                $this->action_error("Le numéro de téléphone n'est pas valide");
+            }
         }
         else {
-            $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
+            $this->action_error("Vous n'avez pas les droits pour effectuer cette action");
         }
     }
 
     public function action_changeSchool(){
-        if(isset($_POST['school']) && unserialize($_SESSION['user']) === Role::PROFESSOR){
+        if(isset($_POST['school']) && unserialize($_SESSION['user'])->getRole() === Role::PROFESSOR){
             $user = unserialize($_SESSION['user']);
-            $user->getPersonalData()['school'] = $_POST['school'];
+            $pdata = $user->getPersonalData();
+            $pdata['school'] = $_POST['school'];
+            $user->setPersonalData($pdata);
             $user->save();
             $_SESSION['user'] = serialize($user);
-            $this->render('my_account', ['user' => $user]);
+            $this->action_my_account();
         }
         else {
-            $this->action_error("Vous n'avez pas les droits pour effectuer cette action", 444);
+            $this->action_error("Vous n'avez pas les droits pour effectuer cette action");
         }
     }
 
@@ -100,15 +112,15 @@ class UserController extends Controller
                     $this->action_my_account();
                 }
                 else {
-                    $this->action_error("L'ancien mot de passe est incorrect", 444);
+                    $this->action_error("L'ancien mot de passe est incorrect");
                 }
             }
             else {
-                $this->action_error("Les mots de passe ne correspondent pas", 444);
+                $this->action_error("Les mots de passe ne correspondent pas");
             }
         }
         else {
-            $this->action_error("Erreur dans les données envoyées", 444);
+            $this->action_error("Erreur dans les données envoyées");
         }
     }
 
@@ -119,22 +131,24 @@ class UserController extends Controller
                 if(password_verify($_POST['pass'], $user->getPassHash())){
                     $user->setConnexionID($_POST['email']);
                     if($user->getRole() === Role::PROFESSOR && $user->getPersonalData() !== null){
-                        $user->getPersonalData()['email'] = $_POST['email'];
+                        $pdata = $user->getPersonalData();
+                        $pdata['email'] = $_POST['email'];
+                        $user->setPersonalData($pdata);
                     }
                     $user->save();
                     $_SESSION['user'] = serialize($user);
                     $this->action_my_account();
                 }
                 else {
-                    $this->action_error("Le mot de passe est incorrect", 444);
+                    $this->action_error("Le mot de passe est incorrect");
                 }
             }
             else {
-                $this->action_error("Le mot de passe est incorrect", 444);
+                $this->action_error("Le mot de passe est incorrect");
             }
         }
         else {
-            $this->action_error("L'adresse email est incorrecte", 444);
+            $this->action_error("L'adresse email est incorrecte");
         }
     }
 
@@ -145,19 +159,19 @@ class UserController extends Controller
     {
         if(!isset($_SESSION['user'])){
             if(!isset($_COOKIE['user'])){
-                $this->action_error("Vous n'êtes pas connecté !", 444);
+                $this->action_error("Vous n'êtes pas connecté !");
                 return;
             }
             else {
                 $user = unserialize($_COOKIE['user']);
                 if($user == null){
-                    $this->action_error("Vous n'êtes pas connecté !", 444);
+                    $this->action_error("Vous n'êtes pas connecté !");
                     return;
                 }
                 else {
                     $user = UserModel::getModel()->getUser($user->getID());
                     if($user == null){
-                        $this->action_error("Impossible de d'accéder à votre compte", 444);
+                        $this->action_error("Impossible de d'accéder à votre compte");
                         return;
                     }
                     else {
@@ -169,7 +183,7 @@ class UserController extends Controller
         else {
             $user = unserialize($_SESSION['user']);
             if($user == null){
-                $this->action_error("Vous n'êtes pas connecté !", 444);
+                $this->action_error("Vous n'êtes pas connecté !");
                 return;
             }
         }
@@ -190,21 +204,28 @@ class UserController extends Controller
                         if(isset($_POST['remember']) && $_POST['remember'] == "on"){
                             setcookie('user', serialize($user), time() + 3600 * 24 * 30, '/', '', true, true);
                         }
-                        $this->render('home');
+                        if(unserialize($_SESSION['user'])->getRole() === Role::PROFESSOR){
+                            $this->action_my_account();
+                        }
+                        else {
+                            $this->action_gestion();
+                        }
                     }
                     else {
-                        $this->action_error('Mot de passe incorrect', 444);
+                        $this->action_error('Mot de passe incorrect');
                     }
                 }
                 else {
-                    $this->action_error('Adresse mail inconnue', 444);
+                    $this->action_error('Adresse mail inconnue');
                 }
             }
             else {
-                $this->action_error('Adresse mail ou mot de passe invalide', 444);
+                $this->action_error('Adresse mail ou mot de passe invalide');
             }
         }
-        $this->action_error('Adresse mail non spécifiée', 444);
+        else {
+            $this->action_error('Adresse mail non spécifiée');
+        }
     }
 
     /**
@@ -228,11 +249,11 @@ class UserController extends Controller
             $mail = strtolower($_POST['email']);
             if(is_valid_email($mail)
                 && isset($_POST['pass']) && isset($_POST['pass_confirm']) && $_POST['pass'] === $_POST['pass_confirm'] &&
-                isset($_POST['last_name']) && isset($_POST['first_name']) && is_valid_name($_POST['last_name']) && is_valid_name($_POST['first_name']) && isset($_POST['cgu_accept']) && $_POST['cgu_accept'] === 'on'){
+                isset($_POST['last_name']) && isset($_POST['first_name']) && isset($_POST['school']) && is_valid_name($_POST['last_name']) && is_valid_name($_POST['first_name']) && isset($_POST['cgu_accept']) && $_POST['cgu_accept'] === 'on'){
 
                 if(CAPTCHA_ENABLED){
                     if(!isset($_POST['h-captcha-response'])){
-                        $this->action_error('Captcha invalide', 444);
+                        $this->action_error('Captcha invalide');
                         return;
                     }
                     $secret = parse_ini_file("../hcaptcha.ini")['secret'];
@@ -264,22 +285,22 @@ class UserController extends Controller
                         }
                     }
                     else {
-                        $this->action_error('Erreur dans la vérification du Captcha', 444);
+                        $this->action_error('Erreur dans la vérification du Captcha');
                     }
                 }
                 elseif(UserModel::getModel()->getUserByConnexionID($mail) == null) {
                     $this->initUser($mail);
                 }
                 else {
-                    $this->action_error("Adresse mail déjà utilisée", 444);
+                    $this->action_error("Adresse mail déjà utilisée");
                 }
             }
             else {
-                $this->action_error('Formulaire invalide', 444);
+                $this->action_error('Formulaire invalide');
             }
         }
         else {
-            $this->action_error("Adresse mail non spécifiée", 444);
+            $this->action_error("Adresse mail non spécifiée");
         }
     }
 
@@ -292,11 +313,12 @@ class UserController extends Controller
         $user->setRole(Role::PROFESSOR);
         $lastName = $_POST['last_name'];
         $firstName = $_POST['first_name'];
-        $pdata = ['last_name' => $lastName, 'first_name' => $firstName, 'email' => $mail, 'phone' => null, 'school' => null];
+        $school = $_POST['school'];
+        $pdata = ['last_name' => $lastName, 'first_name' => $firstName, 'email' => $mail, 'phone' => null, 'school' => $school];
         $user->setPersonalData($pdata);
         $user->save();
         $_SESSION['user'] = serialize($user);
-        $this->render("home");
+        $this->action_my_account();
     }
 
 }
