@@ -1,11 +1,11 @@
-<nav class="fixed-top d-flex mb-3 navbar bg-body-tertiary bg-white">
+<nav class="fixed-top d-flex mb-3 navbar bg-body-tertiary border-bottom" style="background-color: #007ea7;">
     <div class="container-fluid">
         <a class="navbar-brand" href="https://salon-math.fr/" target="_blank">
-            <img src="public/images/Logo-bleu.png" alt="Bootstrap" width="110" height="50">
+            <img src="public/images/Logo-blanc.png" alt="Bootstrap" width="110" height="50">
         </a>
         <a class="btn btn-primary"  href="index.php" role="button">Accueil</a>
         <a class="ms-auto p-3 nav-item" role="button" aria-expanded="true" aria-controls="collapseMenu" data-bs-toggle="collapse" data-bs-target="#collapseMenu" alt="mon_compte" >
-            <svg width="30" height="30" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg width="30" height="30" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8Zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 0 1-2 0 3 3 0 0 0-3-3H8Z"></path>
             </svg>
         </a>
