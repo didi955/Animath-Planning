@@ -1,8 +1,12 @@
 <?php
-class ReservationModel {
+
+class ReservationModel
+{
     private static $instance = null;
 
-    private function __construct(){}
+    private function __construct()
+    {
+    }
 
     public static function getModel()
     {
@@ -12,30 +16,34 @@ class ReservationModel {
         return self::$instance;
     }
 
- public function getReservation($id_user){
-     if(!$this->isInDatabase($id_user)){
-         return null;
-     }
-     $req = DatabaseModel::getModel()->getBD()->prepare('SELECT * FROM "Stand" WHERE id_user=:id_user');
-     $req->bindValue(":id_user", $id_user);
-     $req->execute();
-     $rs = $req->fetch(PDO::FETCH_ASSOC);
-     if(!$rs){
-         return null;
-     }
-     $activities = ActivitiesModel::getModel()->getAllActivitiesByStand($id_user);
-     return $this->buildStand($rs, $activities);
- }
-
-
-    public function isInDatabase($id_user){
-        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT id FROM "Stand" WHERE id_user= :id_user');
+    public function getReservation($id_user)
+    {
+        if (!$this->isInDatabase($id_user)) {
+            return null;
+        }
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT * FROM "Appointement" WHERE id_user=:id_user');
         $req->bindValue(":id_user", $id_user);
         $req->execute();
+        $rs = $req->fetch(PDO::FETCH_ASSOC);
+        if (!$rs) {
+            return null;
+        }
+        $activities = ActivitiesModel::getModel()->getAllActivitiesByStand($id_user);
+        return $this->buildStand($rs, $activity);
+    }
+
+
+    public function isInDatabase($id_user,$id_activity)
+    {
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT id FROM "Appointement" WHERE id_user= :id_user AND id_activity = :id_activity');
+        $req->bindValue(":id_user", $id_user);
+        $req->bindValue(":id_activity", $id_activity);
+        $req->execute();
         $rs = $req->fetch();
-        if($rs){
+        if ($rs) {
             return true;
         }
         return false;
     }
+
 }

@@ -1,28 +1,22 @@
-
 <?php
 
 class Reservation
 {
-private $id_user ;
 
-private $id_activity;
+    private $id_user ;
 
-private $nb_student;
 
-private $student_level;
+    private $nb_student;
 
-private $start;
+    private $student_level;
 
-private $end;
+   private $activity;
 
-private $debut;
 
-private $fin;
+    public function __construct()
+    {
 
-public function __construct()
-{
-
-}
+    }
 
     public function getIdUser()
     {
@@ -32,18 +26,6 @@ public function __construct()
     public function setIdUser($id_user): void
     {
         $this->id_user = $id_user;
-    }
-
-
-    public function getIdActivity()
-    {
-        return $this->id_activity;
-    }
-
-
-    public function setIdActivity($id_activity): void
-    {
-        $this->id_activity = $id_activity;
     }
 
 
@@ -71,40 +53,18 @@ public function __construct()
     }
 
 
-    public function getStart()
+    public function getActivity()
     {
-        return $this->start;
+        return $this->activity;
     }
 
 
-    public function getEnd()
+    public function setActivity($activity): void
     {
-        return $this->end;
+        $this->activity = $activity;
     }
 
 
-    public function getDebut()
-    {
-        return $this->debut;
-    }
-
-
-    public function setDebut($debut): void
-    {
-        $this->debut = $debut;
-    }
-
-
-    public function getFin()
-    {
-        return $this->fin;
-    }
-
-
-    public function setFin($fin): void
-    {
-        $this->fin = $fin;
-    }
 
 
 
