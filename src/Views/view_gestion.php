@@ -18,8 +18,25 @@ include_once "view_topbar.php";
         </div>
     </div>
 </div>
-<div>
 
+
+<div class="container shadow border text-center">
+    <ul class="nav nav-justified gap-3 p-1">
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#InfoPerso" type="button" role="tab" aria-controls="InfoPerso" aria-selected="true">Paramètres</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#gestionStand" type="button" role="tab" aria-controls="gestionStand" aria-selected="true">Gestion des stands</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade show" id="InfoPerso">
+
+        </div>
+        <div  class="tab-pane fade" id="gestionStand">
+            <?php include_once "Layouts/supervisor/gestionStand.php"?>
+        </div>
+
+    </div>
 </div>
-<?php include_once "Layouts/supervisor/gestionStand.php"?>
 
