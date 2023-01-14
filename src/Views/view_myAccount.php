@@ -25,7 +25,7 @@ include 'Layouts/modifierProf.php'
 </div>
 
 <div class="container shadow border text-center bg-light" style="width:69%">
-    <ul class="nav nav-justified gap-3 p-1">
+    <ul class="nav nav-justified gap-3 p-1 border-bottom">
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#accordionInfoPerso" type="button" role="tab" aria-controls="accordionInfoPerso" aria-selected="true">Paramètres</a>
         </li>
