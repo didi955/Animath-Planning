@@ -1,39 +1,16 @@
+<div class="">
+    <form method="get" action="">
+        <h2 class="pb-3" style="text-align: left;">Quel est le niveau de vos élèves :</h2>
+        <select class="form-select" aria-label="Default select example" name="stud_level">
+            <option selected>--Choisissez le niveau de vos élèves--</option>
+            <option value="p">Primaire</option>
+            <option value="c">Collège</option>
+            <option value="l">Lycée</option>
+        </select>
+        <h2 class="pt-4 pb-3" style="text-align: left">Choissiez vos horaires pour la journée :</h2>
+        <label class="fs-3" style="text-align: left" for="meeting-time">Début :</label><input class="fs-4 w-100 h-30" type="datetime-local" id="meeting-time"
+                                                 name="meeting-time" value="2023-05-25T07:00"
+                                                 min="2023-05-25T07:00" max="2023-05-26T19:00">
+    </form>
 
-
-<h1 >
-    Choisissez vos horaires :
-</h1>
-
-
-<div class="date">
-    <div class="data-debut">
-        <label for="start-date">Horaire de début :</label>
-        <input type="datetime-local" id="start-date"
-               name="meeting-time" value="2018-06-12T19:30"
-               min="2018-06-07T00:00" max="2018-06-14T00:00">
-    </div>
-    <div class="data-fin">
-        <label for="end-date">Horaire de fin:</label>
-        <input type="datetime-local" id="end-date"
-               name="meeting-time" value="2018-06-12T19:30"
-               min="2018-06-07T00:00" max="2018-06-14T00:00">
-
-    </div>
 </div>
-
-<h1>
-    Choisissez le nombre d'élèves :
-</h1>
-
-<div class="form-group col-md-4">
-    <label for="inputState">Nombres d'élèves</label>
-    <select id="inputState" class="form-control">
-        <option selected>...</option>
-        <?php
-        for ($i = 1; $i <= 30; $i++) {
-            echo "<option>$i</option>";
-        }
-        ?>
-    </select>
-</div>
-

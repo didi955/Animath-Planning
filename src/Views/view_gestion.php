@@ -3,7 +3,7 @@ include_once "view_topbar.php";
 ?>
 <style>
     body {
-        background: url("public/images/AnimathBlur.png") no-repeat fixed center center;
+        background: url("public/images/main-logo2-blur.png") no-repeat fixed center center;
     }
 </style>
 <script src="public/js/fullcalendar-6.0.0/dist/index.global.js">
