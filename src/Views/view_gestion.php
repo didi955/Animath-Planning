@@ -35,12 +35,12 @@ include_once "view_topbar.php";
         </li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane fade show accordion m-3" id="InfoPerso">
+        <div class="tab-pane fade" id="InfoPerso">
+            <?php include_once "Layouts/personalDataSup.php"?>
         </div>
         <div  class="tab-pane fade" id="gestionStand">
             <?php include_once "Layouts/supervisor/gestionStand.php"?>
         </div>
-
     </div>
 </div>
 
