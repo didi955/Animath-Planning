@@ -33,12 +33,18 @@ include "view_topbar.php";
         </select>
     </div>
 </div>
+<div class="tab-content">
     <?php foreach($stands as $stand):
         $activities = $stand->getActivities();
         $id = $stand->getId();
         $title = $stand->getTitle();
-        foreach ()
         ?>
+
+
+    <div class="tab-pane fade  accordion m-3" id="accordionStand<?php echo e($id)?>">
+        <div class="h-100" id="calendar<?php echo e("$id") ?>">
+        </div>
+    </div>
 
 
     <script>
@@ -86,6 +92,7 @@ include "view_topbar.php";
     </script>
 
     <?php endforeach;?>
+</div>
 
 
 
