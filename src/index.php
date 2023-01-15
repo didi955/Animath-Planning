@@ -22,7 +22,7 @@ require_once "Controllers/Controller.php";
 require_once "Layouts/header.php";
 
 //Liste des contrôleurs
-$controllers = ["Home", "User", "Activities"];
+$controllers = ["Home", "User", "Activities", "Reservation"];
 //Nom du contrôleur par défaut5
 $controller_default = "Home";
 
