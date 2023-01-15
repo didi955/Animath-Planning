@@ -27,8 +27,68 @@ include "view_topbar.php";
         <select class="text-center w-50 form-select" aria-label="Default select example">
             <option selected>--Choisissez un stand--</option>
             <?php foreach($stands as $stand):?>
-                <option value="<?php echo e($stand->getTitle()) ?>"><?php echo e($stand->getTitle()) ?></option>
+                <option value="<?php echo e($stand->getId()) ?>"><?php echo e($stand->getTitle()) ?></option>
             <?php endforeach;?>
+
         </select>
     </div>
 </div>
+    <?php foreach($stands as $stand):
+        $activities = $stand->getActivities();
+        $id = $stand->getId();
+        $title = $stand->getTitle();
+        foreach ()
+        ?>
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            let calendarEl = document.getElementById('calendar<?php echo e("$id") ?>');
+            let calendar = new FullCalendar.Calendar(calendarEl, {
+                themeSystem: 'bootstrap5',
+                initialDate: '2023-05-25',
+                initialView: 'timeGridDay',
+                locale: 'fr',
+                editable: false,
+                snapDuration: '00:15:00',
+                allDaySlot: false,
+                slotMinTime: '09:00:00',
+                slotMaxTime: '18:15:00',
+                slotDuration: '00:15:00',
+                eventClick: function (info){
+                    let modal = document.getElementById("suppr"+info.event.id);
+                    modal.classList.add("show")
+                    modal.style.display = "block";
+                },
+                events: [
+                    <?php foreach ($activities as $activity):
+                    $start = $activity->getStart();
+                    $end = $activity->getEnd();
+                    $capacity = $activity->getCapacity();
+                    $student_level = $activity->getStudentLevel();
+                    $idact = $activity->getId();
+                    ?>
+                    {
+                        id: <?php echo e($idact) ?>,
+                        title: '<?php echo e("$title") ?>',
+                        start: '<?php echo e("$start") ?>',
+                        end: '<?php echo e("$end") ?>',
+                        capacity: '<?php echo e("$capacity") ?>',
+                        studentLevel: '<?php echo e("$student_level") ?>'
+                    },
+                    <?php endforeach;?>
+                ]
+            });
+            calendar.render();
+        });
+
+    </script>
+
+    <?php endforeach;?>
+
+
+
+
+
+
