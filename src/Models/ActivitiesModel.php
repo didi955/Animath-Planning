@@ -88,7 +88,7 @@ class ActivitiesModel
             $date2 = DateUtil::create("2023-05-26",9,0);
             $datefin2 = DateUtil::create("2023-05-26",9,0);
             $nbanimvendredi = $val->getNbAnimVendredi();
-            for($i = 0;$i>$nbanimvendredi;$i++){
+            for($i = 0;$i<$nbanimvendredi;$i++){
                 $date2->default();
                 $datefin2->default();
                 while ($datefin2->compare("18:00")===-1){
