@@ -58,6 +58,18 @@ class ReservationModel
         return $res;
     }
 
+    public function getReservationByStand($id){
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT  a.id_user, p.email, a.nb_student, a.student_level, a.id_activity FROM "Activities" as act natural join "Appointement" as a natural join "PersonalData" as p WHERE act.stand = :id');
+        $req->bindValue(":id", $id);
+        $req->execute();
+        $rs = $req->fetchAll(PDO::FETCH_ASSOC);
+        $res = [];
+        foreach ($rs as $reser){
+            $res[] = $this->buildReservation($reser);
+        }
+        return $res;
+    }
+
     public function isInDatabase($id_user,$id_activity): bool
     {
         $req = DatabaseModel::getModel()->getBD()->prepare('SELECT id FROM "Appointement" WHERE id_user= :id_user AND id_activity = :id_activity');

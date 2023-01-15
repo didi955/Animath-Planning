@@ -35,7 +35,7 @@ class ActivitiesModel
         $rs = $req->fetchAll(PDO::FETCH_ASSOC);
         $acts = [];
         foreach ($rs as $act){
-            $acts[]=$this->buildActivities($act,ReservationModel::getModel()->getReservationByActivity($act['id']));
+            $acts[]=$this->buildActivitiesWoRes($act);
         }
         return $acts;
     }

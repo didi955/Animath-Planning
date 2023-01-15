@@ -40,6 +40,14 @@ class StandModel
             return null;
         }
         $activities = ActivitiesModel::getModel()->getAllActivitiesByStand($id);
+        $reservations = ReservationModel::getModel()->getReservationByStand($id);
+        foreach($activities as $activity){
+            foreach ($reservations as $reservation){
+                if($reservation->getIdActivity() == $activity->getId()){
+                    $activity->setReservations($reservation);
+                }
+            }
+        }
         return $this->buildStand($rs, $activities);
     }
 
