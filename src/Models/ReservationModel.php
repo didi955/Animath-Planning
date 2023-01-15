@@ -30,7 +30,7 @@ class ReservationModel
             return null;
         }
         $activity = ActivitiesModel::getModel()->getActivities($id_activity);
-        return $this->buildReservation($rs,$activity);
+        return $this->buildReservation($rs);
     }
 
     public function getReservationByActivity($id_activity): array
@@ -40,9 +40,8 @@ class ReservationModel
         $req->execute();
         $rs = $req->fetchAll(PDO::FETCH_ASSOC);
         $res = [];
-        $activity = ActivitiesModel::getModel()->getActivities($id_activity);
         foreach ($rs as $reser){
-            $res[] = $this->buildReservation($reser,$activity);
+            $res[] = $this->buildReservation($reser);
         }
         return $res;
     }
@@ -55,7 +54,7 @@ class ReservationModel
         $rs = $req->fetchAll(PDO::FETCH_ASSOC);
         $res = [];
         foreach ($rs as $reser){
-            $res[] = $this->buildReservation($reser,ActivitiesModel::getModel()->getActivities($reser['id_activity']));
+            $res[] = $this->buildReservation($reser);
         }
         return $res;
     }
@@ -73,7 +72,7 @@ class ReservationModel
         return false;
     }
 
-    private function buildReservation($rs,$activity): Reservation
+    private function buildReservation($rs): Reservation
     {
         $res = new Reservation();
         if(isset($rs['id_user'])){
@@ -85,8 +84,8 @@ class ReservationModel
         if(isset($rs['student_level'])){
             $res->setStudentLevel($rs['student_level']);
         }
-        if(isset($activity)){
-            $res->setActivity($activity);
+        if(isset($rs['id_activity'])){
+            $res->setIdActivity($rs['id_activity']);
         }
         return $res;
     }

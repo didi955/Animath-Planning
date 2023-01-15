@@ -12,7 +12,7 @@ class Reservation
 
     private $student_level;
 
-   private $activity;
+   private $id_activity;
 
 
     public function __construct()
@@ -55,15 +55,15 @@ class Reservation
     }
 
 
-    public function getActivity()
+    public function getIdActivity()
     {
-        return $this->activity;
+        return $this->id_activity;
     }
 
 
-    public function setActivity($activity): void
+    public function setIdActivity($activity): void
     {
-        $this->activity = $activity;
+        $this->id_activity = $activity;
     }
 
 

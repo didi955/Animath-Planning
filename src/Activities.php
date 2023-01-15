@@ -14,6 +14,8 @@ class Activities
 
     private $capacity;
 
+    private $reservations;
+
     public function __construct()
     {
     }
@@ -80,5 +82,14 @@ class Activities
         $this->capacity = $capacity;
     }
 
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+
+    public function setReservations($reservations): void
+    {
+        $this->reservations = $reservations;
+    }
 
 }
