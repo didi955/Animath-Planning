@@ -66,34 +66,44 @@ class ActivitiesModel
             set_time_limit(10);
             $date = DateUtil::create("2023-05-25",9,0);
             $datefin = DateUtil::create("2023-05-25",9,0);
-            while ($datefin->compare("18:00")===-1){
-                $datefin->addMin($val->getDuree());
-                if ($date->isValid($val->getPauseStart(),$val->getPauseEnd()) and $datefin->isValid($val->getPauseStart(),$val->getPauseEnd()) and !$date->isInterval($datefin,$val->getPauseStart(),$val->getPauseEnd())) {
-                    $act = ['stand' => $val->getId(), 'start' => $date->format(), 'end' => $datefin->format(), 'student_level' => $val->getStudentLevel(), 'capacity' => $val->getCapacity()];
-                    $activities[] = self::getModel()->buildActivitiesWoRes($act);
-                    $date->addMin($val->getDuree());
-                    $date->addMin($val->getInter());
-                    $datefin->addMin($val->getInter());
-                }
-                else{
-                    $date->default($val->getPauseEnd());
-                    $datefin->default($val->getPauseEnd());
+            $nbanimjeudi = $val->getNbAnimJeudi();
+            for($i = 0;$i<$nbanimjeudi;$i++){
+                $date->default();
+                $datefin->default();
+                while ($datefin->compare("18:00")===-1){
+                    $datefin->addMin($val->getDuree());
+                    if ($date->isValid($val->getPauseStart(),$val->getPauseEnd()) and $datefin->isValid($val->getPauseStart(),$val->getPauseEnd()) and !$date->isInterval($datefin,$val->getPauseStart(),$val->getPauseEnd())) {
+                        $act = ['stand' => $val->getId(), 'start' => $date->format(), 'end' => $datefin->format(), 'student_level' => $val->getStudentLevel(), 'capacity' => intdiv($val->getCapacity(),$nbanimjeudi)];
+                        $activities[] = self::getModel()->buildActivitiesWoRes($act);
+                        $date->addMin($val->getDuree());
+                        $date->addMin($val->getInter());
+                        $datefin->addMin($val->getInter());
+                    }
+                    else{
+                        $date->default($val->getPauseEnd());
+                        $datefin->default($val->getPauseEnd());
+                    }
                 }
             }
             $date2 = DateUtil::create("2023-05-26",9,0);
             $datefin2 = DateUtil::create("2023-05-26",9,0);
-            while ($datefin2->compare("18:00")===-1){
-                $datefin2->addMin($val->getDuree());
-                if ($date2->isValid($val->getPauseStart(),$val->getPauseEnd()) and $datefin2->isValid($val->getPauseStart(),$val->getPauseEnd()) and !$date2->isInterval($datefin2,$val->getPauseStart(),$val->getPauseEnd())) {
-                    $act = ['stand' => $val->getId(), 'start' => $date2->format(), 'end' => $datefin2->format(), 'student_level' => $val->getStudentLevel(), 'capacity' => $val->getCapacity()];
-                    $activities[] = self::getModel()->buildActivitiesWoRes($act);
-                    $date2->addMin($val->getDuree());
-                    $date2->addMin($val->getInter());
-                    $datefin2->addMin($val->getInter());
-                }
-                else{
-                    $date2->default($val->getPauseEnd());
-                    $datefin2->default($val->getPauseEnd());
+            $nbanimvendredi = $val->getNbAnimVendredi();
+            for($i = 0;$i>$nbanimvendredi;$i++){
+                $date2->default();
+                $datefin2->default();
+                while ($datefin2->compare("18:00")===-1){
+                    $datefin2->addMin($val->getDuree());
+                    if ($date2->isValid($val->getPauseStart(),$val->getPauseEnd()) and $datefin2->isValid($val->getPauseStart(),$val->getPauseEnd()) and !$date2->isInterval($datefin2,$val->getPauseStart(),$val->getPauseEnd())) {
+                        $act = ['stand' => $val->getId(), 'start' => $date2->format(), 'end' => $datefin2->format(), 'student_level' => $val->getStudentLevel(), 'capacity' => intdiv($val->getCapacity(),$nbanimvendredi)];
+                        $activities[] = self::getModel()->buildActivitiesWoRes($act);
+                        $date2->addMin($val->getDuree());
+                        $date2->addMin($val->getInter());
+                        $datefin2->addMin($val->getInter());
+                    }
+                    else{
+                        $date2->default($val->getPauseEnd());
+                        $datefin2->default($val->getPauseEnd());
+                    }
                 }
             }
         }

@@ -67,7 +67,7 @@ CREATE TABLE "Activities"(
                              "end" VARCHAR NOT NULL,
                              "student_level" VARCHAR(40) NOT NULL,
                              "capacity" INT NOT NULL,
-                             primary key ("stand","start")
+                             primary key ("id")
 );
 
 CREATE TABLE "LogUser"(
