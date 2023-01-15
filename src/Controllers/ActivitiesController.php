@@ -89,6 +89,9 @@ class ActivitiesController extends Controller
         if(isset($_POST['$id'])){
             ActivitiesModel::getModel()->remove($_POST['$id']);
         }
+        else{
+            echo "C'est pas bon";
+        }
     }
 
 }
