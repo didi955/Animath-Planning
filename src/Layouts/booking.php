@@ -1,5 +1,5 @@
 <div class="">
-    <form method="post" action="?controller=Reservation&action=create">
+    <form method="get" action="?controller=Reservation&action=filter">
         <div class= "pb-4">
         <h4 class="pb-1"  style="text-align: left;">Quel est le niveau de vos élèves ?</h4>
         <select class="form-select w-50" aria-label="Default select example" name="stud_level">
@@ -12,13 +12,11 @@
 
         <div class="border-2 border-bottom" style="color: #98c1d9"></div>
         <h4 class="pt-3 pb-1" style="text-align: left">Quelles sont vos disponiblités ?</h4>
-        <label class="fs-7 pt-1" style="justify-content: left" for="meeting-time">Début :</label><input class="fs-6  w-100 h-30" type="datetime-local" id="meeting-time"
-                                                 name="meeting-time_start" value="2023-05-25T07:00"
-                                                 min="2023-05-25T07:00" max="2023-05-26T19:00">
+        <label class="fs-7 pt-1" style="justify-content: left" for="meeting-time">Début :</label>
+        <input class="fs-6  w-100 h-30" type="datetime-local" id="meeting-time" name="meeting-time_start" value="2023-05-25T07:00" min="2023-05-25T07:00" max="2023-05-26T19:00">
 
-        <label class="fs-7" style="justify-content: left" for="meeting-time_end">Fin :</label><input class="fs-6  w-100 h-30" type="datetime-local" id="meeting-time"
-                                                                                                   name="meeting-time" value="2023-05-25T18:00"
-                                                                                                   min="2023-05-25T07:00" max="2023-05-26T19:00">
+        <label class="fs-7" style="justify-content: left" for="meeting-time_end">Fin :</label>
+        <input class="fs-6  w-100 h-30" type="datetime-local" id="meeting-time" name="meeting-time" value="2023-05-25T18:00" min="2023-05-25T07:00" max="2023-05-26T19:00">
         <br><br>
         <div class="border-2 border-bottom"></div>
         <h4 class="pt-3 pb-1" style="text-align: left">Combien d'élèves accompagnez vous?</h4>
