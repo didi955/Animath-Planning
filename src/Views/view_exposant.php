@@ -1,7 +1,8 @@
 <?php
 include "view_topbar.php";
 ?>
-
+<script src="public/js/fullcalendar-6.0.0/dist/index.global.js">
+</script>
 <style>
     body {
         background: url("public/images/main-logo2-blur.png") no-repeat fixed center center;
@@ -48,7 +49,6 @@ include "view_topbar.php";
 
 
     <script>
-
         document.addEventListener('DOMContentLoaded', function() {
             let calendarEl = document.getElementById('calendar<?php echo e("$id") ?>');
             let calendar = new FullCalendar.Calendar(calendarEl, {
