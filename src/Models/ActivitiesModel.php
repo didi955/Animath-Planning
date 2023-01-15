@@ -17,13 +17,16 @@ class ActivitiesModel
         return self::$instance;
     }
 
-    public function getActivities($id){
+    public function getActivities($id, bool $want_reservations = true){
         $req = DatabaseModel::getModel()->getBD()->prepare('SELECT * FROM "Activities" WHERE id=:id');
         $req->bindValue(":id", $id);
         $req->execute();
         $rs = $req->fetch(PDO::FETCH_ASSOC);
         if(!$rs){
             return null;
+        }
+        if($want_reservations === false){
+            return $this->buildActivitiesWoRes($rs);
         }
         return $this->buildActivities($rs,ReservationModel::getModel()->getReservationByActivity($id));
     }
@@ -117,7 +120,7 @@ class ActivitiesModel
         }
     }
 
-    private function buildActivities($rs,$res)
+    private function buildActivities($rs, $res)
     {
         $activities = new Activities();
         if(isset($rs['id'])){

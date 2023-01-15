@@ -37,7 +37,7 @@ include 'Layouts/modifierProf.php'
         <?php endif; ?>
         <?php if($user->getRole() === Role::PROFESSOR): ?>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#planning" type="button" role="tab" aria-controls="planning" aria-selected="true">Mes visites</a>
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#MyVisits" type="button" role="tab" aria-controls="planning" aria-selected="true">Mes visites</a>
             </li>
         <?php endif; ?>
     </ul>
@@ -50,7 +50,9 @@ include 'Layouts/modifierProf.php'
     <div class="tab-pane h-50 fade m-3" id="booking">
         <?php include "Layouts/booking.php"?>
     </div>
-</div>
+    <div class="tab-pane fade m-3" id="MyVisits">
+        <?php include "Layouts/my_visits.php"?>
+    </div>
 </div>
 
 <div class="modal fade" id="addEvent" tabindex="-1" aria-labelledby="addEventLabel" aria-hidden="true">

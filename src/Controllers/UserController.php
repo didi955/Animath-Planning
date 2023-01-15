@@ -1,7 +1,5 @@
 <?php
 
-use Ramsey\Uuid\Nonstandard\Uuid;
-
 class UserController extends Controller
 {
 
@@ -188,7 +186,7 @@ class UserController extends Controller
                 return;
             }
         }
-        $this->render('myAccount', ['user' => $user]);
+        $this->render('myAccount', ['user' => $user, 'appointements' => ReservationModel::getModel()->getMyReservations($user->getID())]);
     }
 
     /**

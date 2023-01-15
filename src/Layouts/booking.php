@@ -1,5 +1,5 @@
 <div class="">
-    <form method="post" action="?controller=Reservation&action=">
+    <form method="post" action="?controller=Reservation&action=create">
         <div class= "pb-4">
         <h4 class="pb-1"  style="text-align: left;">Quel est le niveau de vos élèves ?</h4>
         <select class="form-select w-50" aria-label="Default select example" name="stud_level">

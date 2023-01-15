@@ -17,7 +17,7 @@ class ActivitiesController extends Controller
         if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
             $datas = [];
             try {
-                $stands = ActivitiesModel::getModel()->generateActivities();
+                ActivitiesModel::getModel()->generateActivities();
             }
             catch (PDOException $exception){
                 $datas['err'] = $exception->getMessage();
