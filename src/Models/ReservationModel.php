@@ -16,7 +16,7 @@ class ReservationModel
         return self::$instance;
     }
 
-    public function getReservation($id_user,$id_activity)
+    public function getReservation($id_user,$id_activity): ?Reservation
     {
         if (!$this->isInDatabase($id_user,$id_activity)) {
             return null;
@@ -33,7 +33,8 @@ class ReservationModel
         return $this->buildReservation($rs,$activity);
     }
 
-    public function getReservationByActivity($id_activity){
+    public function getReservationByActivity($id_activity): array
+    {
         $req = DatabaseModel::getModel()->getBD()->prepare('SELECT * FROM "Appointement" WHERE id_activity = :id_activity');
         $req->bindValue(":id_activity", $id_activity);
         $req->execute();
@@ -46,7 +47,8 @@ class ReservationModel
         return $res;
     }
 
-    public function getReservationByUserId($id_user){
+    public function getReservationByUserId($id_user): array
+    {
         $req = DatabaseModel::getModel()->getBD()->prepare('SELECT * FROM "Appointement" WHERE id_user = :id_user');
         $req->bindValue(":id_user", $id_user);
         $req->execute();
@@ -58,7 +60,7 @@ class ReservationModel
         return $res;
     }
 
-    public function isInDatabase($id_user,$id_activity)
+    public function isInDatabase($id_user,$id_activity): bool
     {
         $req = DatabaseModel::getModel()->getBD()->prepare('SELECT id FROM "Appointement" WHERE id_user= :id_user AND id_activity = :id_activity');
         $req->bindValue(":id_user", $id_user);
@@ -71,20 +73,21 @@ class ReservationModel
         return false;
     }
 
-    private function buildReservation($rs,$activity)
+    private function buildReservation($rs,$activity): Reservation
     {
+        $res = new Reservation();
         if(isset($rs['id_user'])){
-
+            $res->setIdUser($rs['id_user']);
         }
         if(isset($rs['nb_student'])){
-
+            $res->setNbStudent($rs['NbStudent']);
         }
         if(isset($rs['student_level'])){
-
+            $res->setStudentLevel($rs['student_level']);
         }
         if(isset($activity)){
-
+            $res->setActivity($activity);
         }
+        return $res;
     }
-
 }
