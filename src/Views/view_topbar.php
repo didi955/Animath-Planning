@@ -1,7 +1,7 @@
 <nav class="fixed-top d-flex mb-3 navbar bg-body-tertiary bg-light border-bottom">
     <div class="container-fluid">
         <a class="navbar-brand" href="https://salon-math.fr/" target="_blank">
-            <img src="public/images/Logo-bleu.png" alt="Bootstrap" width="110" height="50">
+            <img src="public/images/logo-bleu.png" alt="Bootstrap" width="110" height="50">
         </a>
         <a class="btn btn-primary"  href="index.php" role="button">Accueil</a>
         <a class="ms-auto p-3 nav-item" role="button" aria-expanded="true" aria-controls="collapseMenu" data-bs-toggle="collapse" data-bs-target="#collapseMenu" alt="mon_compte" >

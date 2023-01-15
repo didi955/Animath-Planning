@@ -36,7 +36,7 @@ include "view_topbar.php";
         <div class="text-center fs-3 pb-3">Connexion</div>
         <?php if(isset($_SESSION['user'])): ?>
         <div class="container text-center pt-3 pb-3 mt-3 mb-3 fs-5">
-            Vous êtes déjà  connecté
+            Vous êtes déjà connecté
             <br><br>
             <?php if(unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR): ?>
                 <a class="btn btn-primary btn-lg" href="?controller=User&action=gestion">Gestion</a>
