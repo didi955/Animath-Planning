@@ -118,7 +118,7 @@
                 <div class="modal fade mt-5" id="suppr<?php echo("$idact") ?>" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-body text-center" style="height: 45rem">
+                            <div class="modal-body" style="height: 45rem">
                                 Informations du stand :
                                 <div class="mt-3 mb-3 row border-bottom border-top">
                                     <div class="col-4 border-end text-center d-flex align-items-center">
@@ -132,15 +132,26 @@
                                     </div>
                                 </div>
                                 Reservations :
-                                <div class="mt-3 mb-3">
-                                    <?php foreach ($res as $re):?>
-                                        <div>
-                                            <?php echo e($re->getIdUser()."|".$re->getNbStudent()."|".$re->getStudentLevel()) ?>
-                                        </div>
+                                <div class="h-50 overflow-scroll container border border-secondary shadow border-2 row mt-3 mb-3 ms-1">
+                                    <?php foreach ($res as $re):
+                                    $mail = $re->getEmail();
+                                    $level = $re->getStudentLevel();
+                                    $nbs = $re->getNbStudent();
+                                    ?>
+                                    <div class="border-top border-secondary row pt-2 pb-2">
+                                        <span class="col-11">
+                                            Réservé par : <?php echo e("$mail") ?><br>
+                                            Niveau des étudiants : <?php echo e("$level") ?>
+                                            Nombre d'élèves : <?php echo e("$nbs") ?><br>
+                                        </span>
+                                        <span class="col-1">
+                                            <button>X</button>
+                                        </span>
+                                    </div>
                                     <?php endforeach; ?>
                                 </div>
                                 Capacité restante :
-                                <div class="mt-3 mb-3">
+                                <div class="row mt-3 mb-3">
                                     <em>TODO</em>
                                     <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                                         <div class="progress-bar" style="width: 25%">25%</div>

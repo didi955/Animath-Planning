@@ -198,3 +198,8 @@ INSERT INTO "Role" (id,name) VALUES (2,'Professor');
 
 
 INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (2,1,5,'Primaire');
+INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (10,1,5,'Primaire');
+INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (13,1,5,'Primaire');
+INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (9,1,5,'Primaire');
+INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (12,1,5,'Primaire');
+INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (11,1,5,'Primaire');

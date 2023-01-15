@@ -21,7 +21,7 @@ class ReservationModel
         if (!$this->isInDatabase($id_user,$id_activity)) {
             return null;
         }
-        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT * FROM "Appointement" WHERE id_user=:id_user AND id_activity = :id_activity');
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT id_user, email, nb_student, student_level, id_activity  FROM "Appointement" natural join "PersonalData" WHERE id_user=:id_user AND id_activity = :id_activity');
         $req->bindValue(":id_user", $id_user);
         $req->bindValue(":id_activity", $id_activity);
         $req->execute();
@@ -34,7 +34,7 @@ class ReservationModel
 
     public function getReservationByActivity($id_activity): array
     {
-        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT * FROM "Appointement" WHERE id_activity = :id_activity');
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT id_user, email, nb_student, student_level, id_activity  FROM "Appointement" natural join "PersonalData" WHERE id_activity = :id_activity');
         $req->bindValue(":id_activity", $id_activity);
         $req->execute();
         $rs = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -47,7 +47,7 @@ class ReservationModel
 
     public function getReservationByUserId($id_user): array
     {
-        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT * FROM "Appointement" WHERE id_user = :id_user');
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT id_user, email, nb_student, student_level, id_activity  FROM "Appointement" natural join "PersonalData" WHERE id_user = :id_user');
         $req->bindValue(":id_user", $id_user);
         $req->execute();
         $rs = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -76,6 +76,9 @@ class ReservationModel
         $res = new Reservation();
         if(isset($rs['id_user'])){
             $res->setIdUser($rs['id_user']);
+        }
+        if(isset($rs['email'])){
+            $res->setEmail($rs['email']);
         }
         if(isset($rs['nb_student'])){
             $res->setNbStudent($rs['nb_student']);

@@ -5,8 +5,9 @@ class Reservation
 
 
 
-    private $id_user ;
+    private $id_user;
 
+    private $email;
 
     private $nb_student;
 
@@ -30,6 +31,15 @@ class Reservation
         $this->id_user = $id_user;
     }
 
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }
 
     public function getNbStudent()
     {
