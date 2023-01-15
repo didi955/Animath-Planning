@@ -70,7 +70,7 @@ class ActivitiesModel
                 $datefin->addMin($val->getDuree());
                 if ($date->isValid($val->getPauseStart(),$val->getPauseEnd()) and $datefin->isValid($val->getPauseStart(),$val->getPauseEnd()) and !$date->isInterval($datefin,$val->getPauseStart(),$val->getPauseEnd())) {
                     $act = ['stand' => $val->getId(), 'start' => $date->format(), 'end' => $datefin->format(), 'student_level' => $val->getStudentLevel(), 'capacity' => $val->getCapacity()];
-                    $activities[] = self::getModel()->buildActivities($act);
+                    $activities[] = self::getModel()->buildActivitiesWoRes($act);
                     $date->addMin($val->getDuree());
                     $date->addMin($val->getInter());
                     $datefin->addMin($val->getInter());
@@ -157,6 +157,13 @@ class ActivitiesModel
             $activities->setCapacity($rs['capacity']);
         }
         return $activities;
+    }
+
+    public function remove($id)
+    {
+        $req = DatabaseModel::getModel()->getBD()->prepare('DELETE FROM "Activities" where $id=:id');
+        $req->bindValue(":id",$id);
+        $req->execute();
     }
 
 }

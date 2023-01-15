@@ -148,7 +148,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer mt-4"">
-                                <form class="container" action="?controller=Activities&action=remove">
+                                <form class="container" method="post" action="?controller=Activities&action=remove">
                                     <input type="hidden" name="id" value="<?php echo e($idact)?>">
                                     <label for="sub">Voulez vous supprimez cette activité ?</label>
                                     <input class="ms-2 btn btn-primary" type="submit" value="Oui" id="suboui">
