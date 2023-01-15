@@ -115,7 +115,6 @@ class ActivitiesModel
                 throw new PDOException("Problème de chargement");
             }
         }
-        return $stands;
     }
 
     private function buildActivities($rs,$res)
