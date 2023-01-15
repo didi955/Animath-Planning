@@ -133,7 +133,7 @@
                                 </div>
                                 Reservations :
                                 <div class="h-50 overflow-scroll container border border-secondary shadow border-2 row mt-3 mb-3 ms-1">
-                                    <?php foreach ($res as $re):
+                                    <?php if($res != null): foreach ($res as $re):
                                     $mail = $re->getEmail();
                                     $level = $re->getStudentLevel();
                                     $nbs = $re->getNbStudent();
@@ -148,7 +148,7 @@
                                             <button>X</button>
                                         </span>
                                     </div>
-                                    <?php endforeach; ?>
+                                    <?php endforeach;endif; ?>
                                 </div>
                                 Capacité restante :
                                 <div class="row mt-3 mb-3">
