@@ -24,7 +24,8 @@ class DatabaseModel
         $dbname = $credentials['dbname'];
         $user = $credentials['user'];
         $pass = $credentials['pass'];
-        $dsn = "pgsql:host=$host;port=5432;dbname=$dbname;";
+        $port = $credentials['port'];
+        $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;";
         try {
             $this->bd = new PDO($dsn, $user, $pass);
             $this->bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
