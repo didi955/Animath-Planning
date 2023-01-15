@@ -11,11 +11,13 @@ require_once "Utils/Role.php";
 require_once "Models/ActivitiesModel.php";
 require_once "Models/StandModel.php";
 require_once "Stand.php";
+require_once "Reservation.php";
 require_once "User.php";
 require_once "Activities.php";
 require_once "Models/UserModel.php";
 require_once "Models/DatabaseModel.php";
 require_once "Models/ProfessorModel.php";
+require_once "Models/ReservationModel.php";
 require_once "Controllers/Controller.php";
 require_once "Layouts/header.php";
 
