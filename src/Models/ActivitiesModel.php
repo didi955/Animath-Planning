@@ -25,7 +25,7 @@ class ActivitiesModel
         if(!$rs){
             return null;
         }
-        return $this->buildActivities($rs);
+        return $this->buildActivities($rs,ReservationModel::getModel()->getReservationByActivity($id));
     }
 
     public function getAllActivitiesByStand($stand){
@@ -34,10 +34,8 @@ class ActivitiesModel
         $req->execute();
         $rs = $req->fetchAll(PDO::FETCH_ASSOC);
         $acts = [];
-        $i=0;
         foreach ($rs as $act){
-            $acts["$i"]=$this->buildActivities($act);
-            $i += 1;
+            $acts[]=$this->buildActivities($act,ReservationModel::getModel()->getReservationByActivity($act['id']));
         }
         return $acts;
     }
@@ -54,8 +52,6 @@ class ActivitiesModel
         }
     }
 
-
-    // TODO NEED REWORK
     public function generateActivities(){
         try {
             $stands = StandModel::getModel()->generateStands();
@@ -90,7 +86,7 @@ class ActivitiesModel
                 $datefin2->addMin($val->getDuree());
                 if ($date2->isValid($val->getPauseStart(),$val->getPauseEnd()) and $datefin2->isValid($val->getPauseStart(),$val->getPauseEnd()) and !$date2->isInterval($datefin2,$val->getPauseStart(),$val->getPauseEnd())) {
                     $act = ['stand' => $val->getId(), 'start' => $date2->format(), 'end' => $datefin2->format(), 'student_level' => $val->getStudentLevel(), 'capacity' => $val->getCapacity()];
-                    $activities[] = self::getModel()->buildActivities($act);
+                    $activities[] = self::getModel()->buildActivitiesWoRes($act);
                     $date2->addMin($val->getDuree());
                     $date2->addMin($val->getInter());
                     $datefin2->addMin($val->getInter());
@@ -112,7 +108,34 @@ class ActivitiesModel
         return $stands;
     }
 
-    private function buildActivities($rs)
+    private function buildActivities($rs,$res)
+    {
+        $activities = new Activities();
+        if(isset($rs['id'])){
+            $activities->setId($rs['id']);
+        }
+        if(isset($rs['stand'])){
+            $activities->setStand($rs['stand']);
+        }
+        if(isset($rs['start'])){
+            $activities->setStart($rs['start']);
+        }
+        if(isset($rs['end'])){
+            $activities->setEnd($rs['end']);
+        }
+        if(isset($rs['student_level'])){
+            $activities->setStudentLevel($rs['student_level']);
+        }
+        if(isset($rs['capacity'])){
+            $activities->setCapacity($rs['capacity']);
+        }
+        if(isset($res)){
+            $activities->setReservations($res);
+        }
+        return $activities;
+    }
+
+    private function buildActivitiesWoRes($rs)
     {
         $activities = new Activities();
         if(isset($rs['id'])){
