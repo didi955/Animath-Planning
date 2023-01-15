@@ -113,6 +113,7 @@
             $student_level = $activity->getStudentLevel();
             $end = $activity->getEnd();
             $idact = $activity->getId();
+            $res = $activity->getReservations();
             ?>
                 <div class="modal fade mt-5" id="suppr<?php echo("$idact") ?>" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog">
@@ -132,7 +133,11 @@
                                 </div>
                                 Reservations :
                                 <div class="mt-3 mb-3">
-                                    <em>TODO</em>
+                                    <?php foreach ($res as $re):?>
+                                        <div>
+                                            <?php echo e($re->getIdUser()."|".$re->getNbStudent()."|".$re->getStudentLevel()) ?>
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
                                 Capacité restante :
                                 <div class="mt-3 mb-3">

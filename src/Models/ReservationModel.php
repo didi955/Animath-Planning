@@ -29,7 +29,6 @@ class ReservationModel
         if (!$rs) {
             return null;
         }
-        $activity = ActivitiesModel::getModel()->getActivities($id_activity);
         return $this->buildReservation($rs);
     }
 

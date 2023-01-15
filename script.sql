@@ -33,7 +33,7 @@ ALTER TABLE
     "User" ADD PRIMARY KEY("id_user");
 
 CREATE TABLE "PersonalData"(
-                               "id_user" SERIAL NOT NULL,
+                               "id_user" integer NOT NULL,
                                "last_name" VARCHAR(50) NULL,
                                "first_name" VARCHAR(50) NULL,
                                "email" VARCHAR(320) NULL,
@@ -44,7 +44,7 @@ ALTER TABLE
     "PersonalData" ADD PRIMARY KEY("id_user");
 
 CREATE TABLE "Appointement"(
-                               "id_user" Serial NOT NULL,
+                               "id_user" INTEGER NOT NULL,
                                "id_activity" INT NOT NULL,
                                "nb_student" INT NOT NULL,
                                "student_level" VARCHAR(50),
@@ -195,3 +195,6 @@ execute procedure verifAppointement();
 
 INSERT INTO "Role" (id,name) VALUES (1,'Supervisor');
 INSERT INTO "Role" (id,name) VALUES (2,'Professor');
+
+
+INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (2,1,5,'Primaire');
