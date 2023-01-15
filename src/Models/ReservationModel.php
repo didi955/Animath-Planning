@@ -78,7 +78,7 @@ class ReservationModel
             $res->setIdUser($rs['id_user']);
         }
         if(isset($rs['nb_student'])){
-            $res->setNbStudent($rs['NbStudent']);
+            $res->setNbStudent($rs['nb_student']);
         }
         if(isset($rs['student_level'])){
             $res->setStudentLevel($rs['student_level']);
