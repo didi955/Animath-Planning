@@ -1,4 +1,4 @@
-<div class="">
+
     <form method="post" action="?controller=Reservation&action=filter">
         <div class= "pb-4">
         <h4 class="pb-1"  style="text-align: left;">Quel est le niveau de vos élèves ?</h4>
@@ -34,33 +34,38 @@
     </form>
 
     <?php
-        if(isset($activities)):?>
-            <div>
-                <h4 class="pt-3 pb-1" style="text-align: left">Résultats de votre recherche</h4>
-                <div class="row">
-                    <?php foreach ($activities as $activity): ?>
+        if(isset($activities)):
+            $tab = [];
+        ?>
+            <div class="container mt-3">
+                <?php foreach ($activities as $activity):
+                if(!isset($tab["$activity[title]"])):
+                        $tab["$activity[title]"] = 0;
+                ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="HeaderPanel<?= e($activity['stand']) ?>">
+                        <button class="accordion-button bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#Panel<?= e($activity['stand']) ?>" aria-expanded="true" aria-controls="Panel<?= e($activity['stand']) ?>">
+                            <?= e($activity['title']) ?>
+                        </button>
+                    </h2>
+                    <div id="Panel<?= e($activity['stand']) ?>" class="accordion-collapse collapse" aria-labelledby="HeaderPanel<?= e($activity['stand']) ?>">
+                        <?php foreach ($activities as $activity): ?>
                         <?php if((isset($activity['remaining_capacity']) && $activity['remaining_capacity'] > 0) || !isset($activity['remaining_capacity'])): ?>
-                        <div class="col-4">
-                            <div class="card" style="width: 18rem;">
-                                <h5 class="card-title"><?= e($activity['title']) ?></h5>
-                                <div class="card-body">
-                                    <p><?= e($activity['desc']) ?></p>
-                                    <p>Horaire de début: <?= e($activity['start']) ?></p>
-                                    <p>Horaire de fin: <?= e($activity['end']) ?></p>
-                                    <p>Niveau: <?= e($activity['alevel']) ?></p>
-                                    <?php if(isset($activity['remaining_capacity'])): ?>
-                                        <p><?= e($activity['remaining_capacity']) ?> places restantes</p>
-                                    <?php else: ?>
-                                        <p><?= e($activity['capacity']) ?> places restantes</p>
-                                    <?php endif; ?>
-                                </div>
-                                <div class="card-footer">
-                                    <a href="#confirmBooking<?= e($activity['id']) ?>" class="btn btn-primary">Réserver</a>
-                                </div>
-                            </div>
+                        <div class="accordion-body">
+                            <p><?= e($activity['desc']) ?></p>
+                            <p>Horaire de début: <?= e($activity['start']) ?></p>
+                            <p>Horaire de fin: <?= e($activity['end']) ?></p>
+                            <p>Niveau: <?= e($activity['alevel']) ?></p>
+                            <?php if(isset($activity['remaining_capacity'])): ?>
+                                <p><?= e($activity['remaining_capacity']) ?> places restantes</p>
+                            <?php else: ?>
+                                <p><?= e($activity['capacity']) ?> places restantes</p>
+                            <?php endif; ?>
+                            <a href="#confirmBooking<?= e($activity['id']) ?>" class="btn btn-primary">Réserver</a>
                         </div>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
+                        <?php endif; endforeach; ?>
+                    </div>
                 </div>
+                <?php endif; endforeach; ?>
             </div>
         <?php endif; ?>

@@ -42,7 +42,7 @@ include "view_topbar.php";
         ?>
 
 
-    <div class="tab-pane fade  accordion m-3" id="accordionStand<?php echo e($id)?>">
+    <div class="tab-pane fade accordion m-3" id="accordionStand<?php echo e($id)?>">
         <div class="h-100" id="calendar<?php echo e("$id") ?>">
         </div>
     </div>
