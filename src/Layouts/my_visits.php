@@ -13,7 +13,7 @@
                 <p>Horaire de fin: <?=e($app['end'])?></p>
             </div>
             <div class="card-footer p-1">
-                <button class="btn btn-danger" href="<?php echo e("#deleteActivities$id")?>" data-bs-toggle="modal">Supprimer</button>
+                <button class="btn btn-danger" href="<?php echo e("#deleteActivities" . $app['id_activity'])?>" data-bs-toggle="modal">Supprimer</button>
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Détails</button>
         </div>
     <?php endforeach; ?>

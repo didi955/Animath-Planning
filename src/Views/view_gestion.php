@@ -36,10 +36,10 @@ include_once "view_topbar.php";
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade" id="InfoPerso">
-            <?php include_once "Layouts/personalDataSup.php"?>
+            <?php include "Layouts/personalDataSup.php"?>
         </div>
-        <div  class="tab-pane fade" id="gestionStand">
-            <?php include_once "Layouts/supervisor/gestionStand.php"?>
+        <div class="tab-pane fade" id="gestionStand">
+            <?php include "Layouts/supervisor/gestionStand.php"?>
         </div>
     </div>
 </div>

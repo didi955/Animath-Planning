@@ -17,7 +17,7 @@ class ReservationModel
     }
 
     public function getMyReservations($id_user){
-        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT "Appointement".nb_student, "Appointement".student_level, start, "end", title, "desc" FROM "Appointement" INNER JOIN "Activities" A on "Appointement".id_activity = A.id INNER JOIN "Stand" S on A.stand = S.id WHERE id_user=:id_user');
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT "Appointement".id_activity, "Appointement".nb_student, "Appointement".student_level, start, "end", title, "desc" FROM "Appointement" INNER JOIN "Activities" A on "Appointement".id_activity = A.id INNER JOIN "Stand" S on A.stand = S.id WHERE id_user=:id_user');
         $req->bindValue(":id_user", $id_user);
         $req->execute();
         $rs = $req->fetchAll(PDO::FETCH_ASSOC);

@@ -38,7 +38,6 @@
             <div class="col-1">
                 <div class="h-50">
                     <img class="w-25" type="button" data-bs-toggle="modal" href="#MdpModal" src="public/images/modif.png" alt="modif">
-
                 </div>
             </div>
         </div>
