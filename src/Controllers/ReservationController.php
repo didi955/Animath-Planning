@@ -10,9 +10,16 @@ class ReservationController extends Controller
 
     public function action_filter()
     {
-        $filtre = ['level' => $_POST["stud_level"],'start' => $_POST["meeting-time_start"],'end' => $_POST["meeting-time"],'nb'=> $_POST["stud_number"]];
-        var_dump($filtre);
-        echo $filtre["level"];
-        /*$this->render("myAccount",['stand' => StandModel::getModel()->getAllStand(), 'filtre' => $filtre]);*/
+        if(!isset($_SESSION['user'])){
+            $this->render('home');
+        }
+        if(isset($_POST['stud_level']) && isset($_POST['meeting-time_start']) && isset($_POST['meeting-time_end']) && isset($_POST['stud_number'])){
+            $filtre = ['student_level' => $_POST["stud_level"], 'start' => $_POST["meeting-time_start"], 'end' => $_POST["meeting-time_end"], 'nb_student'=> $_POST["stud_number"]];
+            $activities = ActivitiesModel::getModel()->getActivitiesWithFilter($filtre);
+            $this->render("myAccount",['user' => unserialize($_SESSION['user']), 'stand' => StandModel::getModel()->getAllStand(), 'activities' => $activities]);
+        }
+        else {
+            $this->action_error("Veuillez remplir tous les champs");
+        }
     }
 }

@@ -17,6 +17,24 @@ class ActivitiesModel
         return self::$instance;
     }
 
+    public function getActivitiesWithFilter($filter)
+    {
+        $sql = 'SELECT title, "desc", "Activities".id, stand, start, "end", "Activities".student_level alevel, capacity, ("Activities".capacity - (SELECT SUM(nb_student) FROM "Appointement" WHERE id_activity = "Activities".id)) as remaining_capacity
+FROM "Activities" JOIN "Stand" S on S.id = "Activities".stand
+WHERE "Activities".student_level LIKE :level AND start >= :start_time AND "end" <= :end_time';
+        $params = [
+            ':level' => "%" . $filter['student_level'] . "%",
+            ':start_time' => $filter['start'],
+            ':end_time' => $filter['end']
+        ];
+        $req = DatabaseModel::getModel()->getBD()->prepare($sql);
+        $req->bindValue(':level', $params[':level']);
+        $req->bindValue(':start_time', $params[':start_time']);
+        $req->bindValue(':end_time', $params[':end_time']);
+        $req->execute();
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getActivities($id, bool $want_reservations = true){
         $req = DatabaseModel::getModel()->getBD()->prepare('SELECT * FROM "Activities" WHERE id=:id');
         $req->bindValue(":id", $id);

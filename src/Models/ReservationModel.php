@@ -25,7 +25,6 @@ class ReservationModel
     }
 
 
-
     public function getReservation($id_user,$id_activity): ?Reservation
     {
         if (!$this->isInDatabase($id_user,$id_activity)) {
