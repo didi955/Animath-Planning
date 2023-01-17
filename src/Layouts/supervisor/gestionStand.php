@@ -145,16 +145,15 @@
                                             Nombre d'élèves : <?php echo e("$nbs") ?><br>
                                         </span>
                                         <span class="col-1">
-                                            <button>X</button>
+                                            <button class="btn btn-primary">X</button>
                                         </span>
                                     </div>
                                     <?php endforeach;endif; ?>
                                 </div>
                                 Capacité restante :
                                 <div class="row mt-3 mb-3">
-                                    <em>TODO</em>
-                                    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                        <div class="progress-bar" style="width: 25%">25%</div>
+                                    <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar" style="width: 0">0</div>
                                     </div>
                                 </div>
                             </div>
