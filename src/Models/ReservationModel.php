@@ -20,8 +20,7 @@ class ReservationModel
         $req = DatabaseModel::getModel()->getBD()->prepare('SELECT "Appointement".id_activity, "Appointement".nb_student, "Appointement".student_level, start, "end", title, "desc" FROM "Appointement" INNER JOIN "Activities" A on "Appointement".id_activity = A.id INNER JOIN "Stand" S on A.stand = S.id WHERE id_user=:id_user');
         $req->bindValue(":id_user", $id_user);
         $req->execute();
-        $rs = $req->fetchAll(PDO::FETCH_ASSOC);
-        return $rs;
+        return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
@@ -81,7 +80,7 @@ class ReservationModel
 
     public function isInDatabase($id_user,$id_activity): bool
     {
-        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT id FROM "Appointement" WHERE id_user= :id_user AND id_activity = :id_activity');
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT * FROM "Appointement" WHERE id_user= :id_user AND id_activity = :id_activity');
         $req->bindValue(":id_user", $id_user);
         $req->bindValue(":id_activity", $id_activity);
         $req->execute();
@@ -90,6 +89,19 @@ class ReservationModel
             return true;
         }
         return false;
+    }
+
+    public function addReservation($id_user,$id_activity,$nb_student,$student_level){
+        if ($this->isInDatabase($id_user,$id_activity)) {
+            return false;
+        }
+        $req = DatabaseModel::getModel()->getBD()->prepare('INSERT INTO "Appointement" (id_user, id_activity, nb_student, student_level) VALUES (:id_user, :id_activity, :nb_student, :student_level)');
+        $req->bindValue(":id_user", $id_user);
+        $req->bindValue(":id_activity", $id_activity);
+        $req->bindValue(":nb_student", $nb_student);
+        $req->bindValue(":student_level", $student_level);
+        $req->execute();
+        return true;
     }
 
     private function buildReservation($rs): Reservation

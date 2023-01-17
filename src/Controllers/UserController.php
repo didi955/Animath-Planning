@@ -22,7 +22,7 @@ class UserController extends Controller
     }
 
     public function action_exposant(){
-        $this->render('exposant',['stands' => StandModel::getModel()->getAllStand(), 'user' => unserialize($_SESSION['user'])]);
+        $this->render('exposant', ['stands' => StandModel::getModel()->getAllStand(), 'user' => unserialize($_SESSION['user'])]);
     }
 
     public function action_changeFirstName(){

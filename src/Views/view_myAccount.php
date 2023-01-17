@@ -37,7 +37,7 @@ include 'Layouts/modifierProf.php'
         <?php endif; ?>
         <?php if($user->getRole() === Role::PROFESSOR): ?>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#MyVisits" type="button" role="tab" aria-controls="planning" aria-selected="true">Mes visites</a>
+                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#myvisits" type="button" role="tab" aria-controls="planning" aria-selected="true">Mes visites</a>
             </li>
         <?php endif; ?>
     </ul>
@@ -50,7 +50,7 @@ include 'Layouts/modifierProf.php'
     <div class="tab-pane h-50 show active fade m-3" id="booking">
         <?php include "Layouts/booking.php"?>
     </div>
-    <div class="tab-pane fade m-3" id="MyVisits">
+    <div class="tab-pane fade m-3" id="myvisits">
         <?php include "Layouts/my_visits.php"?>
     </div>
 </div>
@@ -74,22 +74,3 @@ include 'Layouts/modifierProf.php'
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let calendarEl = document.getElementById('calendar');
-        let calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'timeGridDay',
-            locale: 'fr',
-            editable: true,
-            allDaySlot: false,
-            events: [
-                {
-                    title: 'Activité échecs',
-                    start: '2022-12-16T15:00:00'
-                }
-            ]
-        });
-        calendar.render();
-    });
-</script>
