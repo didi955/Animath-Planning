@@ -25,8 +25,8 @@ include "view_topbar.php";
 
 <div class="container bg-light">
     <div class="p-3 d-flex justify-content-center">
-        <select class="text-center w-50 form-select" aria-label="Default select example">
-            <option selected>--Choisissez un stand--</option>
+        <select class="text-center w-50 form-select" id="selection" aria-label="Default select example">
+            <option value="0" selected>--Choisissez un stand--</option>
             <?php foreach($stands as $stand):?>
                 <option value="<?php echo e($stand->getId()) ?>"><?php echo e($stand->getTitle()) ?></option>
             <?php endforeach;?>
@@ -42,11 +42,10 @@ include "view_topbar.php";
         ?>
 
 
-    <div class="tab-pane fade accordion m-3" id="accordionStand<?php echo e($id)?>">
-        <div class="h-100" id="calendar<?php echo e("$id") ?>">
+    <div class="tab-pane row bg-light fade accordion m-3" id="accordionStand<?php echo e($id)?>">
+        <div class="p-5 h-100 col-6 border-end" id="calendar<?php echo e("$id") ?>">
         </div>
     </div>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -93,6 +92,15 @@ include "view_topbar.php";
 
     <?php endforeach;?>
 </div>
+
+<script>
+    document.querySelector("#selection").addEventListener("click",()=>{
+        for(let i = 1;i<26;i++){
+            document.querySelector("#accordionStand"+i).classList.remove('show','active');
+        }
+        document.querySelector("#accordionStand"+document.querySelector("#selection").value).classList.add('show','active');
+    });
+</script>
 
 
 
