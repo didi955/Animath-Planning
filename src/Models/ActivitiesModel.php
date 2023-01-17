@@ -191,7 +191,7 @@ WHERE "Activities".student_level LIKE :level AND start >= :start_time AND "end" 
 
     public function remove($id)
     {
-        $req = DatabaseModel::getModel()->getBD()->prepare('DELETE FROM "Activities" where $id=:id');
+        $req = DatabaseModel::getModel()->getBD()->prepare('DELETE FROM "Activities" where id=:id');
         $req->bindValue(":id",$id);
         $req->execute();
     }

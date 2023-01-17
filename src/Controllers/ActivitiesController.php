@@ -86,12 +86,10 @@ class ActivitiesController extends Controller
     }
 
     public function action_remove(){
-        if(isset($_POST['$id'])){
-            ActivitiesModel::getModel()->remove($_POST['$id']);
+        if(isset($_POST['id'])){
+            ActivitiesModel::getModel()->remove($_POST['id']);
         }
-        else{
-            echo "C'est pas bon";
-        }
+        $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand(), 'user' => unserialize($_SESSION['user'])]);
     }
 
 }
