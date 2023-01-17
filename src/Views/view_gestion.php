@@ -28,10 +28,14 @@ include_once "view_topbar.php";
 <div class="container shadow border text-center bg-light">
     <ul class="border-bottom nav nav-justified gap-3 p-1">
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#InfoPerso" type="button" role="tab" aria-controls="InfoPerso" aria-selected="true">Paramètres</a>
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#InfoPerso" type="button" role="tab" aria-controls="InfoPerso" aria-selected="false">Paramètres</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" data-bs-target="#gestionStand" type="button" role="tab" aria-controls="gestionStand" aria-selected="true">Gestion des stands</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#gestionAdmin" type="button" role="tab" aria-controls="gestionAdmin" aria-selected="false">Gestion Admin</a>
         </li>
     </ul>
     <div class="tab-content">
@@ -39,6 +43,27 @@ include_once "view_topbar.php";
         </div>
         <div class="tab-pane fade" id="gestionStand">
             <?php include "Layouts/supervisor/gestionStand.php"?>
+        </div>
+        <div class="tab-pane fade" id="gestionAdmin">
+            <?php $superviseurs = ['superviseur 1', 'superviseur 2', 'superviseur 3' , 'superviseur 4' , 'superviseur 5',
+            'superviseur 6']?>
+            <table class="table">
+
+            <?php foreach($superviseurs as $superviseur):?>
+                <tr>
+                    <td>
+                        <?=e($superviseur)?>
+                        <div class="d-flex justify-content-end ">
+                        <button class="btn btn-danger ">Supprimer</button>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach;?>
+            </table>
+            <br>
+            <div class="d-flex justify-content-end">
+            <input class="btn btn-primary " type="submit" value="Ajouter Superviseur">
+            </div>
         </div>
     </div>
 </div>
