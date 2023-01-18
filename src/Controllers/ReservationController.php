@@ -27,7 +27,7 @@ class ReservationController extends Controller
         if(unserialize($_SESSION['user'])->getRole() === Role::PROFESSOR && isset($_POST['id_activity']) && isset($_POST['nb_student']) && isset($_POST['student_level'])){
             $activity_id = $_POST['id_activity'];
             ReservationModel::getModel()->addReservation(unserialize($_SESSION['user'])->getId(), $activity_id, $_POST['nb_student'], $_POST['student_level']);
-            $this->render("myAccount",['user' => unserialize($_SESSION['user']), 'stand' => StandModel::getModel()->getAllStand(), 'appointements' => ReservationModel::getModel()->getMyReservations($_SESSION['user']->getID())]);
+            $this->render("myAccount",['user' => unserialize($_SESSION['user']), 'stand' => StandModel::getModel()->getAllStand(), 'appointements' => ReservationModel::getModel()->getMyReservations(unserialize($_SESSION['user']->getID()))]);
 
         }
     }
