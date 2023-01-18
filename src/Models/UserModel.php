@@ -199,6 +199,13 @@ class UserModel
         }
     }
 
+    public function getSuperviseurs(){
+        $req = DatabaseModel::getModel()->getBD()->prepare('SELECT connexion_id from "User" WHERE role=:role');
+        $req->bindValue(':role', Role::SUPERVISOR->value);
+        $req->execute();
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     /**
      * Méthode permettant de construire un objet User à partir d'un tableau de données
      * @param array $rs Tableau de données
@@ -229,5 +236,7 @@ class UserModel
         }
         return $user;
     }
+
+
 
 }

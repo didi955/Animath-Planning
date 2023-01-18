@@ -45,14 +45,12 @@ include_once "view_topbar.php";
             <?php include "Layouts/supervisor/gestionStand.php"?>
         </div>
         <div class="tab-pane fade" id="gestionAdmin">
-            <?php $superviseurs = ['superviseur 1', 'superviseur 2', 'superviseur 3' , 'superviseur 4' , 'superviseur 5',
-            'superviseur 6']?>
             <table class="table">
 
             <?php foreach($superviseurs as $superviseur):?>
                 <tr>
                     <td>
-                        <?=e($superviseur)?>
+                        <?=e($superviseur['connexion_id'])?>
                         <div class="d-flex justify-content-end ">
                         <button class="btn btn-danger ">Supprimer</button>
                         </div>
