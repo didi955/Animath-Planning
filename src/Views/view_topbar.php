@@ -3,7 +3,8 @@
         <a class="navbar-brand" href="https://salon-math.fr/" target="_blank">
             <img src="public/images/logo-bleu.png" alt="Bootstrap" width="110" height="50">
         </a>
-        <a class="btn btn-primary" href="index.php" role="button">Accueil</a>
+        <a class="btn btn-primary me-3" href="index.php" role="button">Accueil</a>
+        <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target= "#cguModalHome">CGU</a>
         <a class="ms-auto p-3 nav-item" role="button" aria-expanded="true" aria-controls="collapseMenu" data-bs-toggle="collapse" data-bs-target="#collapseMenu" alt="mon_compte" >
             <svg width="30" height="30" fill="blue" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8Zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 0 1-2 0 3 3 0 0 0-3-3H8Z"></path>
@@ -12,7 +13,11 @@
     </div>
 </nav>
 
-
+<div class="modal fade" id="cguModalHome" tabindex="-1" aria-labelledby="cguModalLabel" aria-hidden="true">
+    <?php
+    include_once "view_legal.php";
+    ?>
+</div>
 
 <div class="collapse position-absolute" id="collapseMenu" style="width: 13%; margin-left: 86%; margin-top: 5%">
     <div class="card card-body">
