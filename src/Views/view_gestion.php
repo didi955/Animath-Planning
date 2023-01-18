@@ -47,7 +47,7 @@ include_once "view_topbar.php";
         <div class="tab-pane fade" id="gestionAdmin">
             <table class="table">
 
-            <?php foreach($superviseurs as $superviseur):?>
+            <?php if(isset($superviseurs)):foreach($superviseurs as $superviseur):?>
                 <tr>
                     <td>
                         <?=e($superviseur['connexion_id'])?>
@@ -56,7 +56,7 @@ include_once "view_topbar.php";
                         </div>
                     </td>
                 </tr>
-            <?php endforeach;?>
+            <?php endforeach;endif;?>
             </table>
             <br>
             <div class="d-flex justify-content-end">

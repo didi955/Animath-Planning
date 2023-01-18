@@ -93,10 +93,6 @@
                             $student_level = $activity->getStudentLevel();
                             $idact = $activity->getId();
                             $nbeleve = 0;
-                            foreach($activity->getReservations() as $res){
-                                $nbeleve += $res->getNbStudent();
-                            }
-                            $a = $capacity - $nbeleve;
                             ?>
                             {
                                 id: <?php echo e($idact) ?>,
@@ -105,7 +101,6 @@
                                 end: '<?php echo e("$end") ?>',
                                 capacity: '<?php echo e("$capacity") ?>',
                                 studentLevel: '<?php echo e("$student_level") ?>',
-                                backgroundColor : '<?php if($a<$capacity/2){ echo e("red"); } else { echo e("default"); } ?>'
                             },
                             <?php endforeach;?>
                         ]
