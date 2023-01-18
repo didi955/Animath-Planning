@@ -30,7 +30,6 @@ include "view_topbar.php";
             <?php foreach($stands as $stand):?>
                 <option value="<?php echo e($stand->getId()) ?>"><?php echo e($stand->getTitle()) ?></option>
             <?php endforeach;?>
-
         </select>
     </div>
 </div>
@@ -43,7 +42,18 @@ include "view_topbar.php";
 
 
     <div class="tab-pane row bg-light fade accordion m-3" id="accordionStand<?php echo e($id)?>">
-        <div class="p-5 h-100 col-6 border-end" id="calendar<?php echo e("$id") ?>">
+        <div class="p-5 h-100 col-6 border-end" id="calendar<?php echo e("$id") ?>"></div>
+        <div class="col-4">
+            <div class="tab-content">
+                <?php foreach ($activities as $activity):?>
+                    <div class="tab-pane" id="accordionActivity<?php echo e($activity->getId())?>">
+                        Informations sur cette activité :
+                        <?= e($title) ?><br>
+                        <?= e($activity->getStart()) ?><br>
+                        <?= e($activity->getEnd()) ?><br>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 
@@ -62,9 +72,8 @@ include "view_topbar.php";
                 slotMaxTime: '18:15:00',
                 slotDuration: '00:15:00',
                 eventClick: function (info){
-                    let modal = document.getElementById("suppr"+info.event.id);
-                    modal.classList.add("show")
-                    modal.style.display = "block";
+                    let pane = document.querySelector("#accordionActivity"+info.event.id);
+                    pane.classList.add("show","active");
                 },
                 events: [
                     <?php foreach ($activities as $activity):
