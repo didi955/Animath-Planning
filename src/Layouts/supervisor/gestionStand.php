@@ -71,7 +71,7 @@
                     let calendarEl = document.getElementById('calendar<?php echo e("$id") ?>');
                     let calendar = new FullCalendar.Calendar(calendarEl, {
                         themeSystem: 'bootstrap5',
-                        initialDate: '2023-05-25',
+                        initialDate: '2023-05-24',
                         initialView: 'timeGridDay',
                         locale: 'fr',
                         editable: false,
