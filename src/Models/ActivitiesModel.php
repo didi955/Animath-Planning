@@ -17,6 +17,17 @@ class ActivitiesModel
         return self::$instance;
     }
 
+    public function getRemainingCapacity($id_activity){
+        $sql = 'SELECT capacity - COALESCE(SUM(nb_student), 0) as remaining_capacity FROM "Activities"
+    LEFT JOIN "Appointement" ON "Activities".id = "Appointement".id_activity WHERE "Activities".id = :id_activity
+    GROUP BY capacity';
+        $req = DatabaseModel::getModel()->getBD()->prepare($sql);
+        $req->bindValue(":id_activity", $id_activity);
+        $req->execute();
+        $rs = $req->fetch(PDO::FETCH_ASSOC);
+        return $rs['remaining_capacity'];
+    }
+
     public function getActivitiesWithFilter($filter)
     {
         $sql = 'SELECT title, "desc", "Activities".id, stand, start, "end", "Activities".student_level alevel, capacity, ("Activities".capacity - (SELECT SUM(nb_student) FROM "Appointement" WHERE id_activity = "Activities".id)) as remaining_capacity
