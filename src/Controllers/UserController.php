@@ -11,6 +11,44 @@ class UserController extends Controller
         $this->action_my_account();
     }
 
+    /**
+     * Action pour afficher la page de mon compte
+     */
+    public function action_my_account()
+    {
+        if(!isset($_SESSION['user'])){
+            if(!isset($_COOKIE['user'])){
+                $this->action_error("Vous n'êtes pas connecté !");
+                return;
+            }
+            else {
+                $user = unserialize($_COOKIE['user']);
+                if($user == null){
+                    $this->action_error("Vous n'êtes pas connecté !");
+                    return;
+                }
+                else {
+                    $user = UserModel::getModel()->getUser($user->getID());
+                    if($user == null){
+                        $this->action_error("Impossible de d'accéder à votre compte");
+                        return;
+                    }
+                    else {
+                        $_SESSION['user'] = serialize($user);
+                    }
+                }
+            }
+        }
+        else {
+            $user = unserialize($_SESSION['user']);
+            if($user == null){
+                $this->action_error("Vous n'êtes pas connecté !");
+                return;
+            }
+        }
+        $this->render('myAccount', ['user' => $user, 'appointements' => ReservationModel::getModel()->getMyReservations($user->getID())]);
+    }
+
     public function action_gestion(){
         if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR) {
             $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand(), 'user' => unserialize($_SESSION['user']),'superviseurs'=>UserModel::getModel()->getSuperviseurs()]);
@@ -25,6 +63,36 @@ class UserController extends Controller
         $this->render('exposant', ['stands' => StandModel::getModel()->getAllStand(), 'user' => unserialize($_SESSION['user'])]);
     }
 
+    public function action_createSupervisor(){
+        if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR && isset($_POST['email']) && isset($_POST['password'])) {
+            if(UserModel::getModel()->isSupervisor($_POST['email'])){
+                $this->action_error("Cet email est déjà utilisé par un superviseur");
+                return;
+            }
+            if(UserModel::getModel()->getUserByConnexionID($_POST['email']) != null){
+                $this->action_error("Cet email est déjà utilisé par un utilisateur");
+                return;
+            }
+            $this->initSupervisor($_POST['email'], $_POST['password']);
+        }
+        else {
+            $this->action_error("Vous n'avez pas les droits d'éffectuer cette action");
+        }
+    }
+
+    public function action_deleteSupervisor(){
+        if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR && isset($_POST['email'])) {
+            if(UserModel::getModel()->isSupervisor($_POST['email'])){
+                $this->action_error("Cet email n'est pas utilisé par un superviseur");
+                return;
+            }
+            UserModel::getModel()->deleteSupervisor($_POST['email']);
+        }
+        else {
+            $this->action_error("Vous n'avez pas les droits d'éffectuer cette action");
+        }
+    }
+
     public function action_changeFirstName(){
         if(isset($_POST['name']) && unserialize($_SESSION['user'])->getRole() === Role::PROFESSOR){
             if(is_valid_name($_POST['name'])){
@@ -36,7 +104,7 @@ class UserController extends Controller
                 $_SESSION['user'] = serialize($user);
                 $this->action_my_account();
             }
-            else{
+            else {
                 $this->action_error("Le nom n'est pas valide");
             }
         }
@@ -149,44 +217,6 @@ class UserController extends Controller
         else {
             $this->action_error("L'adresse email est incorrecte");
         }
-    }
-
-    /**
-     * Action pour afficher la page de mon compte
-     */
-    public function action_my_account()
-    {
-        if(!isset($_SESSION['user'])){
-            if(!isset($_COOKIE['user'])){
-                $this->action_error("Vous n'êtes pas connecté !");
-                return;
-            }
-            else {
-                $user = unserialize($_COOKIE['user']);
-                if($user == null){
-                    $this->action_error("Vous n'êtes pas connecté !");
-                    return;
-                }
-                else {
-                    $user = UserModel::getModel()->getUser($user->getID());
-                    if($user == null){
-                        $this->action_error("Impossible de d'accéder à votre compte");
-                        return;
-                    }
-                    else {
-                        $_SESSION['user'] = serialize($user);
-                    }
-                }
-            }
-        }
-        else {
-            $user = unserialize($_SESSION['user']);
-            if($user == null){
-                $this->action_error("Vous n'êtes pas connecté !");
-                return;
-            }
-        }
-        $this->render('myAccount', ['user' => $user, 'appointements' => ReservationModel::getModel()->getMyReservations($user->getID())]);
     }
 
     /**
@@ -318,6 +348,16 @@ class UserController extends Controller
         $user->save();
         $_SESSION['user'] = serialize($user);
         $this->action_my_account();
+    }
+
+    private function initSupervisor($mail, $pass){
+        $user = new User();
+        $user->setID(UserModel::getModel()->getMaxID()+1);
+        $user->setConnexionID($mail);
+        $user->setActive(true);
+        $user->setPassHash(hash_pass($pass));
+        $user->setRole(Role::SUPERVISOR);
+        $user->save();
     }
 
 }

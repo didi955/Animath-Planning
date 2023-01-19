@@ -25,6 +25,27 @@ class UserModel
         return self::$instance;
     }
 
+    public function isSupervisor($email){
+        $sql = 'SELECT id_user FROM "User" WHERE role = :role AND connexion_id = :email';
+        $req = DatabaseModel::getModel()->getBD()->prepare($sql);
+        $req->bindValue(':role', Role::SUPERVISOR->value);
+        $req->bindValue(':email', $email);
+        $req->execute();
+        $result = $req->fetch();
+        if($result){
+            return true;
+        }
+        return false;
+    }
+
+    public function deleteSupervisor($email){
+        $sql = 'DELETE FROM "User" WHERE role = :role AND connexion_id = :email';
+        $req = DatabaseModel::getModel()->getBD()->prepare($sql);
+        $req->bindValue(':role', Role::SUPERVISOR->value);
+        $req->bindValue(':email', $email);
+        $req->execute();
+    }
+
     /**
      * Méthode permettant de savoir si il existe un utilisateur à partir d'un UUID
      * @param string $uuid UUID demandé
