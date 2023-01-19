@@ -222,12 +222,4 @@ execute procedure activitiesCascade();
 INSERT INTO "Role" (id,name) VALUES (1,'Supervisor');
 INSERT INTO "Role" (id,name) VALUES (2,'Professor');
 
-
-INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (2,1,5,'Primaire');
-INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (10,1,5,'Primaire');
-INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (13,1,5,'Primaire');
-INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (9,1,5,'Primaire');
-INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (12,1,5,'Primaire');
-INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (11,1,5,'Primaire');
-
-DELETE FROM "Stand" WHERE id = 1;
+INSERT INTO "User" (id_user, role, active, connexion_id, pass_hash) VALUES (1, 1, true, 'admin@animath.fr', '$argon2id$v=19$m=65536,t=4,p=1$bUlZcThpVEM4TTAzRzNMRA$43ZIZn1EVaAFW+wvyxaKtQ');
