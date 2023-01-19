@@ -86,7 +86,7 @@ class UserController extends Controller
 
     public function action_deleteSupervisor(){
         if(isset($_SESSION['user']) && unserialize($_SESSION['user'])->getRole() === Role::SUPERVISOR && isset($_POST['email'])) {
-            if(UserModel::getModel()->isSupervisor($_POST['email'])){
+            if(!UserModel::getModel()->isSupervisor($_POST['email'])){
                 $this->action_error("Cet email n'est pas utilisé par un superviseur");
                 return;
             }
