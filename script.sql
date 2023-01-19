@@ -128,6 +128,9 @@ create or replace function tgLogStand() returns trigger as
 $$
 BEGIN
     insert into "LogStand"(action, old, new) VALUES (tg_op::text, old, new);
+    if tg_op::text = 'DELETE' then
+        DELETE FROM "Activities" WHERE stand=old.id;
+    end if;
     return null;
 end
 $$ language plpgsql;
@@ -154,6 +157,9 @@ create or replace function tgLogActivities() returns trigger as
 $$
 BEGIN
     insert into "LogActivities"(action, old, new) VALUES (tg_op::text, old, new);
+    if tg_op::text = 'DELETE' then
+        DELETE FROM "Appointement" WHERE id_activity=old.id;
+    end if;
     return null;
 end
 $$ language plpgsql;
