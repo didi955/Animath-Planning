@@ -45,6 +45,10 @@ class UserController extends Controller
                 $this->action_error("Vous n'êtes pas connecté !");
                 return;
             }
+            if($user->getRole() === Role::SUPERVISOR){
+                $this->action_gestion();
+                return;
+            }
         }
         $this->render('myAccount', ['user' => $user, 'appointements' => ReservationModel::getModel()->getMyReservations($user->getID())]);
     }
@@ -87,6 +91,7 @@ class UserController extends Controller
                 return;
             }
             UserModel::getModel()->deleteSupervisor($_POST['email']);
+            $this->action_sign_out();
         }
         else {
             $this->action_error("Vous n'avez pas les droits d'éffectuer cette action");
