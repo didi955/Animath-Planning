@@ -128,9 +128,6 @@ create or replace function tgLogStand() returns trigger as
 $$
 BEGIN
     insert into "LogStand"(action, old, new) VALUES (tg_op::text, old, new);
-    if tg_op::text = 'DELETE' then
-        DELETE FROM "Activities" WHERE stand=old.id;
-    end if;
     return null;
 end
 $$ language plpgsql;
@@ -157,9 +154,6 @@ create or replace function tgLogActivities() returns trigger as
 $$
 BEGIN
     insert into "LogActivities"(action, old, new) VALUES (tg_op::text, old, new);
-    if tg_op::text = 'DELETE' then
-        DELETE FROM "Appointement" WHERE id_activity=old.id;
-    end if;
     return null;
 end
 $$ language plpgsql;
@@ -199,6 +193,32 @@ create trigger verifAppointement
     for each row
 execute procedure verifAppointement();
 
+create or replace function standCascade() returns trigger as
+$$
+BEGIN
+    DELETE FROM "Activities" WHERE stand=old.id;
+    return null;
+end
+$$ language plpgsql;
+
+create or replace function activitiesCascade() returns trigger as
+$$
+BEGIN
+    DELETE FROM "Appointement" WHERE id_activity=old.id;
+    return null;
+end
+$$ language plpgsql;
+
+create trigger standCascade
+    before delete on "Stand"
+    for each row
+execute procedure standCascade();
+
+create trigger activitiesCascade
+    before delete on "Activities"
+    for each row
+execute procedure activitiesCascade();
+
 INSERT INTO "Role" (id,name) VALUES (1,'Supervisor');
 INSERT INTO "Role" (id,name) VALUES (2,'Professor');
 
@@ -209,3 +229,5 @@ INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALU
 INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (9,1,5,'Primaire');
 INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (12,1,5,'Primaire');
 INSERT INTO "Appointement" (id_user,id_activity, nb_student, student_level) VALUES (11,1,5,'Primaire');
+
+DELETE FROM "Stand" WHERE id = 1;
