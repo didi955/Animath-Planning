@@ -96,7 +96,7 @@
                             ?>
                             {
                                 id: <?php echo e($idact) ?>,
-                                title: '<?php echo e("$title") ?>',
+                                title: '<?php echo e("Disponible") ?>',
                                 start: '<?php echo e("$start") ?>',
                                 end: '<?php echo e("$end") ?>',
                                 capacity: '<?php echo e("$capacity") ?>',
