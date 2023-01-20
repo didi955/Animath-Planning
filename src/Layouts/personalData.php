@@ -9,7 +9,7 @@
         <div id="PanelInfo" class="accordion-collapse collapse show" aria-labelledby="HeaderPanelInfo">
             <div class="accordion-body row">
                 <div class="col-1">
-                    Mail :
+                    Mail
                 </div>
                 <div class="col-10 text-center">
                     <strong> <?= e($user->getConnexionID()) ?> </strong>
@@ -22,7 +22,7 @@
             </div>
             <div class="accordion-body row">
                 <div class="col-1">
-                    Nom :
+                    Nom
                 </div>
                 <div class="col-10">
                     <strong><?= e($user->getPersonalData()['last_name']) ?></strong>
@@ -36,7 +36,7 @@
             </div>
             <div class="accordion-body row">
                 <div class="col-1">
-                    Prénom :
+                    Prénom
                 </div>
                 <div class="col-10">
                     <strong><?= e($user->getPersonalData()['first_name']) ?></strong>
@@ -49,7 +49,7 @@
             </div>
             <div class="accordion-body row">
                 <div class="col-1">
-                    Téléphone :
+                    Téléphone
                 </div>
                 <div class="col-10">
                     <?php if ($user->getPersonalData()['phone'] != null) : ?>
@@ -66,7 +66,7 @@
             </div>
             <div class="accordion-body row">
                 <div class="col-1">
-                    Établissement :
+                    Établissement
                 </div>
                 <div class="col-10">
                     <?php if ($user->getPersonalData()['school'] != null) : ?>
@@ -93,7 +93,7 @@
     <div id="PanelSecurity" class="accordion-collapse collapse show" aria-labelledby="HeaderPanelSecurity">
         <div class="accordion-body row">
             <div class="col-1">
-                Mot de passe :
+                Mot de passe
             </div>
             <div class="col-10">
                 <strong><?= e("•••••••••••") ?></strong>
