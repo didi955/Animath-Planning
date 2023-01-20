@@ -44,7 +44,7 @@ include_once "view_topbar.php";
             <?php if(isset($superviseurs)):foreach($superviseurs as $superviseur):?>
                 <tr>
                     <td> <form method="post" action="?controller=User&action=deleteSupervisor">
-                            <input type="hidden" value="<?= e($superviseur['connexion_id'])?>>" name="email">
+                            <input type="hidden" value="<?= e($superviseur['connexion_id'])?>" name="email">
                         <?=e($superviseur['connexion_id'])?>
                         <div class="d-flex justify-content-end ">
                             <input class="btn btn-danger" type="submit" value="Supprimer">

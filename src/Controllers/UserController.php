@@ -91,6 +91,7 @@ class UserController extends Controller
                 return;
             }
             UserModel::getModel()->deleteSupervisor($_POST['email']);
+            $this->render('gestion', ['stands' => StandModel::getModel()->getAllStand(), 'user' => unserialize($_SESSION['user']),'superviseurs'=>UserModel::getModel()->getSuperviseurs()]);
         }
         else {
             $this->action_error("Vous n'avez pas les droits d'éffectuer cette action ou erreur dans l'email");

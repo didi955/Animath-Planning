@@ -221,3 +221,6 @@ INSERT INTO "Role" (id,name) VALUES (1,'Supervisor');
 INSERT INTO "Role" (id,name) VALUES (2,'Professor');
 
 INSERT INTO "User" (id_user, role, active, connexion_id, pass_hash) VALUES (1, 1, true, 'admin@animath.fr', '$argon2id$v=19$m=65536,t=4,p=1$bUlZcThpVEM4TTAzRzNMRA$43ZIZn1EVaAFW+wvyxaKtQ');
+
+SELECT * FROM "User" WHERE role = 1 AND connexion_id = 'admin@animath.fr';
+DELETE FROM "User" WHERE role = 1 AND connexion_id = 'admin@animath.fr';
