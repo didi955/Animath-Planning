@@ -108,8 +108,6 @@ ALTER TABLE
 
 ALTER TABLE
     "User" ADD CONSTRAINT "user_role_foreign" FOREIGN KEY("role") REFERENCES "Role"("id");
-ALTER TABLE
-    "Activities" ADD CONSTRAINT "activities_stand_foreign" FOREIGN KEY("stand") REFERENCES "Stand"("id");
 
 create or replace function tgLogUser() returns trigger as
 $$
@@ -210,12 +208,12 @@ end
 $$ language plpgsql;
 
 create trigger standCascade
-    before delete on "Stand"
+    after delete on "Stand"
     for each row
 execute procedure standCascade();
 
 create trigger activitiesCascade
-    before delete on "Activities"
+    after delete on "Activities"
     for each row
 execute procedure activitiesCascade();
 
