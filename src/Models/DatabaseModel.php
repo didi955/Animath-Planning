@@ -14,6 +14,7 @@ class DatabaseModel
     private static $instance = null;
 
     /**
+     *
      * Constructeur : effectue la connexion à la base de données.
      */
     private function __construct()
@@ -23,10 +24,17 @@ class DatabaseModel
         $dbname = $credentials['dbname'];
         $user = $credentials['user'];
         $pass = $credentials['pass'];
-        $dsn = "pgsql:host=$host;port=5432;dbname=$dbname;";
-        $this->bd = new PDO($dsn, $user, $pass);
-        $this->bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->bd->query("SET names 'utf8'");
+        $port = $credentials['port'];
+        $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;";
+        try {
+            $this->bd = new PDO($dsn, $user, $pass);
+            $this->bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->bd->query("SET names 'utf8'");
+        }
+        catch (PDOException $e) {
+            echo "Erreur de connexion à la base de données : " . $e->getMessage();
+            die();
+        }
     }
 
     /**
@@ -41,6 +49,7 @@ class DatabaseModel
     }
 
     /**
+     * Méthode permettant de récupérer l'instance PDO
      * @return PDO
      */
     public function getBD(): PDO

@@ -1,10 +1,7 @@
 <?php
 
-define("TITLE", "Animath");
+define("TITLE", "Reservations - Salon Culture et Jeux Mathématiques");
+define("CAPTCHA_ENABLED", false);
+define("CGU_TITLE", "Conditions Générales d'Utilisation");
 
-
-// Role
-define("SUPERVISOR_ID", 1);
-define("EXHIBITOR", 2);
-define("PROFESSOR_ID", 3);
 

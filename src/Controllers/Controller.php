@@ -16,6 +16,7 @@ abstract class Controller
         } else {
             //Sinon, on appelle l'action par défaut
             $this->action_default();
+
         }
     }
 
@@ -41,7 +42,7 @@ abstract class Controller
         if (file_exists($file_name)) {
             include $file_name;
         } else {
-            $this->action_error("La vue n'existe pas !", 404);
+            $this->action_error("La vue n'existe pas !");
         }
         die();
     }
@@ -51,11 +52,10 @@ abstract class Controller
      * @param string $message Message d'erreur à afficher
      * @return
      */
-    protected function action_error(string $message = '', $code = 500): void
+    protected function action_error(string $message = ''): void
     {
         $data = [
-            'title' => "Error",
-            'code' => $code,
+            'title' => "Erreur",
             'message' => $message
         ];
         $this->render("error", $data);

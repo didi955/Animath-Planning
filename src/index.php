@@ -2,15 +2,29 @@
 
 session_start();
 
+// NEED TO BE SEPARETED IN DIFFERENT FILES
+require_once "Utils/DateUtil.php";
 require_once "Utils/constant.php";
 require_once "Utils/functions.php";
-//require_once "Models/Model.php";
+require_once "Utils/Role.php";
+require_once "Models/ActivitiesModel.php";
+require_once "Models/StandModel.php";
+require_once "Stand.php";
+require_once "Reservation.php";
+require_once "User.php";
+require_once "Activities.php";
+require_once "Models/UserModel.php";
+require_once "Models/DatabaseModel.php";
+require_once "Models/ProfessorModel.php";
+require_once "Models/ReservationModel.php";
 require_once "Controllers/Controller.php";
+require_once "Layouts/header.php";
 
 //Liste des contrôleurs
-$controllers = ["Home"];
-//Nom du contrôleur par défaut
+$controllers = ["Home", "User", "Activities", "Reservation"];
+//Nom du contrôleur par défaut5
 $controller_default = "Home";
+
 
 //On teste si le paramètre controller existe et correspond à un contrôleur de la liste $controllers
 if (isset($_GET['controller']) and in_array($_GET['controller'], $controllers)) {
