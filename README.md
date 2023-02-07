@@ -15,7 +15,7 @@ Ce projet consiste est site web qui permet aux professeurs de differentes école
 Le site web sera développé en utilisant les technologies suivantes:
 
 - HTML, CSS, Bootstrap et JavaScript pour la partie front-end.
-- Framework PHP pour la partie back-end.
+- PHP natif pour la partie back-end.
 - Base de données Postgresql pour stocker les informations sur les activités, les stands, les élèves et les inscriptions.
 
 ## Installation
