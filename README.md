@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Ce projet consiste est site web qui permet aux professeurs de differentes écoles d'inscrire leurs élèves à des activités d'un stand dans le <a href="https://salon-math.fr/"> Salon Culture et Jeux Mathématiques</a>.
+Ce projet est site web qui permet aux professeurs de differentes écoles d'inscrire leurs élèves à des activités d'un stand dans le <a href="https://salon-math.fr/"> Salon Culture et Jeux Mathématiques</a>.
 
 ## Fonctionnalités
 
